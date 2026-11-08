@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وبسایت شخصی ابوالفضل یوسفی</title>
+  <meta name="description" content="وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس و کارآموز بک‌اند با پایتون" />
+  <meta property="og:title" content="وبسایت شخصی ابوالفضل یوسفی" />
+  <meta property="og:description" content="وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس و کارآموز بک‌اند با پایتون" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-[#181C23] text-white min-h-screen" dir="rtl">
+  <header class="flex justify-between items-center px-8 py-6 border-b border-[#23262F]">
+    <div class="text-lg font-bold">ابوالفضل یوسفی</div>
+    <!-- منوی دسکتاپ -->
+    <nav class="hidden md:flex gap-8">
+      <a href="#home" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">خانه</a>
+      <a href="#about" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
+      <a href="#projects" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
+      <a href="#contact" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">تماس</a>
+    </nav>
+    <!-- دکمه منوی موبایل -->
+    <button id="mobile-menu-button"
+      class="md:hidden w-11 h-11 flex items-center justify-center rounded-full bg-[#181C23] text-[#FF6A3D] border border-[#FF6A3D] shadow-lg transition-all duration-200 hover:bg-[#23262F]"
+      aria-label="باز کردن منو">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+  <!-- منوی موبایل -->
+  <nav id="mobile-menu" class="md:hidden bg-[#181C23] border-b border-[#23262F] px-8 py-4 space-y-3">
+    <a href="#home" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">خانه</a>
+    <a href="#about" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
+    <a href="#projects" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
+    <a href="#contact" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">تماس</a>
+  </nav>
+
+  <section id="home" class="flex flex-col md:flex-row justify-between items-center px-8 py-16 max-w-6xl mx-auto">
+    <div class="flex-1 flex justify-center mt-10 md:mt-0">
+      <div class="relative">
+        <div class="absolute -inset-4 rounded-full border-4 border-[#FF6A3D] opacity-30 animate-pulse"></div>
+        <img src="img/11zon_cropped.png" alt="ابوالفضل یوسفی"
+          class="w-60 h-60 rounded-full object-cover border-4 border-[#23262F]" />
+      </div>
+    </div>
+    <div class="flex-1 text-right">
+      <h2 class="text-3xl md:text-4xl font-bold mb-2">سلام<span class="text-[#FF6A3D]">.</span></h2>
+      <h3 class="text-2xl md:text-3xl font-semibold mb-2">
+        <span class="typing-effect" data-texts='["من ابوالفضل هستم", "کارآموز بک‌اند با پایتون", "علاقه‌مند به جنگو و FastAPI", "در مسیر یادگیری دیتابیس و تست‌نویسی"]'></span>
+        <span class="typing-cursor">|</span>
+      </h3>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">برنامه نویس پایتون</h1>
+      <div class="flex flex-wrap gap-4 mb-8 home-buttons" style="margin-top: 2vh;">
+        <a href="#contact">
+          <button class="cursor-pointer bg-[#FF6A3D] text-white px-6 py-2 rounded hover:bg-[#ff7a50] transition">تماس با من</button>
+        </a>
+        <a href="assets/resume.pdf" download
+          class="border border-white px-6 py-2 rounded hover:bg-white hover:text-[#181C23] transition">رزومه من</a>
+      </div>
+      <div class="flex space-x-6 text-[#7B7F86] text-sm">
+        <span>HTML5</span><span>CSS</span><span>Python</span><span>SQL</span><span>Git</span><span>Github</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Progress Bars -->
+  <div class="mb-8 space-y-4 skills-wrapper">
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">HTML</span>
+        <span class="text-[#FF6A3D] font-semibold">70%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 70%;"></div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">CSS</span>
+        <span class="text-[#FF6A3D] font-semibold">60%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 60%;"></div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">Python</span>
+        <span class="text-[#FF6A3D] font-semibold">40%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 40%;"></div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">SQL</span>
+        <span class="text-[#FF6A3D] font-semibold">50%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 50%;"></div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">Git</span>
+        <span class="text-[#FF6A3D] font-semibold">40%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 40%;"></div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-1 text-sm">
+        <span class="text-[#E5E7EB]">GitHub</span>
+        <span class="text-[#FF6A3D] font-semibold">70%</span>
+      </div>
+      <div class="w-full bg-[#23262F] rounded-full h-2">
+        <div class="bg-[#FF6A3D] h-2 rounded-full skill-bar-fill" style="width: 70%;"></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <section id="about" class="max-w-6xl mx-auto px-8 py-12 grid md:grid-cols-2 gap-12">
+    <div class="text-right md:col-span-2">
+      <h2 class="text-2xl font-bold mb-4" style="margin-bottom: 7px;">درباره من</h2>
+      <p class="text-[#7B7F86] mb-8" style="margin-bottom: 5px;">من یک کارآموز بک‌اند با تمرکز روی پایتون هستم. این روزها در حال یادگیری ساخت API، کار با دیتابیس و اصول نوشتن کد تمیزم و سعی می‌کنم با پروژه‌های کوچک مهارت‌هام رو تقویت کنم. هدفم اینه که کم‌کم وارد تیم‌های حرفه‌ای بشم و روی پروژه‌های واقعی کار کنم.</p>
+      <div class="flex space-x-12">
+        <div>
+          <div class="text-2xl font-bold">۵<span class="text-[#FF6A3D]">+</span></div>
+          <div class="text-[#7B7F86] text-sm">پروژه تکمیل‌شده</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold">۶<span class="text-[#FF6A3D]">+</span></div>
+          <div class="text-[#7B7F86] text-sm">ماه تجربه</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="max-w-6xl mx-auto px-8 py-12 text-right">
+    <h2 class="text-2xl font-bold mb-8" style="text-align: center;margin-bottom: 8px;">پروژه‌ها</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4h7l3 3v11a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9h6M9 12h6M9 15h4" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">پروژه رزومه شخصی</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">طراحی و پیاده‌سازی صفحه رزومه شخصی ریسپانسیو با HTML، CSS و جاوااسکریپت</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">HTML</span><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">CSS</span><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">JavaScript</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/CV" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M4 10l8-6 8 6M5 10v10m4-10v10m4-10v10m4-10v10M3 20h18" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">پروژه شبیه‌ساز سیستم مدیریت بانک</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">پیاده‌سازی بک‌اند شبیه‌ساز سیستم مدیریت بانک با پایتون و SQL</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">SQL</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/Bank-App" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10V7a4 4 0 118 0v3" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 10h12v8a2 2 0 01-2 2H8a2 2 0 01-2-2v-8z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14a1 1 0 100-2 1 1 0 000 2zm0 0v3" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">پروژه ساخت پسورد تصادفی و امن</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">ابزار تولید پسوردهای تصادفی و امن با تنظیم طول، حروف، اعداد و کاراکترهای ویژه</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/password-generator" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3h4" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8a7 7 0 100 14 7 7 0 000-14z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12v4m0-4h3" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">پروژه تایمر</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">ابزار تایمر ساده با پایتون برای شمارش معکوس</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/python-timer" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11h10v7a2 2 0 01-2 2H9a2 2 0 01-2-2v-7z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V8a3 3 0 016 0v3" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6h3M7 6l2-2M7 6l2 2" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 6h-3M17 6l-2-2M17 6l-2 2" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">پروژه Encrypt / Decrypt</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">ابزار خط فرمان برای رمزنگاری و رمزگشایی متن‌ها و فایل‌ها با استفاده از الگوریتم‌های ساده</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/mini-encrypt-decrypt" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center">
+          
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white" aria-hidden="true">
+  
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7a2 2 0 012-2h4a2 2 0 012 2v10a2 2 0 01-2 2h-4a2 2 0 01-2-2V7z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 10h4M10 13h4M10 16h2" />
+  
+</svg>
+
+        </div>
+        <h3 class="text-lg font-bold mb-2">بازی سنگ، کاغذ، قیچی</h3>
+        <p class="text-[#7B7F86] text-sm mb-4">پیاده‌سازی بازی کلاسیک سنگ، کاغذ، قیچی با زبان Python. این پروژه شامل انتخاب تصادفی کامپیوتر، اعتبارسنجی ورودی کاربر، تعیین برنده و امکان خروج از بازی با دستور exit است.</p>
+        <div class="flex space-x-2">
+          <span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <a href="https://github.com/abolfazlyousefi5/rock-paper-scissors-game" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </section>
+
+  <section id="contact" class="max-w-6xl mx-auto px-8 py-12 text-right">
+    <h2 class="text-2xl font-bold mb-8 text-center">تماس با من</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <!-- Email -->
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center mx-auto">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="font-semibold mb-2">ایمیل</div>
+        <a href="mailto:a.yousefi2912@gmail.com" class="text-[#7B7F86] hover:text-white transition">a.yousefi2912@gmail.com</a>
+      </div>
+      <!-- WhatsApp -->
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center mx-auto">
+          <svg viewBox="0 0 24 24" class="w-6 h-6 text-white fill-current">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.15 1.6 5.95L2 22l4.25-1.68a9.9 9.9 0 005.79 1.82h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.77 14.3c-.24.67-1.4 1.3-1.93 1.38-.5.08-1.13.12-1.82-.12-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.19-4.97-4.38-.15-.2-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.01-2.41.27-.29.6-.36.8-.36.2 0 .4 0 .57.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.2-.15.32-.3.49-.15.17-.31.38-.45.51-.15.15-.3.31-.13.61.17.3.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.34 1.44.3.15.47.13.65-.08.18-.2.74-.86.94-1.15.2-.29.4-.24.67-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.12.07.69-.17 1.36z" />
+          </svg>
+        </div>
+        <div class="font-semibold mb-2">واتساپ</div>
+        <a href="https://wa.me/989033647670" target="_blank" rel="noopener noreferrer"
+          class="text-[#7B7F86] hover:text-green-400 transition">ارتباط مستقیم در واتساپ</a>
+      </div>
+      <!-- Address -->
+      <div class="bg-[#23262F] p-6 rounded-lg hover:bg-[#2A2E38] transition">
+        <div class="w-12 h-12 bg-[#FF6A3D] rounded-lg mb-4 flex items-center justify-center mx-auto">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div class="font-semibold mb-2">آدرس</div>
+        <div class="text-[#7B7F86]">مشهد ، ایران</div>
+      </div>
+    </div>
+
+    <!-- فرم تماس -->
+    <form id="contact-form" method="post" action="/contact" novalidate
+      class="bg-[#23262F] p-6 rounded-lg mt-8 max-w-2xl mx-auto text-right">
+      <div class="contact-heading">
+        <span class="contact-kicker">LET’S TALK</span>
+        <h3 class="text-xl font-bold mb-2">یک پیام برایم بفرست</h3>
+        <p class="contact-hint">اگر درباره همکاری، پروژه‌ها یا فرصت‌های کاری سؤالی داری، خوشحال می‌شوم پیام تو را بخوانم.</p>
+      </div>
+      
+        
+      
+      <p id="contact-status" class="form-flash hidden" role="status"></p>
+      <input type="hidden" name="csrf_token" value="Yn8nj3bpPmyr6XEEeoxyvHLGGqyVdTTt2lZkWDcAZi8">
+      <div class="hp-field" aria-hidden="true">
+        <label>وب‌سایت <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label class="block mb-4">
+        <span class="block text-sm text-[#E5E7EB] mb-1">نام</span>
+        <input name="name" type="text" required minlength="2" maxlength="80" autocomplete="name" class="field">
+        <span class="field-error" data-error-for="name"></span>
+      </label>
+      <label class="block mb-4">
+        <span class="block text-sm text-[#E5E7EB] mb-1">ایمیل</span>
+        <input name="email" type="email" required maxlength="120" autocomplete="email" dir="ltr" class="field">
+        <span class="field-error" data-error-for="email"></span>
+      </label>
+      <label class="block mb-4">
+        <span class="block text-sm text-[#E5E7EB] mb-1">موضوع پیام <small>(اختیاری)</small></span>
+        <input name="subject" type="text" maxlength="120" placeholder="مثلاً پیشنهاد همکاری" class="field">
+        <span class="field-error" data-error-for="subject"></span>
+      </label>
+      <label class="block mb-4">
+        <span class="block text-sm text-[#E5E7EB] mb-1">پیام</span>
+        <textarea name="message" rows="5" required minlength="10" maxlength="2000" placeholder="پیامت را اینجا بنویس..." class="field"></textarea>
+        <span class="message-counter"><span id="message-count">۰</span> از ۲۰۰۰ کاراکتر</span>
+        <span class="field-error" data-error-for="message"></span>
+      </label>
+      <div class="contact-submit-row">
+        <button type="submit" class="contact-submit"><span>ارسال پیام</span><span aria-hidden="true">←</span></button>
+        <span class="contact-secure-note">اطلاعاتت فقط برای پاسخ‌دادن به پیام استفاده می‌شود.</span>
+      </div>
+    </form>
+  </section>
+
+  <footer class="border-t border-[#23262F] mt-8">
+    <div class="max-w-6xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-[#7B7F86]">من را در شبکه‌های اجتماعی دنبال کنید</p>
+      <div class="flex gap-4">
+        
+        <a href="https://instagram.com/py_.y5" target="_blank" rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-[#23262F] flex items-center justify-center hover:bg-[#FF6A3D] transition" aria-label="اینستاگرام">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2" />
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+            <circle cx="17" cy="7" r="1" fill="currentColor" />
+          </svg>
+        </a>
+        
+        
+        <a href="https://t.me/abolfazl_yousefi02" target="_blank" rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-[#23262F] flex items-center justify-center hover:bg-[#FF6A3D] transition" aria-label="تلگرام">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white">
+            <path d="M21 4L3 11l5 2 2 6 3-4 4 3 4-14z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+          </svg>
+        </a>
+        
+        
+        <a href="https://www.linkedin.com/in/abolfazl-yousefi-249a7b217/" target="_blank" rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-[#23262F] flex items-center justify-center hover:bg-[#FF6A3D] transition" aria-label="لینکدین">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white">
+            <path d="M6 6a2 2 0 11-4 0 2 2 0 014 0z" fill="currentColor" />
+            <path d="M4 10h4v10H4z" fill="currentColor" />
+            <path d="M10 10h3v2.5h.1A3.3 3.3 0 0116 9c3 0 4 1.9 4 4.5V20h-4v-5.1c0-1.2-.1-2.9-1.8-2.9-1.8 0-2.2 1.3-2.2 2.8V20h-4V10z" fill="currentColor" />
+          </svg>
+        </a>
+        
+        
+        <a href="https://github.com/abolfazlyousefi5" target="_blank" rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-[#23262F] flex items-center justify-center hover:bg-[#FF6A3D] transition" aria-label="گیت‌هاب">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-1.04-.01-1.89-2.49.55-3.02-1.09-3.02-1.09-.45-1.17-1.11-1.48-1.11-1.48-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-1.99-.23-4.09-1.02-4.09-4.55 0-1.01.35-1.84.93-2.49-.09-.23-.41-1.17.09-2.45 0 0 .77-.25 2.53.95A8.4 8.4 0 0112 7.5c.78 0 1.57.11 2.3.33 1.75-1.2 2.52-.95 2.52-.95.5 1.28.18 2.22.09 2.45.58.65.93 1.48.93 2.49 0 3.54-2.1 4.32-4.1 4.55.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"
+              fill="currentColor" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/static-form.js"></script>
+
+  <a href="#" id="scrollToTop"
+    class="fixed bottom-12 right-4 md:bottom-20 md:right-6 w-12 h-12 md:w-14 md:h-14 border-2 border-[#FF6A3D] text-[#FF6A3D] rounded-full flex items-center justify-center transform scale-0 transition-all duration-300 hover:bg-[#FF6A3D] hover:text-white hover:scale-110 shadow-lg z-50"
+    aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 24 24" stroke="none">
+      <path d="M5 15l7-7 7 7" />
+    </svg>
+  </a>
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+body {
+  font-family: 'Vazirmatn', sans-serif !important;
+  direction: rtl;
+}
+
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: right;
+  direction: rtl;
+  display: inline-block;
+}
+
+.typing-cursor {
+  color: #FF6A3D;
+  font-weight: bold;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* چینش کلی نوار مهارت‌ها */
+.skills-wrapper {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ریسپانسیو برای موبایل */
+@media (max-width: 768px) {
+  /* هدر جمع‌وجورتر */
+  header {
+    padding: 1rem 1.5rem;
+  }
+
+  /* منوی هدر دسکتاپ در موبایل مخفی بماند */
+  header nav {
+    display: none !important;
+  }
+
+  /* سکشن خانه: تصویر و متن زیر هم و وسط‌چین */
+  #home {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  #home .flex-1 {
+    width: 100%;
+  }
+
+  #home .flex-1.text-right {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  /* دکمه‌های خانه در موبایل وسط‌چین شوند */
+  .home-buttons {
+    justify-content: center;
+  }
+
+  /* نوار مهارت‌ها در موبایل کمی جمع‌وجورتر شوند */
+  .skills-wrapper {
+    max-width: 90%;
+  }
+
+  /* پدینگ داخلی کلی در عرض کوچک */
+  .max-w-6xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* اسکرول‌بار سفارشی */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23262F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6A3D;
+  border-radius: 4px;
+}
+
+/* رنگ و هاور منوی بالا و منوی موبایل */
+header nav a,
+#mobile-menu a {
+  color: #E5E7EB !important;
+  transition: color 0.2s ease;
+}
+
+header nav a:hover,
+#mobile-menu a:hover {
+  color: #FF6A3D !important;
+}
+
+/* دکمه منوی موبایل (همبرگری) */
+#mobile-menu-button {
+  cursor: pointer;
+}
+
+/* خود آیکون سه‌خط همیشه نارنجی باشد */
+#mobile-menu-button svg path {
+  stroke: #FF6A3D !important;
+}
+
+#mobile-menu-button.active {
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 106, 61, 0.5);
+}
+
+/* منوی موبایل با انیمیشن باز/بسته شدن */
+#mobile-menu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform-origin: top;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding-top 0.3s ease, padding-bottom 0.3s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#mobile-menu.open {
+  max-height: 300px; /* ارتفاع کافی برای لینک‌ها */
+  opacity: 1;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* نوار پیشرفت مهارت‌ها از سمت راست شروع شود */
+.skill-bar-fill {
+  display: block;
+  margin-left: auto;
+}
+
+/* ---------- فرم تماس ---------- */
+.field {
+  width: 100%;
+  background: #181C23;
+  border: 1px solid #2f3340;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  color: #fff;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field:focus {
+  outline: none;
+  border-color: #FF6A3D;
+  box-shadow: 0 0 0 3px rgba(255, 106, 61, 0.25);
+}
+
+.field-error {
+  display: block;
+  min-height: 1.1rem;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #ff8d8d;
+}
+
+.form-flash {
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-flash.hidden { display: none; }
+.form-flash-ok { background: rgba(52, 199, 89, 0.15); color: #7ee2a0; }
+.form-flash-error { background: rgba(255, 90, 90, 0.15); color: #ff9c9c; }
+
+/* فیلد مخفی ضد ربات (honeypot) */
+.hp-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- اصلاحات ریسپانسیو و فرم تماس نسخه جدید ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: clip; }
+img, svg { max-width: 100%; }
+section { scroll-margin-top: 1rem; }
+#home { gap: clamp(1.5rem, 5vw, 4rem); }
+#home .relative img { width: clamp(10rem, 22vw, 15rem); height: clamp(10rem, 22vw, 15rem); }
+#home h1 { line-height: 1.35; overflow-wrap: anywhere; }
+#home .typing-effect { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+#home .flex.space-x-6 { flex-wrap: wrap; justify-content: center; gap: .65rem 1rem; }
+#about .flex.space-x-12 { flex-wrap: wrap; gap: 1.5rem; }
+#projects .grid > div { min-width: 0; overflow-wrap: anywhere; }
+#projects .flex.space-x-2 { flex-wrap: wrap; gap: .45rem; }
+#contact .grid { align-items: stretch; }
+#contact .grid > div { min-width: 0; overflow-wrap: anywhere; }
+#contact-form { border: 1px solid #333844; box-shadow: 0 18px 55px rgba(0,0,0,.18); }
+.contact-heading { margin-bottom: 1.5rem; }
+.contact-kicker { color: #FF6A3D; font-size: .72rem; letter-spacing: .18em; font-weight: 700; }
+.contact-heading h3 { margin-top: .35rem; }
+.contact-hint, .contact-secure-note { color: #9298a6; font-size: .85rem; line-height: 1.9; }
+.field { min-height: 46px; }
+textarea.field { min-height: 145px; resize: vertical; }
+.message-counter { display: block; color: #858b99; font-size: .75rem; margin-top: .35rem; }
+.contact-submit-row { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.contact-submit { display: inline-flex; align-items: center; justify-content: center; gap: 1.25rem; min-height: 46px; padding: .65rem 1.25rem; border: 0; border-radius: 10px; background: #FF6A3D; color: white; font: inherit; cursor: pointer; transition: transform .2s ease, filter .2s ease; }
+.contact-submit:hover { filter: brightness(1.08); transform: translateY(-2px); }
+.contact-submit:disabled { opacity: .65; cursor: wait; transform: none; }
+
+@media (max-width: 768px) {
+  header { padding: .9rem 1rem !important; gap: .75rem; }
+  header > div { font-size: .95rem !important; max-width: calc(100% - 4rem); overflow-wrap: anywhere; }
+  #mobile-menu { padding-inline: 1.25rem; }
+  #home { padding: 2.5rem 1rem 2rem !important; gap: 1.5rem; }
+  #home .flex-1 { min-width: 0; }
+  #home .flex-1:first-child { margin-top: 0 !important; }
+  #home .flex-1.text-right { text-align: center; margin-top: .5rem !important; }
+  #home h2 { font-size: 1.8rem !important; }
+  #home h3 { font-size: 1.2rem !important; line-height: 1.8; }
+  #home h1 { font-size: clamp(1.7rem, 8vw, 2.35rem) !important; margin-bottom: 1.1rem; }
+  #home .home-buttons { gap: .65rem; }
+  #home .home-buttons a { flex: 1 1 135px; }
+  #home .home-buttons a > button, #home .home-buttons a { text-align: center; }
+  .skills-wrapper { width: calc(100% - 2rem); max-width: 600px; }
+  #about, #projects, #contact { padding: 2.75rem 1rem !important; }
+  #about { gap: 1.5rem; }
+  #projects .grid { grid-template-columns: minmax(0, 1fr) !important; }
+  #contact .grid { grid-template-columns: minmax(0, 1fr) !important; gap: .85rem; }
+  #contact-form { padding: 1.1rem !important; margin-top: 1.25rem !important; }
+  footer > div { padding-inline: 1rem !important; text-align: center; }
+  footer .flex.gap-4 { justify-content: center; flex-wrap: wrap; }
+}
+@media (max-width: 380px) {
+  #home .relative img { width: 9.5rem; height: 9.5rem; }
+  #home .home-buttons a { flex-basis: 100%; }
+  .contact-submit-row { align-items: stretch; }
+  .contact-submit { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
