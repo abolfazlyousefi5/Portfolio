@@ -145,7 +145,7 @@
       '<div class="w-12 h-12 rounded-xl bg-[#FF6A3D] flex items-center justify-center mb-4">' + ICON_SVG + "</div>" +
       '<h3 class="text-lg font-bold mb-2"></h3>' +
       '<p class="text-[#7B7F86] text-sm leading-relaxed flex-1 mb-4"></p>' +
-      '<div class="flex flex-wrap gap-2 mb-3"></div>' +
+      '<div class="flex flex-wrap gap-2"></div>' +
       '<div class="card-link"></div>';
     d.querySelector("h3").textContent = p.title || "";
     d.querySelector("p").textContent = p.description || "";
@@ -159,8 +159,19 @@
     var par = card.querySelector("p");
     if (par) par.textContent = p.description || "";
 
-    // تگ‌ها
-    var tagBox = card.querySelector(".flex.flex-wrap, .tags");
+    // تگ‌ها — کانتینر تگ‌ها: div فرزندِ مستقیم کارت که فقط span دارد
+    var tagBox = null;
+    var kids = card.children;
+    for (var k = 0; k < kids.length; k++) {
+      var el = kids[k];
+      if (el.tagName !== "DIV") continue;
+      if (!el.querySelector("span")) continue;
+      if (el.querySelector("h3, p, a")) continue;
+      if (el.querySelector("svg")) continue;
+      if (el.children.length && el.children[0].tagName !== "SPAN") continue;
+      tagBox = el; break;
+    }
+    if (tagBox) tagBox.className = "flex flex-wrap gap-2";   // تا تگ‌ها بیرون نزنند
     if (tagBox && p.tags && p.tags.length) {
       var sig = JSON.stringify(p.tags);
       if (tagBox.dataset.sig !== sig) {
