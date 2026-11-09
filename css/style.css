@@ -337,3 +337,25 @@ a.resume-btn:visited {
 /* کپی‌رایت پایین سایت */
 footer a { text-decoration: none; }
 
+/* ═══════════ سوییچ زبان ═══════════ */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #FF6A3D;
+  border-radius: 999px;
+  color: #FF6A3D;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-decoration: none;
+  transition: background .2s, color .2s, transform .2s;
+}
+.lang-switch:hover {
+  background: #FF6A3D;
+  color: #fff;
+  transform: translateY(-1px);
+}
