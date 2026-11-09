@@ -93,12 +93,28 @@
     var about = document.querySelector("#about p");
     if (about && s.about_text) about.textContent = s.about_text;
 
-    // آمار
-    var stats = document.querySelectorAll("#about .text-3xl, #about .stat-num");
-    if (stats.length >= 2) {
-      if (s.stat_projects) stats[0].textContent = s.stat_projects;
-      if (s.stat_months) stats[1].textContent = s.stat_months;
+    // آمار — بر اساس برچسب کنارش پیدا می‌شود (به کلاس وابسته نیست)
+    function setStat(labelText, value) {
+      if (!value) return;
+      var labels = document.querySelectorAll("#about div, #about span, #about p");
+      for (var i = 0; i < labels.length; i++) {
+        var el = labels[i];
+        if (el.children.length > 0) continue;
+        if (el.textContent.trim().indexOf(labelText) === -1) continue;
+        var num = el.previousElementSibling;
+        if (!num) continue;
+        var plus = num.querySelector("span");
+        if (plus) {
+          num.firstChild.nodeValue = String(value);
+        } else {
+          num.textContent = value;
+        }
+        return;
+      }
     }
+    setStat("پروژه", s.stat_projects);
+    setStat("ماه تجربه", s.stat_months);
+    setStat("ماه", s.stat_months);
 
     // ایمیل / واتساپ / آدرس
     document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
