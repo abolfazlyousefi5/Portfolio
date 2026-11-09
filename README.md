@@ -33,7 +33,7 @@
 
 </div>
 
-> 💡 برای دیدن واقعی، روی **[🌐 Live Site]https://abolfazl-yousefi.is-a.dev/)** کلیک کن. 
+> 💡 برای دیدن واقعی، روی **[🌐 Live Sithttps://abolfazl-yousefi.is-a.dev/)** کلیک کن.] 
 ---
 
 ## ✨ امکانات
