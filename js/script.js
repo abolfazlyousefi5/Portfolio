@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
       texts = [];
     }
     if (texts.length) createTypingEffect(typingElement, texts, 150);
+
+    // امکان راه‌اندازی دوباره وقتی site-sync.js جمله‌ها را عوض می‌کند
+    window.__typingRestart = function (newTexts) {
+      if (!newTexts || !newTexts.length) return;
+      typingElement.textContent = "";
+      createTypingEffect(typingElement, newTexts, 150);
+    };
   }
 
   // منوی همبرگری موبایل
