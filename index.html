@@ -62,8 +62,10 @@
         <a href="#contact">
           <button class="cursor-pointer bg-[#FF6A3D] text-white px-6 py-2 rounded hover:bg-[#ff7a50] transition">تماس با من</button>
         </a>
-        <a href="assets/resume.pdf" download
-          class="border border-white px-6 py-2 rounded hover:bg-white hover:text-[#181C23] transition">رزومه من</a>
+        <a href="resume.html" target="_blank" rel="noopener" class="resume-btn" aria-label="مشاهده و دانلود رزومه">
+          <svg class="resume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span>رزومه من</span>
+        </a>
       </div>
       <div class="flex space-x-6 text-[#7B7F86] text-sm">
         <span>HTML5</span><span>CSS</span><span>Python</span><span>SQL</span><span>Git</span><span>Github</span>
@@ -341,7 +343,7 @@
     </div>
 
     <!-- فرم تماس -->
-    <form id="contact-form" method="post" action="/contact" novalidate
+    <form id="contact-form" method="post" action="#" novalidate
       class="bg-[#23262F] p-6 rounded-lg mt-8 max-w-2xl mx-auto text-right">
       <div class="contact-heading">
         <span class="contact-kicker">LET’S TALK</span>
@@ -352,7 +354,7 @@
         
       
       <p id="contact-status" class="form-flash hidden" role="status"></p>
-      <input type="hidden" name="csrf_token" value="Yn8nj3bpPmyr6XEEeoxyvHLGGqyVdTTt2lZkWDcAZi8">
+      <!-- csrf: برای نسخه‌ی استاتیک لازم نیست (API بدون کوکی کار می‌کند) -->
       <div class="hp-field" aria-hidden="true">
         <label>وب‌سایت <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       </div>
@@ -428,10 +430,27 @@
         
       </div>
     </div>
+
+    <!-- کپی‌رایت -->
+    <div class="border-t border-[#23262F]">
+      <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-right">
+        <p class="text-sm text-[#7B7F86]">
+          © <span id="copyright-year">۱۴۰۴</span> —
+          <span class="text-[#E5E7EB] font-semibold">ابوالفضل یوسفی</span>
+          <span class="text-[#FF6A3D]">·</span>
+          تمامی حقوق محفوظ است.
+        </p>
+        <p class="text-xs text-[#5C6470] flex items-center gap-2 flex-wrap justify-center">
+          <span>طراحی و توسعه توسط خودم</span>
+          <span class="text-[#FF6A3D]">•</span>
+          <a href="https://abolfazl-yousefi.is-a.dev/" class="hover:text-[#FF6A3D] transition-colors" dir="ltr">abolfazl-yousefi.is-a.dev</a>
+        </p>
+      </div>
+    </div>
   </footer>
 
   <script src="js/script.js"></script>
-  <script src="js/static-form.js"></script>
+  <script src="js/contact-form.js"></script>
 
   <a href="#" id="scrollToTop"
     class="fixed bottom-12 right-4 md:bottom-20 md:right-6 w-12 h-12 md:w-14 md:h-14 border-2 border-[#FF6A3D] text-[#FF6A3D] rounded-full flex items-center justify-center transform scale-0 transition-all duration-300 hover:bg-[#FF6A3D] hover:text-white hover:scale-110 shadow-lg z-50"
