@@ -6,7 +6,7 @@
 
 <br/>
 
-[![Live Site](https://img.shields.io/badge/🌐_مشاهده_سایت-abolfazlyousefi5.github.io-FF6A3D?style=for-the-badge&logo=githubpages&logoColor=white)](https://abolfazlyousefi5.github.io/Portfolio/)
+[![Live Site](https://img.shields.io/badge/🌐_مشاهده_سایت-abolfazl--yousefi.is--a.dev-FF6A3D?style=for-the-badge&logo=firefox&logoColor=white)](https://abolfazl-yousefi.is-a.dev/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
@@ -26,14 +26,33 @@
 
 <div align="center">
 
-| صفحه اصلی | پروژه‌ها | موبایل |
-|:---:|:---:|:---:|
-| <img src="https://raw.githack.com/abolfazlyousefi5/Portfolio/refs/heads/main/img/11zon_cropped.png" width="90" alt="پروفایل"/> | 💼 ۶ پروژه | 📱 کامل ریسپانسیو |
-| هدر · تایپ افکت · مهارت‌ها | کارت‌های پروژه با تگ | منوی همبرگری |
+<a href="https://abolfazl-yousefi.is-a.dev/">
+  <img src="https://i.imgur.com/Ebf8clm.gif" alt="پیش‌نمایش سایت — دسکتاپ" width="840"/>
+</a>
+
+<br/><br/>
+
+<a href="https://abolfazl-yousefi.is-a.dev/">
+  <img src="https://img.shields.io/badge/🌐_مشاهده_سایت_زنده-abolfazl--yousefi.is--a.dev-FF6A3D?style=for-the-badge&logo=firefox&logoColor=white" alt="مشاهده سایت"/>
+</a>
+
+<br/>
+
+<sub>🎬 اسکرول صفحه · کارت‌های پروژه · فرم تماس · فوتر</sub>
 
 </div>
 
-برای تماشای سایت به : https://abolfazl-yousefi.is-a.dev/ مراجعه کنید !!
+<br/>
+
+<div align="center">
+
+| 📱 موبایل | 🖥️ دسکتاپ |
+|:---:|:---:|
+| <img src="https://i.imgur.com/qgy4997.gif" width="230" alt="موبایل"/> | <img src="https://i.imgur.com/bbqYmWH.png" width="420" alt="دسکتاپ"/> |
+| منوی همبرگری · چیدمان تک‌ستونه | هدر · تایپ افکت · نوار مهارت‌ها |
+
+</div>
+
 ---
 
 ## ✨ امکانات
@@ -71,7 +90,7 @@
 
 دو نسخه مستقل از یک طراحی:
 
-```text
+~~~text
                           ┌──────────────────────────┐
                           │   طراحی مشترک (UI/UX)     │
                           │  HTML · Tailwind · JS    │
@@ -90,9 +109,9 @@
          └──────────────────────┘            └──────────────────────────┘
                     │                                     │
                     ▼                                     ▼
-        abolfazlyousefi5.github.io              Abolfazlyousefi
-            /Portfolio                          .pythonanywhere.com
-```
+          abolfazl-yousefi.is-a.dev          Abolfazlyousefi
+          (دامنه اختصاصی is-a.dev)            .pythonanywhere.com
+~~~
 
 ---
 
@@ -101,7 +120,7 @@
 <details open>
 <summary><b>🟠 نسخه استاتیک (ریشه ریپو)</b></summary>
 
-```text
+~~~text
 Portfolio/
 │
 ├── 📄 index.html              # کل صفحه سایت
@@ -118,15 +137,16 @@ Portfolio/
 │
 ├── 📁 fonts/                  # ۴ وزن وزیرمتن (woff2)
 ├── 📁 img/                    # عکس پروفایل
-└── 📁 assets/                 # رزومه PDF
-```
+├── 📄 resume.html             # رزومه تعاملی (چاپ به PDF)
+│   └── 📁 assets/                 # رزومه PDF قدیمی
+~~~
 
 </details>
 
 <details>
 <summary><b>🔵 نسخه Flask (پوشه <code>flask-app/</code>)</b></summary>
 
-```text
+~~~text
 flask-app/
 │
 ├── 📁 app/
@@ -162,7 +182,7 @@ flask-app/
 ├── 📄 requirements.txt
 ├── 📄 .env.example
 └── 📄 run_local.py            # اجرای لوکال
-```
+~~~
 
 </details>
 
@@ -198,14 +218,14 @@ flask-app/
 
 ### ۱. کلون کردن
 
-```bash
+~~~bash
 git clone https://github.com/abolfazlyousefi5/Portfolio.git
 cd Portfolio/flask-app
-```
+~~~
 
 ### ۲. محیط مجازی
 
-```bash
+~~~bash
 python3 -m venv .venv
 
 # لینوکس / مک
@@ -213,39 +233,39 @@ source .venv/bin/activate
 
 # ویندوز
 .venv\Scripts\activate
-```
+~~~
 
 ### ۳. نصب وابستگی‌ها
 
-```bash
+~~~bash
 pip install -r requirements.txt
-```
+~~~
 
 ### ۴. تنظیمات
 
-```bash
+~~~bash
 cp .env.example .env
-```
+~~~
 
 فایل `.env` را ویرایش کن:
 
-```env
+~~~env
 APP_ENV=development
 SECRET_KEY=یک-رشته-تصادفی-۶۴-کاراکتری
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=رمز-قوی-حداقل-۱۰-کاراکتر
-```
+~~~
 
 > 💡 ساخت `SECRET_KEY`:
-> ```bash
+> ~~~bash
 > python3 -c "import secrets; print(secrets.token_hex(32))"
-> ```
+> ~~~
 
 ### ۵. اجرا
 
-```bash
+~~~bash
 flask --app wsgi run --debug
-```
+~~~
 
 <div align="center">
 
@@ -259,15 +279,15 @@ flask --app wsgi run --debug
 
 ### ۶. تست‌ها
 
-```bash
+~~~bash
 python -m unittest discover -s tests -t .
-```
+~~~
 
-```text
+~~~text
 Ran 26 tests in 5.3s
 
 OK ✅
-```
+~~~
 
 ---
 
@@ -328,20 +348,26 @@ OK ✅
 <details>
 <summary><b>🟢 GitHub Pages — نسخه استاتیک (فعال ✅)</b></summary>
 
-```text
+~~~text
 Settings → Pages → Source: Deploy from a branch
                  → Branch: main / (root)
                  → Save
 
-آدرس: https://abolfazlyousefi5.github.io/Portfolio/
-```
+آدرس: https://abolfazl-yousefi.is-a.dev/
+
+# دامنه اختصاصی رایگان از is-a.dev:
+#   1. فایل domains/abolfazl-yousefi.json در مخزن is-a-dev/register
+#   2. PR زده شد و merge شد ✅
+#   3. Settings → Pages → Custom domain → abolfazl-yousefi.is-a.dev
+#   4. Enforce HTTPS
+~~~
 
 </details>
 
 <details>
 <summary><b>🔵 PythonAnywhere — نسخه Flask (فعال ✅)</b></summary>
 
-```bash
+~~~bash
 # ۱. آپلود پروژه و ساخت venv
 cd ~/portfolio-app
 python3 -m venv .venv --system-site-packages
@@ -353,29 +379,29 @@ APP_ENV=production
 SECRET_KEY=...
 ADMIN_PASSWORD=...
 EOF
-```
+~~~
 
 **در پنل Web:**
-```python
+~~~python
 # WSGI configuration file
 import sys
 path = "/home/USERNAME/portfolio-app"
 if path not in sys.path:
     sys.path.insert(0, path)
 from wsgi import app as application
-```
+~~~
 
 </details>
 
 <details>
 <summary><b>⚪ Render — با دامنه اختصاصی رایگان</b></summary>
 
-```text
+~~~text
 ۱. ریپو را در Render وصل کن
 ۲. New → Blueprint → render.yaml را تأیید کن
 ۳. ADMIN_PASSWORD را وارد کن (حداقل ۱۰ کاراکتر)
 ۴. Settings → Custom Domain → دامنه‌ات را وصل کن
-```
+~~~
 
 > ⚠️ پلن رایگان Render دیسک دائمی ندارد — دیتابیس با هر ری‌استارت پاک می‌شود.
 
@@ -384,7 +410,7 @@ from wsgi import app as application
 <details>
 <summary><b>🖥️ VPS — پایدارترین گزینه</b></summary>
 
-```bash
+~~~bash
 apt update && apt install -y python3-venv nginx git
 git clone https://github.com/abolfazlyousefi5/Portfolio.git /var/www/portfolio
 cd /var/www/portfolio/flask-app
@@ -403,7 +429,7 @@ ln -s /etc/nginx/sites-available/portfolio /etc/nginx/sites-enabled/
 nginx -t && systemctl reload nginx
 
 certbot --nginx -d yourdomain.com
-```
+~~~
 
 </details>
 
@@ -472,13 +498,13 @@ certbot --nginx -d yourdomain.com
 
 اگر باگ پیدا کردی یا ایدهای داری:
 
-```text
+~~~text
 1. Fork کن
 2. یک برنچ بساز:  git checkout -b feature/نام-قابلیت
 3. کامیت کن:       git commit -m "feat: افزودن قابلیت"
 4. پوش کن:         git push origin feature/نام-قابلیت
 5. Pull Request بزن
-```
+~~~
 
 ---
 
@@ -500,9 +526,9 @@ certbot --nginx -d yourdomain.com
 
 این پروژه تحت مجوز **MIT** منتشر شده است — استفاده، تغییر و توزیع آزاد.
 
-```text
+~~~text
 MIT License · © 1405 (2026) Abolfazl Yousefi
-```
+~~~
 
 ---
 
@@ -512,7 +538,7 @@ MIT License · © 1405 (2026) Abolfazl Yousefi
 
 <br/>
 
-**[🌐 مشاهده سایت](https://abolfazlyousefi5.github.io/Portfolio/)** · **[💻 مشاهده کد](https://github.com/abolfazlyousefi5/Portfolio)**
+**[🌐 مشاهده سایت](https://abolfazl-yousefi.is-a.dev/)** · **[💻 مشاهده کد](https://github.com/abolfazlyousefi5/Portfolio)**
 
 <br/>
 
