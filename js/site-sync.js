@@ -7,6 +7,15 @@
   "use strict";
 
   var API = "https://Abolfazlyousefi.pythonanywhere.com";
+  // اگر در صفحه‌ی انگلیسی هستیم، متن‌های ثابت را انگلیسی می‌نویسیم
+  var LANG = (document.documentElement.lang || "fa").slice(0, 2).toLowerCase();
+  var IS_EN = LANG === "en";
+  var STR = {
+    viewProject: IS_EN ? "View project" : "لینک پروژه",
+    projects:    IS_EN ? "Projects"      : "پروژه‌ها",
+    completed:   IS_EN ? "Completed projects" : "پروژه تکمیل‌شده",
+    months:      IS_EN ? "Months of experience" : "ماه تجربه"
+  };
   var CACHE_KEY = "site-data-v1";
   var CACHE_TTL = 60 * 1000;        // ۱ دقیقه
   var TIMEOUT = 12000;
@@ -59,25 +68,38 @@
   function applySite(s) {
     if (!s) return;
 
-    if (s.site_title) document.title = s.site_title;
+    if (s.site_title && !IS_EN) document.title = s.site_title;
 
     var md = document.querySelector('meta[name="description"]');
-    if (md && s.meta_description) md.setAttribute("content", s.meta_description);
+    if (md && s.meta_description && !IS_EN) md.setAttribute("content", s.meta_description);
 
-    // نام در هدر
-    setText("header > div", s.full_name);
+    // نام در هدر — فقط فارسی (نسخه انگلیسی نام لاتین دارد)
+    // ⚠️ مهم: نباید کل wrapper را بازنویسی کند، وگرنه لینک EN پاک می‌شود
+    if (!IS_EN && s.full_name) {
+      var nameEl = document.querySelector("header .site-name") ||
+                   document.querySelector("header > div > div");
+      if (nameEl) nameEl.textContent = s.full_name;
+    }
 
     // عنوان اصلی (h1 در خانه)
-    var h1 = document.querySelector("#home h1");
-    if (h1 && s.headline) h1.textContent = s.headline;
+    if (!IS_EN) {
+      var h1 = document.querySelector("#home h1");
+      if (h1 && s.headline) h1.textContent = s.headline;
+    }
 
-    // جمله‌های افکت تایپ
+    // جمله‌های افکت تایپ — فقط اگر واقعاً عوض شده باشند
     var typing = document.querySelector(".typing-effect");
-    if (typing && s.typing_texts) {
-      var lines = String(s.typing_texts).split("\n").map(function (x) { return x.trim(); }).filter(Boolean);
+    if (typing && s.typing_texts && !IS_EN) {
+      var lines = String(s.typing_texts).split("\n")
+        .map(function (x) { return x.trim(); })
+        .filter(Boolean);
       if (lines.length) {
-        typing.setAttribute("data-texts", JSON.stringify(lines));
-        if (window.__typingRestart) window.__typingRestart(lines);
+        var current = typing.getAttribute("data-texts");
+        var incoming = JSON.stringify(lines);
+        if (current !== incoming) {
+          typing.setAttribute("data-texts", incoming);
+          if (window.__typingRestart) window.__typingRestart(lines);
+        }
       }
     }
 
@@ -91,8 +113,10 @@
     }
 
     // متن درباره من
-    var about = document.querySelector("#about p");
-    if (about && s.about_text) about.textContent = s.about_text;
+    if (!IS_EN) {
+      var about = document.querySelector("#about p");
+      if (about && s.about_text) about.textContent = s.about_text;
+    }
 
     // آمار — بر اساس برچسب کنارش پیدا می‌شود (به کلاس وابسته نیست)
     function setStat(labelText, value) {
@@ -114,8 +138,10 @@
       }
     }
     setStat("پروژه", s.stat_projects);
+    setStat("Project", s.stat_projects);
     setStat("ماه تجربه", s.stat_months);
     setStat("ماه", s.stat_months);
+    setStat("Month", s.stat_months);
 
     // ایمیل / واتساپ / آدرس
     document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
@@ -197,7 +223,7 @@
         a.className = "text-sm text-[#FF6A3D] hover:opacity-80";
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.textContent = "لینک پروژه";
+        a.textContent = STR.viewProject;
         card.appendChild(a);
       }
       if (a.getAttribute("href") !== p.url) a.setAttribute("href", p.url);
@@ -275,11 +301,18 @@
     }).catch(function () { /* آفلاین — بی‌خیال */ });
   }
 
-  // وقتی کاربر از تب ادمین برمی‌گردد، دوباره بخوان
+  // وقتی کاربر از تب ادمین برمی‌گردد، دوباره بخوان (حداکثر هر ۳۰ ثانیه یک‌بار)
+  var lastBoot = 0;
+  function maybeReboot() {
+    var now = Date.now();
+    if (now - lastBoot < 30000) return;
+    lastBoot = now;
+    boot();
+  }
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") boot();
+    if (document.visibilityState === "visible") maybeReboot();
   });
-  window.addEventListener("focus", function () { boot(); });
+  window.addEventListener("focus", maybeReboot);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () { setTimeout(boot, 300); });
