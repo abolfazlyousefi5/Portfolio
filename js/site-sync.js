@@ -145,7 +145,7 @@
       '<div class="w-12 h-12 rounded-xl bg-[#FF6A3D] flex items-center justify-center mb-4">' + ICON_SVG + "</div>" +
       '<h3 class="text-lg font-bold mb-2"></h3>' +
       '<p class="text-[#7B7F86] text-sm leading-relaxed flex-1 mb-4"></p>' +
-      '<div class="flex flex-wrap gap-2"></div>' +
+      '<div class="flex flex-wrap" style="gap:8px"></div>' +
       '<div class="card-link"></div>';
     d.querySelector("h3").textContent = p.title || "";
     d.querySelector("p").textContent = p.description || "";
@@ -171,7 +171,10 @@
       if (el.children.length && el.children[0].tagName !== "SPAN") continue;
       tagBox = el; break;
     }
-    if (tagBox) tagBox.className = "flex flex-wrap gap-2";   // تا تگ‌ها بیرون نزنند
+    if (tagBox) {
+      tagBox.className = "flex flex-wrap";   // تا تگ‌ها بیرون نزنند
+      tagBox.style.gap = "8px";              // همان فاصله‌ی space-x-2 قبلی
+    }
     if (tagBox && p.tags && p.tags.length) {
       var sig = JSON.stringify(p.tags);
       if (tagBox.dataset.sig !== sig) {
@@ -179,7 +182,7 @@
         tagBox.innerHTML = "";
         p.tags.forEach(function (t) {
           var sp = document.createElement("span");
-          sp.className = "text-xs px-2 py-1 rounded bg-[#2C3340] text-[#8FA3C8]";
+          sp.className = "bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs";
           sp.textContent = t;
           tagBox.appendChild(sp);
         });
