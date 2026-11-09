@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <title>رزومه | ابوالفضل یوسفی</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="theme-color" content="#181C23" />
+<meta property="og:image" content="https://i.imgur.com/bbqYmWH.png" />
+<meta property="og:site_name" content="Abolfazl Yousefi" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://i.imgur.com/bbqYmWH.png" />
+
 <style>
   @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'); font-weight:400; }
   @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-Medium.woff2') format('woff2'); font-weight:500; }
@@ -162,10 +172,95 @@
   }
   .print-bar button:hover { background: #ff7a50; transform: translateY(-2px); }
   @media print { .print-bar { display: none !important; } }
+
+  /* ================= ریسپانسیو / تمام‌صفحه ================= */
+  @media screen {
+    html, body { width: 100%; height: auto; min-height: 100%; }
+    body { margin: 0; padding: 0; background: #0c0f13; overflow-x: hidden; }
+    #stage {
+      display: flex; justify-content: center; align-items: flex-start;
+      min-height: 100vh; padding: 18px 0 78px;
+      transform-origin: top center;
+    }
+    .page {
+      margin: 0 auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,.65);
+      border-radius: 3px;
+      transform-origin: top center;
+      flex: 0 0 auto;
+    }
+  }
+
+  /* --- موبایل و تبلت: تک‌ستونه، بدون اسکرول افقی --- */
+  @media screen and (max-width: 860px) {
+    #stage { padding: 0 0 96px; display: block; }
+    .page {
+      width: 100% !important; height: auto !important;
+      display: block !important; border-radius: 0; box-shadow: none;
+      transform: none !important;
+    }
+    .side {
+      width: 100% !important;
+      border-left: 0 !important; border-bottom: 1px solid rgba(255,106,61,.18);
+      padding: 22px 18px 20px;
+    }
+    .side > section { margin-top: 18px; }
+    .avatar { width: 108px; height: 108px; }
+    .main {
+      width: 100% !important; padding: 22px 18px 34px !important;
+      gap: 26px !important;
+    }
+    .head h1 { font-size: 27px !important; }
+    .head .role { font-size: 14px !important; }
+    .head .sub { font-size: 10.5px !important; }
+    .lead { font-size: 12.5px !important; line-height: 2 !important; }
+    .stat-row { gap: 8px !important; }
+    .stat b { font-size: 16px !important; }
+    .stat span { font-size: 9px !important; }
+    .proj { margin-bottom: 16px !important; padding-right: 14px; }
+    .proj-top b { font-size: 13px !important; }
+    .proj p { font-size: 11.5px !important; line-height: 1.95 !important; }
+    .chip { font-size: 9.5px !important; }
+    .contact-item { font-size: 11.5px !important; }
+    .skill-top { font-size: 11.5px !important; }
+    .tag { font-size: 10.5px !important; }
+    .lang-row { font-size: 11.5px !important; }
+    .side h2 { font-size: 11.5px !important; }
+    .sec-title { font-size: 15px !important; }
+    .foot { flex-direction: column; gap: 6px; text-align: center; font-size: 9px; }
+    .print-bar { bottom: 14px; }
+    .print-bar button { padding: 12px 28px; font-size: 13px; }
+  }
+
+  @media screen and (max-width: 400px) {
+    .main { padding: 18px 14px 30px !important; }
+    .side { padding: 18px 14px 16px; }
+    .head h1 { font-size: 24px !important; }
+    .stat-row { flex-direction: column; }
+    .stat { display: flex; justify-content: space-between; align-items: center; text-align: right; }
+    .stat b { font-size: 15px !important; }
+  }
+
+  /* چاپ همیشه دقیقاً A4 تک‌صفحه */
+  @media print {
+    html, body { width: 210mm !important; height: 297mm !important; }
+    body { margin: 0 !important; padding: 0 !important; overflow: visible; }
+    #stage { display: block !important; padding: 0 !important; min-height: 0 !important; transform: none !important; }
+    .page {
+      width: 210mm !important; height: 297mm !important;
+      display: grid !important; grid-template-columns: 62mm 1fr !important;
+      border-radius: 0 !important; box-shadow: none !important;
+      transform: none !important; margin: 0 !important;
+    }
+    .side { width: auto !important; border-bottom: 0 !important; padding: 12mm 7mm 10mm 7mm !important; }
+    .main { width: auto !important; padding: 11mm 10mm 9mm 11mm !important; gap: 2.6mm !important; }
+    .foot { flex-direction: row !important; }
+  }
+
 </style>
 </head>
 <body>
-<div class="page">
+<div id="stage"><div class="page">
 
   <!-- ================= ستون کنار ================= -->
   <aside class="side">
@@ -361,5 +456,39 @@
 <div class="print-bar">
   <button type="button" onclick="window.print()">⤓ ذخیره به‌صورت PDF</button>
 </div>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var page  = stage ? stage.querySelector('.page') : null;
+  if (!page) return;
+  var A4W = 794, A4H = 1123;
+
+  function fit() {
+    if (window.innerWidth <= 860) {
+      // موبایل: چیدمان طبیعی، بدون مقیاس
+      page.style.transform = '';
+      stage.style.height = '';
+      stage.style.width = '';
+      return;
+    }
+    var padX = 40, padTop = 20, padBottom = 84;
+    var availW = window.innerWidth  - padX * 2;
+    var availH = window.innerHeight - padTop - padBottom;
+    var s = Math.min(availW / A4W, availH / A4H);
+    s = Math.min(s, 1.45);
+    page.style.transform = 'scale(' + s + ')';
+    stage.style.height = (A4H * s + padTop + padBottom) + 'px';
+  }
+
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function () { setTimeout(fit, 120); });
+  window.addEventListener('beforeprint', function () { page.style.transform = ''; });
+  window.addEventListener('afterprint', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 </body>
 </html>
