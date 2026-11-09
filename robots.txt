@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
 
 Sitemap: https://abolfazl-yousefi.is-a.dev/sitemap.xml
