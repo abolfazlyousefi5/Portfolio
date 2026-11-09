@@ -8,7 +8,7 @@
 
   var API = "https://Abolfazlyousefi.pythonanywhere.com";
   var CACHE_KEY = "site-data-v1";
-  var CACHE_TTL = 5 * 60 * 1000;   // ۵ دقیقه
+  var CACHE_TTL = 60 * 1000;        // ۱ دقیقه
   var TIMEOUT = 12000;
 
   /* ---------- کش: اگر اینترنت قطع بود، آخرین نسخه نشان داده می‌شود ---------- */
@@ -29,7 +29,8 @@
   function fetchJSON(path) {
     var ctrl = ("AbortController" in window) ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, TIMEOUT);
-    return fetch(API + path, {
+    var sep = path.indexOf("?") === -1 ? "?" : "&";
+    return fetch(API + path + sep + "_t=" + Date.now(), {
       mode: "cors",
       credentials: "omit",
       cache: "no-store",
@@ -134,38 +135,86 @@
     });
   }
 
-  /* ---------- ساخت کارت‌های پروژه ---------- */
-  function buildProjectCard(p) {
-    var tags = (p.tags || []).map(function (t) {
-      return '<span class="text-xs px-2 py-1 rounded bg-[#2C3340] text-[#8FA3C8]">' + t + "</span>";
-    }).join("");
+  /* ---------- به‌روزرسانی کارت‌های پروژه (بدون بازسازی) ---------- */
+  var ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>';
 
-    var div = document.createElement("div");
-    div.className = "bg-[#23262F] rounded-lg p-6 text-right flex flex-col";
-    div.innerHTML =
-      '<div class="w-12 h-12 rounded-xl bg-[#FF6A3D] flex items-center justify-center mb-4">' +
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>' +
-      "</div>" +
-      '<h3 class="text-lg font-semibold mb-2">' + p.title + "</h3>" +
-      '<p class="text-sm text-[#9AA3B2] leading-relaxed flex-1 mb-4">' + (p.description || "") + "</p>" +
-      '<div class="flex flex-wrap gap-2 mb-4">' + tags + "</div>" +
-      (p.url ? '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer" class="text-sm text-[#FF6A3D] hover:text-[#ff8a5c] transition-colors">لینک پروژه</a>' : "");
-    return div;
+  function buildCard(p) {
+    var d = document.createElement("div");
+    d.className = "bg-[#23262F] rounded-lg p-6 text-right flex flex-col";
+    d.innerHTML =
+      '<div class="w-12 h-12 rounded-xl bg-[#FF6A3D] flex items-center justify-center mb-4">' + ICON_SVG + "</div>" +
+      '<h3 class="text-lg font-bold mb-2"></h3>' +
+      '<p class="text-[#7B7F86] text-sm leading-relaxed flex-1 mb-4"></p>' +
+      '<div class="flex flex-wrap gap-2 mb-3"></div>' +
+      '<div class="card-link"></div>';
+    d.querySelector("h3").textContent = p.title || "";
+    d.querySelector("p").textContent = p.description || "";
+    return d;
   }
 
+  function fillCard(card, p) {
+    var h3 = card.querySelector("h3");
+    if (h3) h3.textContent = p.title || "";
+
+    var par = card.querySelector("p");
+    if (par) par.textContent = p.description || "";
+
+    // تگ‌ها
+    var tagBox = card.querySelector(".flex.flex-wrap, .tags");
+    if (tagBox && p.tags && p.tags.length) {
+      var sig = JSON.stringify(p.tags);
+      if (tagBox.dataset.sig !== sig) {
+        tagBox.dataset.sig = sig;
+        tagBox.innerHTML = "";
+        p.tags.forEach(function (t) {
+          var sp = document.createElement("span");
+          sp.className = "text-xs px-2 py-1 rounded bg-[#2C3340] text-[#8FA3C8]";
+          sp.textContent = t;
+          tagBox.appendChild(sp);
+        });
+      }
+    }
+
+    // لینک پروژه
+    if (p.url) {
+      var a = card.querySelector('a[href]');
+      if (!a) {
+        a = document.createElement("a");
+        a.className = "text-sm text-[#FF6A3D] hover:opacity-80";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "لینک پروژه";
+        card.appendChild(a);
+      }
+      if (a.getAttribute("href") !== p.url) a.setAttribute("href", p.url);
+    }
+  }
+
+  var lastSig = null;
   function applyProjects(list) {
-    if (!list || !list.length) return;
+    if (!list) return;
     var grid = document.querySelector("#projects .grid");
     if (!grid) return;
-    // فقط اگر تعداد یا عنوان‌ها فرق داشت، بازسازی کن (تا انیمیشن‌ها نپرند)
-    var current = grid.children.length;
-    var firstTitle = grid.querySelector("h3, .font-semibold");
-    var same = current === list.length &&
-               firstTitle && firstTitle.textContent.trim() === String(list[0].title).trim();
-    if (same) return;
 
-    grid.innerHTML = "";
-    list.forEach(function (p) { grid.appendChild(buildProjectCard(p)); });
+    var sig = JSON.stringify(list.map(function (p) {
+      return [p.title, p.description, p.url, (p.tags || []).join("|")];
+    }));
+    if (sig === lastSig) return;         // هیچ تغییری نبود
+    lastSig = sig;
+
+    var cards = grid.children;
+    var n = list.length;
+
+    // تعداد را تنظیم کن
+    if (cards.length > n) {
+      for (var i = cards.length - 1; i >= n; i--) grid.removeChild(cards[i]);
+    }
+    while (grid.children.length < n) {
+      grid.appendChild(buildCard(list[grid.children.length]));
+    }
+
+    // محتوای هر کارت را به‌روز کن
+    for (var j = 0; j < n; j++) fillCard(grid.children[j], list[j]);
   }
 
   /* ---------- نوارهای مهارت ---------- */
@@ -211,6 +260,12 @@
       writeCache({ site: site, projects: projects, skills: skills });
     }).catch(function () { /* آفلاین — بی‌خیال */ });
   }
+
+  // وقتی کاربر از تب ادمین برمی‌گردد، دوباره بخوان
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") boot();
+  });
+  window.addEventListener("focus", function () { boot(); });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () { setTimeout(boot, 300); });
