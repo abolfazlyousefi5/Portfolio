@@ -16,6 +16,16 @@
     completed:   IS_EN ? "Completed projects" : "پروژه تکمیل‌شده",
     months:      IS_EN ? "Months of experience" : "ماه تجربه"
   };
+
+  // انتخاب فیلد درست بر اساس زبان صفحه
+  function pick(obj, faKey, enKey) {
+    if (IS_EN) {
+      var en = obj[enKey];
+      if (en && String(en).trim()) return en;      // انگلیسی موجود است
+      return obj[faKey];                            // وگرنه فارسی
+    }
+    return obj[faKey];
+  }
   var CACHE_KEY = "site-data-v1";
   var CACHE_TTL = 60 * 1000;        // ۱ دقیقه
   var TIMEOUT = 12000;
@@ -84,13 +94,15 @@
     // عنوان اصلی (h1 در خانه)
     if (!IS_EN) {
       var h1 = document.querySelector("#home h1");
-      if (h1 && s.headline) h1.textContent = s.headline;
+      var hl = pick(s, "headline", "headline_en");
+      if (h1 && hl) h1.textContent = hl;
     }
 
     // جمله‌های افکت تایپ — فقط اگر واقعاً عوض شده باشند
     var typing = document.querySelector(".typing-effect");
-    if (typing && s.typing_texts && !IS_EN) {
-      var lines = String(s.typing_texts).split("\n")
+    var typingSrc = pick(s, "typing_texts", "typing_texts_en");
+    if (typing && typingSrc) {
+      var lines = String(typingSrc).split("\n")
         .map(function (x) { return x.trim(); })
         .filter(Boolean);
       if (lines.length) {
@@ -113,10 +125,9 @@
     }
 
     // متن درباره من
-    if (!IS_EN) {
-      var about = document.querySelector("#about p");
-      if (about && s.about_text) about.textContent = s.about_text;
-    }
+    var about = document.querySelector("#about p");
+    var ab = pick(s, "about_text", "about_text_en");
+    if (about && ab) about.textContent = ab;
 
     // آمار — بر اساس برچسب کنارش پیدا می‌شود (به کلاس وابسته نیست)
     function setStat(labelText, value) {
@@ -164,6 +175,9 @@
   /* ---------- به‌روزرسانی کارت‌های پروژه (بدون بازسازی) ---------- */
   var ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>';
 
+  function cardTitle(p) { return pick(p, "title", "title_en") || ""; }
+  function cardDesc(p)  { return pick(p, "description", "description_en") || ""; }
+
   function buildCard(p) {
     var d = document.createElement("div");
     d.className = "bg-[#23262F] rounded-lg p-6 text-right flex flex-col";
@@ -173,17 +187,17 @@
       '<p class="text-[#7B7F86] text-sm leading-relaxed flex-1 mb-4"></p>' +
       '<div class="flex flex-wrap" style="gap:8px"></div>' +
       '<div class="card-link"></div>';
-    d.querySelector("h3").textContent = p.title || "";
-    d.querySelector("p").textContent = p.description || "";
+    d.querySelector("h3").textContent = cardTitle(p);
+    d.querySelector("p").textContent = cardDesc(p);
     return d;
   }
 
   function fillCard(card, p) {
     var h3 = card.querySelector("h3");
-    if (h3) h3.textContent = p.title || "";
+    if (h3) h3.textContent = cardTitle(p);
 
     var par = card.querySelector("p");
-    if (par) par.textContent = p.description || "";
+    if (par) par.textContent = cardDesc(p);
 
     // تگ‌ها — کانتینر تگ‌ها: div فرزندِ مستقیم کارت که فقط span دارد
     var tagBox = null;
@@ -237,7 +251,7 @@
     if (!grid) return;
 
     var sig = JSON.stringify(list.map(function (p) {
-      return [p.title, p.description, p.url, (p.tags || []).join("|")];
+      return [cardTitle(p), cardDesc(p), p.url, (p.tags || []).join("|")];
     }));
     if (sig === lastSig) return;         // هیچ تغییری نبود
     lastSig = sig;
