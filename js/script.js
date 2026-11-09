@@ -1,36 +1,49 @@
 // افکت تایپ متحرک: متن را تایپ می‌کند، پاک می‌کند و به جمله‌ی بعدی می‌رود
-function createTypingEffect(element, texts, speed = 100) {
-  let textIndex = 0; // شماره متن فعلی
-  let charIndex = 0; // شماره کاراکتر فعلی
-  let isDeleting = false; // آیا در حال پاک کردن هستیم؟
+var __typingTimer = null;      // تایمر حلقه‌ی فعلی — تا بتوانیم لغو کنیم
+var __typingSignature = null;  // امضای متن‌ها — برای اینکه بی‌دلیل ری‌استارت نشود
+
+function createTypingEffect(element, texts, speed) {
+  speed = speed || 110;
+
+  // ✅ هر بار که دوباره صدا زده شد، حلقه‌ی قبلی را بکش
+  if (__typingTimer) { clearTimeout(__typingTimer); __typingTimer = null; }
+
+  var textIndex = 0;
+  var charIndex = 0;
+  var isDeleting = false;
 
   function type() {
-    const currentText = texts[textIndex];
+    var currentText = texts[textIndex] || "";
+    var next;
 
     if (isDeleting) {
-      element.textContent = currentText.substring(0, charIndex - 1);
       charIndex--;
+      next = currentText.substring(0, Math.max(charIndex, 0));
     } else {
-      element.textContent = currentText.substring(0, charIndex + 1);
       charIndex++;
+      next = currentText.substring(0, charIndex);
     }
 
-    let typeSpeed = speed;
-    if (isDeleting) typeSpeed /= 2; // پاک کردن سریع‌تر
+    // فقط اگر عوض شده، بنویس (جلوگیری از پرش)
+    if (element.textContent !== next) element.textContent = next;
 
-    if (!isDeleting && charIndex === currentText.length) {
-      typeSpeed = 2000; // توقف ۲ ثانیه
+    var delay = isDeleting ? speed / 2 : speed;
+
+    if (!isDeleting && charIndex >= currentText.length) {
+      delay = 2200;                       // توقف روی جمله‌ی کامل
       isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
+    } else if (isDeleting && charIndex <= 0) {
       isDeleting = false;
+      charIndex = 0;
       textIndex = (textIndex + 1) % texts.length;
-      typeSpeed = 500;
+      delay = 450;
     }
 
-    setTimeout(type, typeSpeed);
+    __typingTimer = setTimeout(type, delay);
   }
 
-  type();
+  element.textContent = "";
+  __typingTimer = setTimeout(type, 250);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -43,12 +56,18 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (e) {
       texts = [];
     }
-    if (texts.length) createTypingEffect(typingElement, texts, 150);
+    if (texts.length) {
+      __typingSignature = JSON.stringify(texts);
+      createTypingEffect(typingElement, texts, 150);
+    }
 
     // امکان راه‌اندازی دوباره وقتی site-sync.js جمله‌ها را عوض می‌کند
     window.__typingRestart = function (newTexts) {
       if (!newTexts || !newTexts.length) return;
-      typingElement.textContent = "";
+      var sig = JSON.stringify(newTexts);
+      // ✅ اگر متن‌ها همان قبلی هستند، هیچ کاری نکن (باگ اصلی همین بود)
+      if (sig === __typingSignature) return;
+      __typingSignature = sig;
       createTypingEffect(typingElement, newTexts, 150);
     };
   }
