@@ -255,3 +255,85 @@ textarea.field { min-height: 145px; resize: vertical; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- نسخه ۲: دکمه رزومه، کپی‌رایت، فرم ---------- */
+
+/* دکمه رزومه — نه روی هاور سفید می‌شود، نه اندازه‌اش می‌پرد */
+.resume-btn,
+a.resume-btn,
+a.resume-btn:visited {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .5rem !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  padding: .55rem 1.4rem !important;
+  border: 1px solid #FF6A3D !important;
+  border-radius: .375rem !important;
+  background: transparent !important;
+  color: #FF6A3D !important;
+  font-weight: 500 !important;
+  font-size: .95rem !important;
+  line-height: 1.5 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease !important;
+}
+.resume-btn .resume-icon,
+.resume-btn .resume-icon * {
+  width: 1rem !important;
+  height: 1rem !important;
+  min-width: 1rem !important;
+  max-width: 1rem !important;
+  min-height: 1rem !important;
+  max-height: 1rem !important;
+  flex: 0 0 1rem !important;
+  display: block !important;
+}
+.resume-btn > span {
+  display: inline-block !important;
+  font-size: .95rem !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
+}
+.resume-btn:hover,
+.resume-btn:focus-visible {
+  background: #FF6A3D !important;
+  border-color: #FF6A3D !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  outline: none !important;
+}
+.resume-btn:active { transform: translateY(0) !important; }
+
+/* پیام وضعیت فرم */
+.form-flash-ok {
+  background: rgba(52, 199, 89, 0.14);
+  border: 1px solid rgba(52, 199, 89, 0.35);
+  color: #8AE8A8;
+  font-weight: 500;
+}
+.form-flash-error {
+  background: rgba(255, 90, 90, 0.14);
+  border: 1px solid rgba(255, 90, 90, 0.35);
+  color: #FFA3A3;
+  font-weight: 500;
+}
+.field-invalid {
+  border-color: #FF5A5A !important;
+  box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.15) !important;
+}
+
+/* حالت ارسال */
+.contact-submit.is-loading { opacity: .8; }
+.contact-submit.is-loading > span[aria-hidden="true"] {
+  animation: spinSend .9s linear infinite;
+  display: inline-block;
+}
+@keyframes spinSend { to { transform: rotate(360deg); } }
+
+/* کپی‌رایت پایین سایت */
+footer a { text-decoration: none; }
+
