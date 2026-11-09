@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<title>Resume — Abolfazl Yousefi | Python Backend Developer</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="theme-color" content="#181C23" />
+<meta property="og:image" content="https://i.imgur.com/bbqYmWH.png" />
+<meta property="og:site_name" content="Abolfazl Yousefi" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://i.imgur.com/bbqYmWH.png" />
+
+<style>
+  @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'); font-weight:400; }
+  @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-Medium.woff2') format('woff2'); font-weight:500; }
+  @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-SemiBold.woff2') format('woff2'); font-weight:600; }
+  @font-face { font-family:'Vazirmatn'; src:url('fonts/Vazirmatn-Bold.woff2') format('woff2'); font-weight:700; }
+
+  @page { size: A4; margin: 0; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  html, body { width:210mm; height:297mm; }
+  @media screen {
+    html { background:#0c0f13; }
+    body { margin: 14px auto; box-shadow:0 20px 70px rgba(0,0,0,.6); }
+  }
+  body {
+    font-family:'Vazirmatn','Segoe UI',sans-serif;
+    background:#181C23;
+    color:#E9ECF1;
+    font-size:11.4px;
+    line-height:1.92;
+    direction:rtl;
+  }
+
+  .page {
+    width:210mm; height:297mm;
+    display:grid;
+    grid-template-columns: 62mm 1fr;
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* ---------- ستون کنار (تیره‌تر) ---------- */
+  .side {
+    background:#12161C;
+    border-left:1px solid rgba(255,106,61,.18);
+    padding:12mm 7mm 10mm 7mm;
+    display:flex; flex-direction:column;
+    gap:7mm;
+  }
+
+  .avatar-wrap { text-align:center; }
+  .avatar {
+    width:34mm; height:34mm; border-radius:50%;
+    object-fit:cover; object-position:center top;
+    border:2.5px solid #FF6A3D;
+    box-shadow:0 0 0 4px rgba(255,106,61,.13), 0 8px 22px rgba(0,0,0,.45);
+    display:block; margin:0 auto;
+  }
+
+  .side h2 {
+    font-size:10.4px; font-weight:700; color:#FF6A3D;
+    letter-spacing:.14em; text-transform:uppercase;
+    margin-bottom:2.2mm; padding-bottom:1.4mm;
+    border-bottom:1px solid rgba(255,106,61,.28);
+    display:flex; align-items:center; gap:2mm;
+  }
+  .side h2::before {
+    content:''; width:3px; height:9px; background:#FF6A3D; border-radius:2px; display:block;
+  }
+
+  .contact-list { display:flex; flex-direction:column; gap:3.2mm; }
+  .contact-item { display:flex; align-items:flex-start; gap:2.2mm; font-size:10px; color:#B9C0CC; }
+  .contact-item .ic {
+    width:5.6mm; height:5.6mm; min-width:5.6mm; border-radius:50%;
+    background:rgba(255,106,61,.14); color:#FF6A3D;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .contact-item .ic svg { width:3.1mm; height:3.1mm; }
+  .contact-item .txt { word-break:break-all; line-height:1.65; padding-top:.4mm; }
+  .contact-item a { color:#B9C0CC; text-decoration:none; }
+
+  .skill { margin-bottom:3.6mm; }
+  .skill-top { display:flex; justify-content:space-between; font-size:10.2px; margin-bottom:1.1mm; }
+  .skill-top .nm { color:#DCE1E8; font-weight:500; }
+  .skill-top .pc { color:#FF6A3D; font-weight:600; font-size:8.8px; }
+  .track { height:3.2px; background:#232833; border-radius:99px; overflow:hidden; }
+  .track i { display:block; height:100%; background:linear-gradient(90deg,#FF6A3D,#FF9A6B); border-radius:99px; }
+
+  .tag-cloud { display:flex; flex-wrap:wrap; gap:1.6mm; }
+  .tag {
+    font-size:9.2px; padding:.8mm 2.2mm; border-radius:99px;
+    background:rgba(255,106,61,.12); color:#FFB59C;
+    border:1px solid rgba(255,106,61,.22);
+  }
+
+  .lang-row { display:flex; justify-content:space-between; font-size:10px; color:#B9C0CC; margin-bottom:1.6mm; }
+
+  /* ---------- ستون اصلی ---------- */
+  .main { padding:11mm 10mm 9mm 11mm; display:flex; flex-direction:column; gap:2.6mm; }
+
+  .head { border-bottom:2px solid rgba(255,106,61,.22); padding-bottom:4mm; }
+  .head h1 {
+    font-size:31px; font-weight:700; color:#FFFFFF; letter-spacing:-.2px; line-height:1.25;
+  }
+  .head h1 span { color:#FF6A3D; }
+  .head .role {
+    font-size:14px; color:#FF9A6B; font-weight:600; margin-top:1mm;
+  }
+  .head .sub { font-size:10.6px; color:#8E96A3; margin-top:1.6mm; }
+
+  .sec-title {
+    font-size:13px; font-weight:700; color:#FFFFFF;
+    display:flex; align-items:center; gap:2.4mm; margin-bottom:2.6mm;
+  }
+  .sec-title::before {
+    content:''; width:4px; height:13px; border-radius:2px;
+    background:#FF6A3D; display:block;
+  }
+  .sec-title .en { font-size:8.4px; color:#5C6470; font-weight:500; letter-spacing:.1em; }
+
+  .lead { color:#B9C0CC; font-size:11px; line-height:1.8; text-align:justify; }
+
+  .stat-row { display:flex; gap:3.5mm; margin-top:3.6mm; }
+  .stat {
+    flex:1; background:#1D222B; border:1px solid #262C37; border-radius:2.4mm;
+    padding:2mm 3mm; text-align:center;
+  }
+  .stat b { display:block; font-size:17px; color:#FF6A3D; font-weight:700; line-height:1.4; }
+  .stat span { font-size:9.6px; color:#8E96A3; }
+
+  .proj { margin-bottom:2.9mm; padding-right:3.2mm; border-right:1.6px solid #262C37; position:relative; }
+  .proj:last-child { margin-bottom:0; }
+  .proj::before {
+    content:''; position:absolute; right:-1.35mm; top:2.2mm;
+    width:2.6mm; height:2.6mm; border-radius:50%;
+    background:#181C23; border:1.6px solid #FF6A3D;
+  }
+  .proj-top { display:flex; align-items:baseline; justify-content:space-between; gap:2mm; }
+  .proj-top b { font-size:11.6px; color:#FFFFFF; font-weight:600; }
+  .proj-top b a { color:#FFFFFF; text-decoration:none; }
+  .proj p { font-size:10.2px; color:#9AA2AE; line-height:1.85; margin-top:.6mm; }
+  .chips { display:flex; gap:1.3mm; flex-wrap:wrap; margin-top:1.3mm; }
+  .chip {
+    font-size:8.8px; padding:.5mm 1.8mm; border-radius:1.2mm;
+    background:#232833; color:#8FA3C8; border:1px solid #2C3340;
+  }
+
+  .main .tag { font-size:9.6px; padding:1mm 2.6mm; }
+  .foot {
+    margin-top:auto; padding-top:4mm; border-top:1px solid #232833;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:8.2px; color:#5C6470;
+  }
+  .foot .dot { color:#FF6A3D; }
+
+  /* ---- دکمه چاپ (فقط روی صفحه) ---- */
+  .print-bar {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 9999;
+  }
+  .print-bar button {
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    padding: 10px 22px; border-radius: 999px;
+    border: 1px solid #FF6A3D; background: #FF6A3D; color: #fff;
+    box-shadow: 0 10px 28px rgba(255,106,61,.35);
+    transition: background .2s, transform .2s;
+  }
+  .print-bar button:hover { background: #ff7a50; transform: translateY(-2px); }
+  @media print { .print-bar { display: none !important; } }
+  .lang-btn {
+    display:flex; align-items:center; justify-content:center; min-width:52px;
+    font-family:'Vazirmatn',sans-serif; font-size:13px; font-weight:700;
+    padding:10px 16px; border-radius:999px; text-decoration:none;
+    border:1px solid #FF6A3D; background:transparent; color:#FF6A3D;
+    transition:background .2s,color .2s;
+  }
+  .lang-btn:hover { background:#FF6A3D; color:#fff; }
+
+  /* ================= ریسپانسیو / تمام‌صفحه ================= */
+  @media screen {
+    html, body { width: 100%; height: auto; min-height: 100%; }
+    body { margin: 0; padding: 0; background: #0c0f13; overflow-x: hidden; }
+    #stage {
+      display: flex; justify-content: center; align-items: flex-start;
+      min-height: 100vh; padding: 18px 0 78px;
+      transform-origin: top center;
+    }
+    .page {
+      margin: 0 auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,.65);
+      border-radius: 3px;
+      transform-origin: top center;
+      flex: 0 0 auto;
+    }
+  }
+
+  /* --- موبایل و تبلت: تک‌ستونه، بدون اسکرول افقی --- */
+  @media screen and (max-width: 860px) {
+    #stage { padding: 0 0 96px; display: block; }
+    .page {
+      width: 100% !important; height: auto !important;
+      display: block !important; border-radius: 0; box-shadow: none;
+      transform: none !important;
+    }
+    .side {
+      width: 100% !important;
+      border-left: 0 !important; border-bottom: 1px solid rgba(255,106,61,.18);
+      padding: 22px 18px 20px;
+    }
+    .side > section { margin-top: 18px; }
+    .avatar { width: 108px; height: 108px; }
+    .main {
+      width: 100% !important; padding: 22px 18px 34px !important;
+      gap: 26px !important;
+    }
+    .head h1 { font-size: 27px !important; }
+    .head .role { font-size: 14px !important; }
+    .head .sub { font-size: 10.5px !important; }
+    .lead { font-size: 12.5px !important; line-height: 2 !important; }
+    .stat-row { gap: 8px !important; }
+    .stat b { font-size: 16px !important; }
+    .stat span { font-size: 9px !important; }
+    .proj { margin-bottom: 16px !important; padding-right: 14px; }
+    .proj-top b { font-size: 13px !important; }
+    .proj p { font-size: 11.5px !important; line-height: 1.95 !important; }
+    .chip { font-size: 9.5px !important; }
+    .contact-item { font-size: 11.5px !important; }
+    .skill-top { font-size: 11.5px !important; }
+    .tag { font-size: 10.5px !important; }
+    .lang-row { font-size: 11.5px !important; }
+    .side h2 { font-size: 11.5px !important; }
+    .sec-title { font-size: 15px !important; }
+    .foot { flex-direction: column; gap: 6px; text-align: center; font-size: 9px; }
+    .print-bar { bottom: 14px; }
+    .print-bar button { padding: 12px 28px; font-size: 13px; }
+  }
+
+  @media screen and (max-width: 400px) {
+    .main { padding: 18px 14px 30px !important; }
+    .side { padding: 18px 14px 16px; }
+    .head h1 { font-size: 24px !important; }
+    .stat-row { flex-direction: column; }
+    .stat { display: flex; justify-content: space-between; align-items: center; text-align: right; }
+    .stat b { font-size: 15px !important; }
+  }
+
+  /* چاپ همیشه دقیقاً A4 تک‌صفحه */
+  @media print {
+    html, body { width: 210mm !important; height: 297mm !important; }
+    body { margin: 0 !important; padding: 0 !important; overflow: visible; }
+    #stage { display: block !important; padding: 0 !important; min-height: 0 !important; transform: none !important; }
+    .page {
+      width: 210mm !important; height: 297mm !important;
+      display: grid !important; grid-template-columns: 62mm 1fr !important;
+      border-radius: 0 !important; box-shadow: none !important;
+      transform: none !important; margin: 0 !important;
+    }
+    .side { width: auto !important; border-bottom: 0 !important; padding: 12mm 7mm 10mm 7mm !important; }
+    .main { width: auto !important; padding: 11mm 10mm 9mm 11mm !important; gap: 2.6mm !important; }
+    .foot { flex-direction: row !important; }
+  }
+
+</style>
+</head>
+<body>
+<div id="stage"><div class="page">
+
+  <!-- ================= ستون کنار ================= -->
+  <aside class="side">
+    <div class="avatar-wrap">
+      <img class="avatar" src="img/11zon_cropped.png" alt="ابوالفضل یوسفی" />
+    </div>
+
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+          <span class="txt"><a href="mailto:a.yousefi2912@gmail.com">a.yousefi2912@gmail.com</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <span class="txt" dir="ltr">+98 991 767 2214</span>
+        </div>
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="txt">Mashhad, Iran</span>
+        </div>
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.9c-2.5.6-3-1.1-3-1.1-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.6-1.4-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9.9-2.5-.1-.2-.4-1.2.1-2.4 0 0 .8-.3 2.5.9a8.5 8.5 0 0 1 4.6 0c1.8-1.2 2.5-.9 2.5-.9.5 1.2.2 2.2.1 2.4.6.6.9 1.5.9 2.5 0 3.5-2.1 4.3-4.1 4.5.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 22 12.3C22 6.6 17.5 2 12 2z"/></svg></span>
+          <span class="txt" dir="ltr">github.com/abolfazlyousefi5</span>
+        </div>
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.6a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM3.9 10.8h2.9V21H3.9zM9 10.8h2.8v1.4h.1a3.1 3.1 0 0 1 2.8-1.5c3 0 3.5 1.9 3.5 4.4V21h-2.9v-4.6c0-1.1 0-2.5-1.6-2.5s-1.8 1.2-1.8 2.4V21H9z"/></svg></span>
+          <span class="txt" dir="ltr">linkedin.com/in/abolfazl-yousefi-249a7b217</span>
+        </div>
+        <div class="contact-item">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13l-4.8-1.5c-1-.3-1-1 .2-1.5l18.9-7.3c.9-.3 1.6.2 1.4 1.6z"/></svg></span>
+          <span class="txt" dir="ltr">t.me/abolfazl_yousefi02</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">Python</span><span class="pc">55%</span></div>
+        <div class="track"><i style="width:55%"></i></div>
+      </div>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">HTML / CSS</span><span class="pc">70%</span></div>
+        <div class="track"><i style="width:70%"></i></div>
+      </div>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">SQL / SQLite</span><span class="pc">50%</span></div>
+        <div class="track"><i style="width:50%"></i></div>
+      </div>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">Git / GitHub</span><span class="pc">60%</span></div>
+        <div class="track"><i style="width:60%"></i></div>
+      </div>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">Flask</span><span class="pc">45%</span></div>
+        <div class="track"><i style="width:45%"></i></div>
+      </div>
+      <div class="skill">
+        <div class="skill-top"><span class="nm">JavaScript</span><span class="pc">40%</span></div>
+        <div class="track"><i style="width:40%"></i></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Currently learning</h2>
+      <div class="tag-cloud">
+        <span class="tag">Django</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">REST API</span>
+        <span class="tag">Testing</span>
+        <span class="tag">Databases</span>
+        <span class="tag">Linux</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <div class="lang-row"><span>Persian</span><span style="color:#FF6A3D">Native</span></div>
+      <div class="lang-row"><span>English</span><span>Intermediate — technical documentation</span></div>
+    </section>
+
+    <section>
+      <h2>Status</h2>
+      <div class="lang-row"><span>Military service</span><span>Exempt</span></div>
+      <div class="lang-row" style="margin-bottom:0"><span>Marital status</span><span>Single</span></div>
+    </section>
+  </aside>
+
+  <!-- ================= ستون اصلی ================= -->
+  <main class="main">
+
+    <header class="head">
+      <h1>Abolfazl <span>Yousefi</span></h1>
+      <div class="role">Python Backend Developer</div>
+      <div class="sub">Backend intern · Django &amp; FastAPI enthusiast · Mashhad, Iran</div>
+    </header>
+
+    <section>
+      <div class="sec-title">About me <span class="en">About</span></div>
+      <p class="lead">
+        I am a backend intern focused on Python. Right now I am learning how to build APIs, work with databases and write clean code, and I keep improving my skills through small projects. My goal is to join a professional team step by step and work on real products.
+      </p>
+      <div class="stat-row">
+        <div class="stat"><b>6+</b><span>Completed projects</span></div>
+        <div class="stat"><b>6</b><span>Months of learning</span></div>
+        <div class="stat"><b>2</b><span>Live websites</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">Projects <span class="en">Projects</span></div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://abolfazl-yousefi.is-a.dev/">Personal website &amp; resume</a></b>
+        </div>
+        <p>Responsive personal resume site built with HTML, CSS and JavaScript — plus a Flask version with an admin panel, SQLite database and a working contact form.</p>
+        <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Flask</span></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://github.com/abolfazlyousefi5/Bank-App">Bank Management Simulator</a></b>
+        </div>
+        <p>Backend for a bank management simulator in Python and SQL — customers, accounts and transactions.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://github.com/abolfazlyousefi5/password-generator">Secure Password Generator</a></b>
+        </div>
+        <p>Generates secure random passwords with configurable length, letters, digits and special characters.</p>
+        <div class="chips"><span class="chip">Python</span></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://github.com/abolfazlyousefi5/mini-encrypt-decrypt">Encrypt / Decrypt</a></b>
+        </div>
+        <p>Command-line tool to encrypt and decrypt text and files using simple algorithms.</p>
+        <div class="chips"><span class="chip">Python</span></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://github.com/abolfazlyousefi5/python-timer">Python Timer</a></b>
+        </div>
+        <p>A simple Python countdown timer.</p>
+        <div class="chips"><span class="chip">Python</span></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <b><a href="https://github.com/abolfazlyousefi5/rock-paper-scissors-game">Rock, Paper, Scissors</a></b>
+        </div>
+        <p>Classic game with random computer choice, input validation, winner detection and an exit command.</p>
+        <div class="chips"><span class="chip">Python</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">Education <span class="en">Education</span></div>
+      <div class="proj" style="margin-bottom:0">
+        <div class="proj-top"><b>Computer Engineering — Associate / Diploma cycle</b></div>
+        <p>Currently studying · Focus on programming, data structures and databases</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">What I do <span class="en">What I do</span></div>
+      <div class="tag-cloud">
+        <span class="tag">Building APIs with Flask</span>
+        <span class="tag">SQLite database design</span>
+        <span class="tag">Form validation &amp; security</span>
+        <span class="tag">Admin panel development</span>
+        <span class="tag">Responsive UI</span>
+        <span class="tag">Git version control</span>
+              </div>
+    </section>
+
+    <footer class="foot">
+      <span>Abolfazl Yousefi — Resume</span>
+      <span>abolfazl-yousefi.is-a.dev <span class="dot">·</span> github.com/abolfazlyousefi5</span>
+    </footer>
+
+  </main>
+</div>
+<div class="print-bar">
+  <button type="button" onclick="window.print()">⤓ Save as PDF</button>
+  <a class="lang-btn" href="resume.html" hreflang="fa" lang="fa">فا</a>
+</div>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var page  = stage ? stage.querySelector('.page') : null;
+  if (!page) return;
+  var A4W = 794, A4H = 1123;
+
+  function fit() {
+    if (window.innerWidth <= 860) {
+      // موبایل: چیدمان طبیعی، بدون مقیاس
+      page.style.transform = '';
+      stage.style.height = '';
+      stage.style.width = '';
+      return;
+    }
+    var padX = 40, padTop = 20, padBottom = 84;
+    var availW = window.innerWidth  - padX * 2;
+    var availH = window.innerHeight - padTop - padBottom;
+    var s = Math.min(availW / A4W, availH / A4H);
+    s = Math.min(s, 1.45);
+    page.style.transform = 'scale(' + s + ')';
+    stage.style.height = (A4H * s + padTop + padBottom) + 'px';
+  }
+
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function () { setTimeout(fit, 120); });
+  window.addEventListener('beforeprint', function () { page.style.transform = ''; });
+  window.addEventListener('afterprint', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>
