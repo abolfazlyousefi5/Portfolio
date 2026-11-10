@@ -1,8 +1,3 @@
-/* ============================================================
-   contact-form.js  —  نسخه ۳ (بدون فیلتر)
-   پیام به FormSubmit می‌رود (روی Cloudflare — در ایران باز است)
-   و اگر آن هم نشد، به ایمیل مستقیم کاربر (mailto) برمی‌گردد.
-   ============================================================ */
 (function () {
   "use strict";
 
@@ -19,11 +14,36 @@
   var originalLabel = btnLabel ? btnLabel.textContent : "ارسال";
 
   var IS_EN = (document.documentElement.lang || "fa").slice(0, 2) === "en";
+
+  /* متن‌های پیش‌فرض — site-sync.js آن‌ها را از data.json به‌روز می‌کند */
   var T = IS_EN
-    ? { sending: "Sending…", ok: "Message sent. Thank you!", bad: "Please fill the form correctly.",
-        net: "Connection failed.", fallback: "Opening your email app…", err: "Something went wrong." }
-    : { sending: "در حال ارسال…", ok: "پیامت ارسال شد. ممنون!", bad: "لطفاً فرم را درست پر کن.",
-        net: "اتصال برقرار نشد.", fallback: "در حال باز کردن ایمیل…", err: "مشکلی پیش آمد." };
+    ? {
+        sending: "Sending…",
+        ok: "Message sent ✓ — I'll reply to you by email soon.",
+        bad: "Please fill the form correctly.",
+        net: "Connection failed.",
+        fallback: "Your email app is opening — just press Send to finish.",
+        err: "Something went wrong."
+      }
+    : {
+        sending: "در حال ارسال…",
+        ok: "پیامت رسید ✓ — جوابت رو تا چند روز آینده با ایمیل می‌دم.",
+        bad: "لطفاً فرم را درست پر کن.",
+        net: "اتصال برقرار نشد.",
+        fallback: "ایمیلت باز شد — فقط دکمه‌ی «ارسال» رو بزن تا پیام برسه.",
+        err: "مشکلی پیش آمد."
+      };
+
+  /* ---------- متن‌ها را از data.json بگیر (اگر تنظیم شده باشد) ---------- */
+  function syncTexts() {
+    var root = document.documentElement;
+    var ok = root.getAttribute("data-contact-ok");
+    var fb = root.getAttribute("data-contact-fallback");
+    if (ok && ok.trim()) T.ok = ok.trim();
+    if (fb && fb.trim()) T.fallback = fb.trim();
+  }
+  syncTexts();
+  window.__contactTextsChanged = syncTexts;   // site-sync صدا می‌زند
 
   /* ---------- نمایش پیام ---------- */
   function flash(text, kind) {
@@ -51,9 +71,12 @@
 
   function validate(data) {
     var errors = {};
-    if (!data.name || data.name.trim().length < 2) errors.name = "نام را کامل بنویس.";
-    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) errors.email = "ایمیل معتبر وارد کن.";
-    if (!data.message || data.message.trim().length < 10) errors.message = "پیام باید حداقل ۱۰ کاراکتر باشد.";
+    if (!data.name || data.name.trim().length < 2)
+      errors.name = IS_EN ? "Please enter your full name." : "نام را کامل بنویس.";
+    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email))
+      errors.email = IS_EN ? "Please enter a valid email." : "ایمیل معتبر وارد کن.";
+    if (!data.message || data.message.trim().length < 10)
+      errors.message = IS_EN ? "Message must be at least 10 characters." : "پیام باید حداقل ۱۰ کاراکتر باشد.";
     return errors;
   }
 
