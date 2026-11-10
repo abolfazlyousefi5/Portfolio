@@ -64,6 +64,40 @@
   .pill.on{background:rgba(52,211,153,.15);color:var(--ok)}
   .hint{font-size:11.5px;color:var(--muted);margin-top:5px}
   .add-btn{margin-top:6px}
+  .lead{font-size:13.5px;color:var(--muted);line-height:2}
+  .adv{margin-top:22px;border-top:1px solid #343845;padding-top:14px}
+  .adv summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600;list-style:none;padding:6px 0}
+  .adv summary::-webkit-details-marker{display:none}
+  .adv summary::before{content:"▸ ";display:inline-block;transition:.2s}
+  .adv[open] summary::before{transform:rotate(90deg)}
+  .adv-body{padding-top:10px}
+  .safe{background:rgba(52,211,153,.07);border-right:3px solid var(--ok);border-radius:8px;padding:11px 13px;font-size:12.5px;color:var(--muted);line-height:2;margin-top:12px}
+  .safe b{color:var(--ok)}
+  .safe code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:11.5px;direction:ltr;display:inline-block}
+
+  /* ---------- پیام‌ها ---------- */
+  .msg-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .msg-toolbar input[type=search]{flex:1;min-width:150px;background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px 12px;color:var(--text);font-family:inherit;font-size:13px}
+  .msg-toolbar input[type=search]:focus{outline:none;border-color:var(--accent)}
+  .msg{background:var(--card2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border-right:3px solid #343845}
+  .msg.unread{border-right-color:var(--accent)}
+  .msg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .msg-who{display:flex;align-items:center;gap:9px;min-width:0}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:0 0 34px}
+  .msg-name{font-weight:600;font-size:14px}
+  .msg-mail{font-size:11.5px;color:var(--muted);direction:ltr;text-align:right;word-break:break-all}
+  .msg-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .msg-date{font-size:11px;color:var(--muted);direction:ltr;white-space:nowrap}
+  .msg-subject{font-size:13px;color:var(--accent);margin:9px 0 4px;font-weight:600}
+  .msg-body{font-size:13.5px;line-height:2;color:var(--text);white-space:pre-wrap;word-break:break-word;margin-top:6px}
+  .msg-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+  .tag-new{font-size:10.5px;background:var(--accent);color:#fff;padding:2px 7px;border-radius:99px;font-weight:700}
+  .empty{text-align:center;padding:44px 16px;color:var(--muted);font-size:13.5px;line-height:2.1}
+  .empty .big{font-size:34px;display:block;margin-bottom:10px;opacity:.55}
+  .count-badge{background:var(--accent);color:#fff;font-size:11px;padding:1px 7px;border-radius:99px;margin-right:5px;font-weight:700}
+  .inbox{background:#2A2E38;border-right:3px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;line-height:1.9}
+  .inbox b{color:var(--text)}
+  .msg-form{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:14px}
 </style>
 </head>
 <body>
@@ -80,38 +114,45 @@
     <div style="display:flex;gap:8px;align-items:center">
       <span id="conn-pill" class="pill">اتصال برقرار نیست</span>
       <a href="./" class="btn btn-ghost btn-sm" style="text-decoration:none">دیدن سایت ↗</a>
+      <button class="btn btn-ghost btn-sm hide" id="logout-btn" title="خروج از حساب">خروج</button>
     </div>
   </header>
 
   <!-- ============ صفحه راه‌اندازی توکن ============ -->
   <div id="setup" class="card hide">
-    <h2>گام ۱ از ۱ — اتصال به گیت‌هاب (فقط یک‌بار)</h2>
-    <div class="banner">
-      برای اینکه تغییرهای تو <b>روی همه دستگاه‌ها</b> دیده شود، پنل باید فایل
-      <code>data.json</code> را در مخزن گیت‌هابت به‌روز کند. یک «کلید دسترسی» لازم است که
-      فقط یک‌بار می‌سازی و اینجا می‌چسبانی. کلید در همین مرورگر ذخیره می‌شود.
+    <h2>🔐 ورود به پنل</h2>
+    <p class="lead">این پنل با «کلید شخصی گیت‌هاب» وارد می‌شود — مثل رمز عبور، ولی امن‌تر.</p>
+
+    <div class="field" style="margin-top:18px">
+      <label>کلید شخصی</label>
+      <input id="pat-input" name="github-token" type="password" dir="ltr"
+             placeholder="github_pat_••••••••••••••••" autocomplete="on" spellcheck="false" />
+      <div class="hint">✓ فقط در همین مرورگر ذخیره می‌شود &nbsp;·&nbsp; ✓ هیچ‌جا ارسال نمی‌شود &nbsp;·&nbsp; ✓ تا ۱ سال معتبر</div>
     </div>
-    <ol class="steps">
-      <li>این لینک را باز کن:<br />
-        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>
-      </li>
-      <li><b>Token name</b> → بنویس: <code>portfolio-admin</code></li>
-      <li><b>Expiration</b> → <code>1 year</code></li>
-      <li><b>Repository access</b> → <code>Only select repositories</code> → انتخاب کن <code>Portfolio</code></li>
-      <li><b>Repository permissions</b> → <code>Contents</code> را روی <code>Read and write</code> بگذار</li>
-      <li>پایین صفحه <b>Generate token</b> → کلید را کپی کن (شبیه <code>github_pat_...</code>)</li>
-      <li>همین‌جا بچسبان و <b>ذخیره کن</b></li>
-    </ol>
-    <div class="field" style="margin-top:16px">
-      <label>کلید دسترسی گیت‌هاب</label>
-      <input id="pat-input" type="password" dir="ltr" placeholder="github_pat_..." autocomplete="off" spellcheck="false" />
-      <div class="hint">کلید فقط در این مرورگر ذخیره می‌شود و جایی ارسال نمی‌شود.</div>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:14px">
-      <button class="btn btn-primary" id="pat-save">ذخیره و وصل شو</button>
+
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="pat-save">ورود</button>
       <button class="btn btn-ghost" id="pat-clear" style="display:none">قطع اتصال</button>
     </div>
     <div id="setup-msg" class="status" style="margin-top:10px"></div>
+
+    <!-- بخش پیشرفته — بسته است -->
+    <details class="adv">
+      <summary>کلید نداری؟ اینجا بساز</summary>
+      <div class="adv-body">
+        <ol class="steps">
+          <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">ساخت کلید جدید ↗</a></li>
+          <li><b>Name:</b> <code>portfolio-admin</code> &nbsp;·&nbsp; <b>Expiration:</b> <code>1 year</code></li>
+          <li><b>Repository access:</b> <code>Only select repositories</code> → <code>Portfolio</code></li>
+          <li><b>Permissions → Contents:</b> <code>Read and write</code></li>
+          <li><b>Generate token</b> → کلید را کپی کن و بالا بچسبان</li>
+        </ol>
+        <div class="safe">
+          <b>چرا امن است؟</b> این کلید فقط به یک مخزن و فقط به فایل <code>data.json</code> دسترسی دارد.
+          نه به اکانتت، نه به بقیه مخزن‌ها، نه به رمزت. هر وقت خواستی از همان صفحه پاکش کن.
+        </div>
+      </div>
+    </details>
   </div>
 
   <!-- ============ پنل اصلی ============ -->
@@ -120,6 +161,7 @@
       <button class="tab active" data-tab="site">مشخصات سایت</button>
       <button class="tab" data-tab="skills">مهارت‌ها</button>
       <button class="tab" data-tab="projects">پروژه‌ها</button>
+      <button class="tab" data-tab="messages">پیام‌ها<span class="count-badge hide" id="msg-badge">۰</span></button>
     </div>
 
     <div id="tab-site"></div>
@@ -139,6 +181,40 @@
         <button class="btn btn-ghost btn-sm add-btn" id="proj-add">+ افزودن پروژه</button>
       </div>
     </div>
+
+    <div id="tab-messages" class="hide">
+      <div class="card">
+        <h2>📨 پیام‌های رسیده</h2>
+        <div class="inbox">
+          📬 پیام‌های واقعی به <b>ایمیلت</b> می‌رسند
+          <a class="btn btn-primary btn-sm" style="text-decoration:none;margin-right:auto"
+             href="https://mail.google.com/mail/u/0/#search/from%3Aformsubmit" target="_blank" rel="noopener">
+             باز کردن ایمیل ↗
+          </a>
+        </div>
+
+        <div class="msg-toolbar">
+          <input type="search" id="msg-search" placeholder="جستجو در نام، ایمیل یا متن…" />
+          <button class="btn btn-ghost btn-sm" id="msg-add">＋ افزودن</button>
+          <button class="btn btn-ghost btn-sm" id="msg-refresh">به‌روزرسانی</button>
+        </div>
+
+        <div class="msg-form hide" id="msg-form">
+          <div class="row2">
+            <div class="field"><label>نام</label><input id="mf-name" type="text" /></div>
+            <div class="field"><label>ایمیل</label><input id="mf-email" type="text" dir="ltr" /></div>
+          </div>
+          <div class="field"><label>موضوع (اختیاری)</label><input id="mf-subject" type="text" /></div>
+          <div class="field"><label>متن پیام</label><textarea id="mf-message" rows="3"></textarea></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary btn-sm" id="mf-save">ذخیره</button>
+            <button class="btn btn-ghost btn-sm" id="mf-cancel">انصراف</button>
+          </div>
+        </div>
+
+        <div id="msg-box"></div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -149,6 +225,593 @@
   <span class="status" id="status"></span>
 </div>
 
-<script>!function(){"use strict";var t="main",e="https://api.github.com/repos/abolfazlyousefi5/Portfolio/contents/data.json",n="gh_pat_portfolio",a=null,l="",i=function(t){return document.querySelector(t)};function r(t){for(var e=(new TextEncoder).encode(t),n="",a=0;a<e.length;a++)n+=String.fromCharCode(e[a]);return btoa(n)}function s(t){return String(null==t?"":t).replace(/[0-9]/g,function(t){return"۰۱۲۳۴۵۶۷۸۹"[+t]})}function o(t){return String(null==t?"":t).replace(/[۰-۹]/g,function(t){return String("۰۱۲۳۴۵۶۷۸۹".indexOf(t))})}function c(t){return String(null==t?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}function u(t,e,n){var a=i("#status");n?a.innerHTML=t||"":a.textContent=t||"",a.className="status"+(e?" "+e:"")}function d(){return{Authorization:"Bearer "+l,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}}function p(){return fetch(e+"?ref="+t+"&t="+Date.now(),{headers:d(),cache:"no-store"}).then(function(t){if(401===t.status)throw new Error("کلید معتبر نیست (401)");if(404===t.status)throw new Error("مخزن یا فایل پیدا نشد (404)");if(!t.ok)throw new Error("خطای گیت‌هاب: "+t.status);return t.json()})}var f=[{title:"هویت سایت",items:[{k:"full_name",label:"نام کامل (هدر سایت)",type:"text"},{k:"site_title",label:"عنوان تب مرورگر",type:"text"},{k:"meta_description",label:"توضیح متا برای گوگل",type:"textarea",rows:2},{k:"headline",label:"عنوان اصلی — فارسی",type:"text"},{k:"headline_en",label:"عنوان اصلی — انگلیسی",type:"text",ltr:!0}]},{title:"درباره من",items:[{k:"about_text",label:"متن درباره من — فارسی",type:"textarea",rows:4},{k:"about_text_en",label:"متن درباره من — انگلیسی",type:"textarea",rows:4,ltr:!0}]},{title:"جمله‌های افکت تایپ",items:[{k:"typing_texts",label:"فارسی — هر خط یک جمله",type:"textarea",rows:4},{k:"typing_texts_en",label:"انگلیسی — هر خط یک جمله",type:"textarea",rows:4,ltr:!0}]},{title:"نوار تکنولوژی و آمار",items:[{k:"tech_line",label:"تکنولوژی‌ها — هر خط یکی",type:"textarea",rows:3,ltr:!0},{k:"stat_projects",label:"تعداد پروژه",type:"text",small:!0},{k:"stat_months",label:"ماه تجربه",type:"text",small:!0}]},{title:"راه‌های تماس",items:[{k:"email",label:"ایمیل",type:"text",ltr:!0},{k:"whatsapp",label:"واتساپ (بدون +)",type:"text",ltr:!0},{k:"address",label:"آدرس",type:"text"}]},{title:"شبکه‌های اجتماعی",items:[{k:"github",label:"GitHub",type:"text",ltr:!0},{k:"linkedin",label:"LinkedIn",type:"text",ltr:!0},{k:"telegram",label:"Telegram",type:"text",ltr:!0},{k:"instagram",label:"Instagram",type:"text",ltr:!0}]}];function v(t,e){var n=t.ltr?' dir="ltr"':"",a='<div class="field"><label>'+c(t.label)+"</label>";return"textarea"===t.type?a+='<textarea rows="'+(t.rows||3)+'" data-k="'+t.k+'"'+n+">"+c(e)+"</textarea>":a+='<input type="text" data-k="'+t.k+'" value="'+c(e)+'"'+n+" />",a+"</div>"}function m(){var t=i("#skills-box");t.innerHTML="",a.skills.forEach(function(e,n){var l=document.createElement("div");l.className="skill-row",l.innerHTML='<input type="text" value="'+c(e.name)+'" placeholder="نام مهارت" data-f="name" /><input type="range" min="0" max="100" step="5" value="'+(+e.level||0)+'" data-f="level" /><input type="text" class="lv" value="'+(+e.level||0)+'" data-f="num" dir="ltr" /><button class="del" title="حذف">×</button>',l.querySelector("[data-f=name]").addEventListener("input",function(t){a.skills[n].name=t.target.value,u("تغییر ذخیره‌نشده…","")});var i=l.querySelector("[data-f=level]"),r=l.querySelector("[data-f=num]");i.addEventListener("input",function(){a.skills[n].level=+i.value,r.value=i.value,u("تغییر ذخیره‌نشده…","")}),r.addEventListener("input",function(){var t=Math.max(0,Math.min(100,parseInt(o(r.value),10)||0));a.skills[n].level=t,i.value=t,u("تغییر ذخیره‌نشده…","")}),l.querySelector(".del").addEventListener("click",function(){a.skills.splice(n,1),m(),u("تغییر ذخیره‌نشده…","")}),t.appendChild(l)})}function b(){var t=i("#proj-box");t.innerHTML="",a.projects.forEach(function(e,n){var l=document.createElement("div");l.className="proj",l.innerHTML='<div class="proj-head"><span class="proj-num">پروژه '+(n+1)+'</span><div style="display:flex;gap:6px"><button class="btn btn-ghost btn-sm" data-up>↑</button><button class="btn btn-ghost btn-sm" data-down>↓</button><button class="del" data-del title="حذف">×</button></div></div><div class="row2"><div class="field"><label>عنوان — فارسی</label><input type="text" data-f="title" value="'+c(e.title)+'" /></div><div class="field"><label>عنوان — انگلیسی</label><input type="text" dir="ltr" data-f="title_en" value="'+c(e.title_en)+'" /></div></div><div class="field"><label>توضیح — فارسی</label><textarea rows="2" data-f="description">'+c(e.description)+'</textarea></div><div class="field"><label>توضیح — انگلیسی</label><textarea rows="2" dir="ltr" data-f="description_en">'+c(e.description_en)+'</textarea></div><div class="row2"><div class="field"><label>تگ‌ها (با کاما جدا کن)</label><input type="text" dir="ltr" data-f="tags" value="'+c((e.tags||[]).join(", "))+'" /></div><div class="field"><label>لینک پروژه</label><input type="text" dir="ltr" data-f="url" value="'+c(e.url)+'" /></div></div>',l.querySelectorAll("[data-f]").forEach(function(t){t.addEventListener("input",function(){var e=t.getAttribute("data-f");"tags"===e?a.projects[n].tags=t.value.split(",").map(function(t){return t.trim()}).filter(Boolean):a.projects[n][e]=t.value,u("تغییر ذخیره‌نشده…","")})}),l.querySelector("[data-del]").addEventListener("click",function(){confirm("این پروژه حذف شود؟")&&(a.projects.splice(n,1),b(),u("تغییر ذخیره‌نشده…",""))}),l.querySelector("[data-up]").addEventListener("click",function(){if(0!==n){var t=a.projects[n-1];a.projects[n-1]=a.projects[n],a.projects[n]=t,b(),u("تغییر ذخیره‌نشده…","")}}),l.querySelector("[data-down]").addEventListener("click",function(){if(n!==a.projects.length-1){var t=a.projects[n+1];a.projects[n+1]=a.projects[n],a.projects[n]=t,b(),u("تغییر ذخیره‌نشده…","")}}),t.appendChild(l)})}function g(){var t;t="",f.forEach(function(e){t+='<div class="card"><h2>'+c(e.title)+"</h2>";var n=e.items.filter(function(t){return t.small});e.items.filter(function(t){return!t.small}).forEach(function(e){t+=v(e,a.settings[e.k])}),n.length&&(t+='<div class="row2">',n.forEach(function(e){t+=v(e,a.settings[e.k])}),t+="</div>"),t+="</div>"}),i("#tab-site").innerHTML=t,i("#tab-site").querySelectorAll("[data-k]").forEach(function(t){t.addEventListener("input",function(){a.settings[t.getAttribute("data-k")]=t.value,u("تغییر ذخیره‌نشده…","")})}),m(),b()}function h(){return u("در حال خواندن از گیت‌هاب…",""),p().then(function(t){var e,n=function(t){for(var e=atob(String(t).replace(/\s/g,"")),n=new Uint8Array(e.length),a=0;a<e.length;a++)n[a]=e.charCodeAt(a);return(new TextDecoder).decode(n)}(t.content),l=JSON.parse(n);(e=(e=l)||{}).version=e.version||1,e.settings=e.settings||{},e.skills=Array.isArray(e.skills)?e.skills:[],e.projects=Array.isArray(e.projects)?e.projects:[],e.skills.forEach(function(t){t.level=+t.level||0}),e.projects.forEach(function(t){t.title=t.title||"",t.title_en=t.title_en||"",t.description=t.description||"",t.description_en=t.description_en||"",t.url=t.url||"",t.tags=Array.isArray(t.tags)?t.tags:[]}),a=e,g(),i("#conn-pill").textContent="متصل ✓",i("#conn-pill").className="pill on",u('بارگذاری شد — آخرین به‌روزرسانی: <bdi dir="ltr">'+c(a.updated||"—")+"</bdi>","ok",!0)}).catch(function(t){u(t.message,"err"),i("#conn-pill").textContent="خطا در اتصال",i("#conn-pill").className="pill"})}function y(){i("#setup").classList.remove("hide"),i("#panel").classList.add("hide"),i("#savebar").style.display="none",i("#pat-input").value="",i("#pat-clear").style.display=l?"inline-block":"none"}function k(){i("#setup").classList.add("hide"),i("#panel").classList.remove("hide"),i("#savebar").style.display="flex"}i("#pat-save").addEventListener("click",function(){var t=i("#pat-input").value.trim();if(!t)return i("#setup-msg").textContent="کلید را وارد کن.",void(i("#setup-msg").className="status err");l=t,localStorage.setItem(n,t),i("#setup-msg").textContent="در حال تست اتصال…",i("#setup-msg").className="status",p().then(function(){i("#setup-msg").textContent="اتصال برقرار شد ✓",i("#setup-msg").className="status ok",k(),h()}).catch(function(t){localStorage.removeItem(n),l="",i("#setup-msg").textContent=t.message,i("#setup-msg").className="status err"})}),i("#pat-clear").addEventListener("click",function(){confirm("کلید از این مرورگر حذف شود؟")&&(localStorage.removeItem(n),l="",a=null,y())}),i("#save-btn").addEventListener("click",function(){if(a){var n=i("#save-btn");n.disabled=!0,u("در حال ذخیره…","");var l,c=JSON.parse(JSON.stringify(a));c.updated=(new Date).toISOString().replace(/\.\d+Z$/,"Z"),c.settings.stat_projects=s(o(c.settings.stat_projects).trim())||"۰",c.settings.stat_months=s(o(c.settings.stat_months).trim())||"۰",(l=c,p().then(function(n){var a={message:"به‌روزرسانی محتوا از پنل ادمین",content:r(JSON.stringify(l,null,2)+"\n"),branch:t,sha:n.sha};return fetch(e,{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},d()),body:JSON.stringify(a)}).then(function(t){if(401===t.status||403===t.status)throw new Error("اجازه نوشتن نداری — دسترسی Contents را روی Read and write بگذار");if(409===t.status)throw new Error("همزمانی — دوباره تلاش کن");return t.ok?t.json():t.json().catch(function(){return{}}).then(function(e){throw new Error(e.message||"خطای ذخیره: "+t.status)})})})).then(function(){a=c,u("ذخیره شد ✓ گیت‌هاب در حال انتشار است — حدود ۴۰ ثانیه بعد سایت به‌روز می‌شود.","ok"),setTimeout(function(){i("#reload-btn").click()},2500)}).catch(function(t){u(t.message,"err")}).then(function(){n.disabled=!1})}}),i("#reload-btn").addEventListener("click",function(){confirm("تغییرهای ذخیره‌نشده پاک شود و از گیت‌هاب خوانده شود؟")&&h()}),i("#skill-add").addEventListener("click",function(){a.skills.push({name:"",level:50}),m(),u("تغییر ذخیره‌نشده…","")}),i("#proj-add").addEventListener("click",function(){a.projects.push({id:Date.now(),title:"",title_en:"",description:"",description_en:"",tags:[],url:""}),b(),u("تغییر ذخیره‌نشده…","")}),document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active")}),t.classList.add("active"),["site","skills","projects"].forEach(function(e){i("#tab-"+e).classList.toggle("hide",e!==t.getAttribute("data-tab"))})})}),(l=localStorage.getItem(n)||"")?(k(),h()):y()}();</script>
+<script>
+(function () {
+  "use strict";
+
+  var OWNER = "abolfazlyousefi5";
+  var REPO  = "Portfolio";
+  var BRANCH = "main";
+  var PATH  = "data.json";
+  var MSG_PATH = "messages.json";
+  var API   = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + PATH;
+  var MSG_API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + MSG_PATH;
+  var TOKEN_KEY = "gh_pat_portfolio";
+
+  var data = null;      // {version, updated, settings, skills, projects}
+  var msgs = [];        // [{id,name,email,subject,message,date,read}]
+  var msgSha = "";
+  var token = "";
+
+  var $ = function (s) { return document.querySelector(s); };
+
+  /* ---------------- ابزارها ---------------- */
+  function b64encode(str) {
+    var bytes = new TextEncoder().encode(str), bin = "";
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function b64decode(b64) {
+    var bin = atob(String(b64).replace(/\s/g, "")), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+  function faNum(v) {
+    return String(v == null ? "" : v).replace(/[0-9]/g, function (d) {
+      return "۰۱۲۳۴۵۶۷۸۹"[+d];
+    });
+  }
+  function enNum(v) {
+    return String(v == null ? "" : v).replace(/[۰-۹]/g, function (d) {
+      return String("۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+    });
+  }
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function setStatus(txt, kind, html) {
+    var el = $("#status");
+    if (html) el.innerHTML = txt || ""; else el.textContent = txt || "";
+    el.className = "status" + (kind ? " " + kind : "");
+  }
+
+  /* ---------------- GitHub ---------------- */
+  function ghHeaders() {
+    return {
+      "Authorization": "Bearer " + token,
+      "Accept": "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28"
+    };
+  }
+
+  function ghFetchJSON(url) {
+    return fetch(url + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: ghHeaders(), cache: "no-store" })
+      .then(function (r) {
+        if (r.status === 401) throw new Error("کلید معتبر نیست (401)");
+        if (r.status === 404) return null;          // فایل هنوز ساخته نشده
+        if (!r.ok) throw new Error("خطای گیت‌هاب: " + r.status);
+        return r.json();
+      });
+  }
+
+  function ghGet() { return ghFetchJSON(API); }
+  function ghGetMsgs() { return ghFetchJSON(MSG_API); }
+
+  function ghPutFile(url, obj, message, sha) {
+    var body = {
+      message: message,
+      content: b64encode(JSON.stringify(obj, null, 2) + "\n"),
+      branch: BRANCH
+    };
+    if (sha) body.sha = sha;
+    return fetch(url, {
+      method: "PUT",
+      headers: Object.assign({ "Content-Type": "application/json" }, ghHeaders()),
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (r.status === 401 || r.status === 403) throw new Error("اجازه نوشتن نداری — دسترسی Contents را روی Read and write بگذار");
+      if (r.status === 409) throw new Error("همزمانی — دوباره تلاش کن");
+      if (!r.ok) {
+        return r.json().catch(function () { return {}; }).then(function (e) {
+          throw new Error(e.message || ("خطای ذخیره: " + r.status));
+        });
+      }
+      return r.json();
+    });
+  }
+
+  function ghPut(obj) {
+    return ghGet().then(function (meta) {
+      return ghPutFile(API, obj, "به‌روزرسانی محتوا از پنل ادمین", meta ? meta.sha : null);
+    });
+  }
+
+  /* ---------------- فرم‌ها ---------------- */
+  var GROUPS = [
+    { title: "هویت سایت", items: [
+      { k: "full_name", label: "نام کامل (هدر سایت)", type: "text" },
+      { k: "site_title", label: "عنوان تب مرورگر", type: "text" },
+      { k: "meta_description", label: "توضیح متا برای گوگل", type: "textarea", rows: 2 },
+      { k: "headline", label: "عنوان اصلی — فارسی", type: "text" },
+      { k: "headline_en", label: "عنوان اصلی — انگلیسی", type: "text", ltr: true }
+    ]},
+    { title: "درباره من", items: [
+      { k: "about_text", label: "متن درباره من — فارسی", type: "textarea", rows: 4 },
+      { k: "about_text_en", label: "متن درباره من — انگلیسی", type: "textarea", rows: 4, ltr: true }
+    ]},
+    { title: "جمله‌های افکت تایپ", items: [
+      { k: "typing_texts", label: "فارسی — هر خط یک جمله", type: "textarea", rows: 4 },
+      { k: "typing_texts_en", label: "انگلیسی — هر خط یک جمله", type: "textarea", rows: 4, ltr: true }
+    ]},
+    { title: "نوار تکنولوژی و آمار", items: [
+      { k: "tech_line", label: "تکنولوژی‌ها — هر خط یکی", type: "textarea", rows: 3, ltr: true },
+      { k: "stat_projects", label: "تعداد پروژه", type: "text", small: true },
+      { k: "stat_months", label: "ماه تجربه", type: "text", small: true }
+    ]},
+    { title: "راه‌های تماس", items: [
+      { k: "email", label: "ایمیل", type: "text", ltr: true },
+      { k: "whatsapp", label: "واتساپ (بدون +)", type: "text", ltr: true },
+      { k: "address", label: "آدرس", type: "text" }
+    ]},
+    { title: "شبکه‌های اجتماعی", items: [
+      { k: "github", label: "GitHub", type: "text", ltr: true },
+      { k: "linkedin", label: "LinkedIn", type: "text", ltr: true },
+      { k: "telegram", label: "Telegram", type: "text", ltr: true },
+      { k: "instagram", label: "Instagram", type: "text", ltr: true }
+    ]},
+    { title: "💬 پیام‌های فرم تماس", desc: "متنی که بازدیدکننده بعد از فرستادن پیام می‌بیند", items: [
+      { k: "contact_ok_fa", label: "پیام موفق — فارسی", type: "textarea", rows: 2 },
+      { k: "contact_ok_en", label: "پیام موفق — انگلیسی", type: "textarea", rows: 2, ltr: true },
+      { k: "contact_fallback_fa", label: "وقتی ایمیل باز می‌شود — فارسی", type: "textarea", rows: 2 },
+      { k: "contact_fallback_en", label: "وقتی ایمیل باز می‌شود — انگلیسی", type: "textarea", rows: 2, ltr: true }
+    ]}
+  ];
+
+  function renderSite() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="card"><h2>' + esc(g.title) + "</h2>";
+      if (g.desc) html += '<p class="lead" style="margin:-8px 0 14px;font-size:12.5px">' + esc(g.desc) + "</p>";
+      var items = g.items.filter(function (i) { return i.small; });
+      var normal = g.items.filter(function (i) { return !i.small; });
+      normal.forEach(function (f) {
+        html += fld(f, data.settings[f.k]);
+      });
+      if (items.length) {
+        html += '<div class="row2">';
+        items.forEach(function (f) { html += fld(f, data.settings[f.k]); });
+        html += "</div>";
+      }
+      html += "</div>";
+    });
+    $("#tab-site").innerHTML = html;
+    $("#tab-site").querySelectorAll("[data-k]").forEach(function (el) {
+      el.addEventListener("input", function () {
+        data.settings[el.getAttribute("data-k")] = el.value;
+        setStatus("تغییر ذخیره‌نشده…", "");
+      });
+    });
+  }
+
+  function fld(f, val) {
+    var d = f.ltr ? ' dir="ltr"' : "";
+    var out = '<div class="field"><label>' + esc(f.label) + "</label>";
+    if (f.type === "textarea") {
+      out += '<textarea rows="' + (f.rows || 3) + '" data-k="' + f.k + '"' + d + ">" + esc(val) + "</textarea>";
+    } else {
+      out += '<input type="text" data-k="' + f.k + '" value="' + esc(val) + '"' + d + " />";
+    }
+    return out + "</div>";
+  }
+
+  function renderSkills() {
+    var box = $("#skills-box");
+    box.innerHTML = "";
+    data.skills.forEach(function (sk, i) {
+      var row = document.createElement("div");
+      row.className = "skill-row";
+      row.innerHTML =
+        '<input type="text" value="' + esc(sk.name) + '" placeholder="نام مهارت" data-f="name" />' +
+        '<input type="range" min="0" max="100" step="5" value="' + (+sk.level || 0) + '" data-f="level" />' +
+        '<input type="text" class="lv" value="' + (+sk.level || 0) + '" data-f="num" dir="ltr" />' +
+        '<button class="del" title="حذف">×</button>';
+      row.querySelector('[data-f=name]').addEventListener("input", function (e) {
+        data.skills[i].name = e.target.value; setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      var rng = row.querySelector('[data-f=level]');
+      var num = row.querySelector('[data-f=num]');
+      rng.addEventListener("input", function () {
+        data.skills[i].level = +rng.value; num.value = rng.value; setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      num.addEventListener("input", function () {
+        var v = Math.max(0, Math.min(100, parseInt(enNum(num.value), 10) || 0));
+        data.skills[i].level = v; rng.value = v; setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      row.querySelector(".del").addEventListener("click", function () {
+        data.skills.splice(i, 1); renderSkills(); setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      box.appendChild(row);
+    });
+  }
+
+  function renderProjects() {
+    var box = $("#proj-box");
+    box.innerHTML = "";
+    data.projects.forEach(function (p, i) {
+      var d = document.createElement("div");
+      d.className = "proj";
+      d.innerHTML =
+        '<div class="proj-head"><span class="proj-num">پروژه ' + (i + 1) + "</span>" +
+          '<div style="display:flex;gap:6px">' +
+            '<button class="btn btn-ghost btn-sm" data-up>↑</button>' +
+            '<button class="btn btn-ghost btn-sm" data-down>↓</button>' +
+            '<button class="del" data-del title="حذف">×</button>' +
+          "</div></div>" +
+        '<div class="row2">' +
+          '<div class="field"><label>عنوان — فارسی</label><input type="text" data-f="title" value="' + esc(p.title) + '" /></div>' +
+          '<div class="field"><label>عنوان — انگلیسی</label><input type="text" dir="ltr" data-f="title_en" value="' + esc(p.title_en) + '" /></div>' +
+        "</div>" +
+        '<div class="field"><label>توضیح — فارسی</label><textarea rows="2" data-f="description">' + esc(p.description) + "</textarea></div>" +
+        '<div class="field"><label>توضیح — انگلیسی</label><textarea rows="2" dir="ltr" data-f="description_en">' + esc(p.description_en) + "</textarea></div>" +
+        '<div class="row2">' +
+          '<div class="field"><label>تگ‌ها (با کاما جدا کن)</label><input type="text" dir="ltr" data-f="tags" value="' + esc((p.tags || []).join(", ")) + '" /></div>' +
+          '<div class="field"><label>لینک پروژه</label><input type="text" dir="ltr" data-f="url" value="' + esc(p.url) + '" /></div>' +
+        "</div>";
+
+      d.querySelectorAll("[data-f]").forEach(function (el) {
+        el.addEventListener("input", function () {
+          var f = el.getAttribute("data-f");
+          if (f === "tags") {
+            data.projects[i].tags = el.value.split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+          } else {
+            data.projects[i][f] = el.value;
+          }
+          setStatus("تغییر ذخیره‌نشده…", "");
+        });
+      });
+      d.querySelector("[data-del]").addEventListener("click", function () {
+        if (!confirm("این پروژه حذف شود؟")) return;
+        data.projects.splice(i, 1); renderProjects(); setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      d.querySelector("[data-up]").addEventListener("click", function () {
+        if (i === 0) return;
+        var t = data.projects[i - 1]; data.projects[i - 1] = data.projects[i]; data.projects[i] = t;
+        renderProjects(); setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      d.querySelector("[data-down]").addEventListener("click", function () {
+        if (i === data.projects.length - 1) return;
+        var t = data.projects[i + 1]; data.projects[i + 1] = data.projects[i]; data.projects[i] = t;
+        renderProjects(); setStatus("تغییر ذخیره‌نشده…", "");
+      });
+      box.appendChild(d);
+    });
+  }
+
+  function renderAll() {
+    renderSite(); renderSkills(); renderProjects();
+  }
+
+  /* ---------------- پیام‌ها ---------------- */
+  function faDate(iso) {
+    try {
+      var d = new Date(iso);
+      var y = d.getFullYear();
+      var mo = String(d.getMonth() + 1).padStart(2, "0");
+      var da = String(d.getDate()).padStart(2, "0");
+      var hh = String(d.getHours()).padStart(2, "0");
+      var mm = String(d.getMinutes()).padStart(2, "0");
+      return faNum(y + "/" + mo + "/" + da + " — " + hh + ":" + mm);
+    } catch (e) { return "—"; }
+  }
+
+  function initial(name) {
+    var s = String(name || "?").trim();
+    return s ? s.charAt(0).toUpperCase() : "?";
+  }
+
+  var msgQuery = "";
+
+  function renderMessages() {
+    var box = $("#msg-box");
+    if (!box) return;
+    var list = msgs.slice().sort(function (a, b) {
+      return String(b.date || "").localeCompare(String(a.date || ""));
+    });
+
+    if (msgQuery) {
+      var q = msgQuery.toLowerCase();
+      list = list.filter(function (m) {
+        return (m.name + " " + m.email + " " + (m.subject || "") + " " + m.message)
+          .toLowerCase().indexOf(q) !== -1;
+      });
+    }
+
+    // نشان تعداد خوانده‌نشده
+    var unread = msgs.filter(function (m) { return !m.read; }).length;
+    var badge = $("#msg-badge");
+    if (badge) {
+      badge.textContent = faNum(unread);
+      badge.classList.toggle("hide", unread === 0);
+    }
+
+    if (!list.length) {
+      box.innerHTML = msgQuery
+        ? '<div class="empty"><span class="big">🔍</span>پیامی با این جستجو پیدا نشد.</div>'
+        : '<div class="empty"><span class="big">📭</span>' +
+          'هیچ پیامی در بایگانی نیست.<br/>' +
+          '<span style="font-size:12px;opacity:.75">پیام‌های واقعی به ایمیلت می‌روند — اینجا فقط بایگانی دستی است.</span>' +
+          '</div>';
+      return;
+    }
+
+    box.innerHTML = "";
+    list.forEach(function (m) {
+      var d = document.createElement("div");
+      d.className = "msg" + (m.read ? "" : " unread");
+      d.innerHTML =
+        '<div class="msg-head">' +
+          '<div class="msg-who">' +
+            '<div class="avatar">' + esc(initial(m.name)) + "</div>" +
+            "<div>" +
+              '<div class="msg-name">' + esc(m.name) + (m.read ? "" : ' <span class="tag-new">جدید</span>') + "</div>" +
+              '<div class="msg-mail">' + esc(m.email) + "</div>" +
+            "</div>" +
+          "</div>" +
+          '<div class="msg-meta"><span class="msg-date">' + faDate(m.date) + "</span></div>" +
+        "</div>" +
+        (m.subject ? '<div class="msg-subject">' + esc(m.subject) + "</div>" : "") +
+        '<div class="msg-body">' + esc(m.message) + "</div>" +
+        '<div class="msg-actions">' +
+          '<a class="btn btn-primary btn-sm" style="text-decoration:none" href="mailto:' + esc(m.email) +
+            "?subject=" + encodeURIComponent("پاسخ به پیام شما") + '">پاسخ با ایمیل</a>' +
+          '<button class="btn btn-ghost btn-sm" data-toggle>' + (m.read ? "علامت‌زدن به‌عنوان نخوانده" : "خوانده شد") + "</button>" +
+          '<button class="btn btn-ghost btn-sm" data-del style="color:var(--err)">حذف</button>' +
+        "</div>";
+
+      d.querySelector("[data-toggle]").addEventListener("click", function () {
+        m.read = !m.read;
+        renderMessages();
+        saveMessages("تغییر وضعیت خوانده‌شدن");
+      });
+      d.querySelector("[data-del]").addEventListener("click", function () {
+        if (!confirm("این پیام از فایل messages.json حذف شود؟")) return;
+        msgs = msgs.filter(function (x) { return x.id !== m.id; });
+        renderMessages();
+        saveMessages("حذف پیام");
+      });
+      box.appendChild(d);
+    });
+  }
+
+  function saveMessages(why) {
+    var payload = msgs.slice();
+    setStatus("در حال ذخیره…", "");
+    return ghPutFile(MSG_API, payload, (why || "به‌روزرسانی پیام‌ها") + " از پنل ادمین", msgSha)
+      .then(function (res) {
+        msgSha = res && res.content ? res.content.sha : msgSha;
+        setStatus("ذخیره شد ✓", "ok");
+      })
+      .catch(function (e) { setStatus(e.message, "err"); });
+  }
+
+  function loadMessages() {
+    var box = $("#msg-box");
+    if (box) box.innerHTML = '<div class="empty">در حال خواندن پیام‌ها…</div>';
+    return ghGetMsgs().then(function (meta) {
+      if (!meta) {                       // فایل هنوز ساخته نشده
+        msgs = []; msgSha = "";
+        renderMessages();
+        return;
+      }
+      msgSha = meta.sha;
+      try {
+        var arr = JSON.parse(b64decode(meta.content));
+        msgs = Array.isArray(arr) ? arr : [];
+      } catch (e) { msgs = []; }
+      renderMessages();
+    }).catch(function (e) {
+      if (box) box.innerHTML = '<div class="empty">خطا در خواندن پیام‌ها:<br/>' + esc(e.message) + "</div>";
+    });
+  }
+
+  /* ---------------- بارگذاری / ذخیره ---------------- */
+  function loadFromGitHub() {
+    setStatus("در حال خواندن از گیت‌هاب…", "");
+    return ghGet().then(function (meta) {
+      var txt = b64decode(meta.content);
+      var obj = JSON.parse(txt);
+      data = normalize(obj);
+      renderAll();
+      $("#conn-pill").textContent = "متصل ✓";
+      $("#conn-pill").className = "pill on";
+      ghGetMsgs().then(function (meta) {
+        if (!meta) return;
+        try {
+          var arr = JSON.parse(b64decode(meta.content));
+          msgs = Array.isArray(arr) ? arr : [];
+          msgSha = meta.sha;
+          var unread = msgs.filter(function (m) { return !m.read; }).length;
+          var b = $("#msg-badge");
+          if (b) { b.textContent = faNum(unread); b.classList.toggle("hide", unread === 0); }
+        } catch (e) {}
+      }).catch(function () {});
+      setStatus('بارگذاری شد — آخرین به‌روزرسانی: <bdi dir="ltr">' +
+                esc(data.updated || "—") + "</bdi>", "ok", true);
+    }).catch(function (e) {
+      setStatus(e.message, "err");
+      $("#conn-pill").textContent = "خطا در اتصال";
+      $("#conn-pill").className = "pill";
+    });
+  }
+
+  function normalize(o) {
+    o = o || {};
+    o.version = o.version || 1;
+    o.settings = o.settings || {};
+    o.skills = Array.isArray(o.skills) ? o.skills : [];
+    o.projects = Array.isArray(o.projects) ? o.projects : [];
+    o.skills.forEach(function (s) { s.level = +s.level || 0; });
+    o.projects.forEach(function (p) {
+      p.title = p.title || ""; p.title_en = p.title_en || "";
+      p.description = p.description || ""; p.description_en = p.description_en || "";
+      p.url = p.url || ""; p.tags = Array.isArray(p.tags) ? p.tags : [];
+    });
+    return o;
+  }
+
+  function save() {
+    if (!data) return;
+    var btn = $("#save-btn");
+    btn.disabled = true;
+    setStatus("در حال ذخیره…", "");
+    var payload = JSON.parse(JSON.stringify(data));
+    payload.updated = new Date().toISOString().replace(/\.\d+Z$/, "Z");
+    payload.settings.stat_projects = faNum(enNum(payload.settings.stat_projects).trim()) || "۰";
+    payload.settings.stat_months = faNum(enNum(payload.settings.stat_months).trim()) || "۰";
+
+    ghPut(payload).then(function () {
+      data = payload;
+      setStatus("ذخیره شد ✓ گیت‌هاب در حال انتشار است — حدود ۴۰ ثانیه بعد سایت به‌روز می‌شود.", "ok");
+      setTimeout(function () { $("#reload-btn").click(); }, 2500);
+    }).catch(function (e) {
+      setStatus(e.message, "err");
+    }).then(function () { btn.disabled = false; });
+  }
+
+  /* ---------------- راه‌اندازی ---------------- */
+  function showSetup() {
+    $("#setup").classList.remove("hide");
+    $("#panel").classList.add("hide");
+    $("#savebar").style.display = "none";
+    $("#logout-btn").classList.add("hide");
+    $("#pat-input").value = "";
+    $("#pat-clear").style.display = token ? "inline-block" : "none";
+    if (token) $("#setup-msg").textContent = "کلید ذخیره‌شده معتبر نیست — دوباره وصل شو.";
+  }
+
+  function showPanel() {
+    $("#setup").classList.add("hide");
+    $("#panel").classList.remove("hide");
+    $("#savebar").style.display = "flex";
+    $("#logout-btn").classList.remove("hide");
+  }
+
+  function begin() {
+    token = localStorage.getItem(TOKEN_KEY) || "";
+    if (!token) { showSetup(); return; }
+    showPanel();
+    loadFromGitHub();
+  }
+
+  $("#pat-save").addEventListener("click", function () {
+    var v = $("#pat-input").value.trim();
+    if (!v) { $("#setup-msg").textContent = "کلید را وارد کن."; $("#setup-msg").className = "status err"; return; }
+    token = v;
+    localStorage.setItem(TOKEN_KEY, v);
+    $("#setup-msg").textContent = "در حال تست اتصال…";
+    $("#setup-msg").className = "status";
+    ghGet().then(function () {
+      $("#setup-msg").textContent = "اتصال برقرار شد ✓";
+      $("#setup-msg").className = "status ok";
+      showPanel();
+      loadFromGitHub();
+    }).catch(function (e) {
+      localStorage.removeItem(TOKEN_KEY);
+      token = "";
+      $("#setup-msg").textContent = e.message;
+      $("#setup-msg").className = "status err";
+    });
+  });
+
+  function logout() {
+    if (!confirm("از حساب خارج می‌شوی؟ برای ورود بعدی باید کلید دسترسی را دوباره بچسبانی.")) return;
+    localStorage.removeItem(TOKEN_KEY);
+    token = ""; data = null;
+    showSetup();
+  }
+
+  $("#logout-btn").addEventListener("click", logout);
+
+  $("#pat-clear").addEventListener("click", function () {
+    if (!confirm("کلید از این مرورگر حذف شود؟")) return;
+    localStorage.removeItem(TOKEN_KEY);
+    token = ""; data = null;
+    showSetup();
+  });
+
+  $("#save-btn").addEventListener("click", save);
+  $("#reload-btn").addEventListener("click", function () {
+    if (!confirm("تغییرهای ذخیره‌نشده پاک شود و از گیت‌هاب خوانده شود؟")) return;
+    loadFromGitHub();
+  });
+
+  /* ---- افزودن دستی ---- */
+  function openMsgForm() {
+    $("#msg-form").classList.remove("hide");
+    ["#mf-name", "#mf-email", "#mf-subject", "#mf-message"].forEach(function (s) { $(s).value = ""; });
+    $("#mf-name").focus();
+  }
+  function closeMsgForm() { $("#msg-form").classList.add("hide"); }
+
+  var addBtn = $("#msg-add");
+  if (addBtn) addBtn.addEventListener("click", openMsgForm);
+  var cancelBtn = $("#mf-cancel");
+  if (cancelBtn) cancelBtn.addEventListener("click", closeMsgForm);
+
+  var saveBtn = $("#mf-save");
+  if (saveBtn) saveBtn.addEventListener("click", function () {
+    var name = $("#mf-name").value.trim();
+    var email = $("#mf-email").value.trim();
+    var subject = $("#mf-subject").value.trim();
+    var message = $("#mf-message").value.trim();
+    if (!name || !message) { alert("نام و متن پیام لازم است."); return; }
+    msgs.push({
+      id: Date.now(),
+      name: name, email: email, subject: subject, message: message,
+      date: new Date().toISOString(), read: true
+    });
+    closeMsgForm();
+    renderMessages();
+    saveMessages("افزودن دستی پیام");
+  });
+
+  var searchEl = $("#msg-search");
+  if (searchEl) {
+    searchEl.addEventListener("input", function () {
+      msgQuery = searchEl.value.trim();
+      renderMessages();
+    });
+  }
+  var refreshEl = $("#msg-refresh");
+  if (refreshEl) {
+    refreshEl.addEventListener("click", function () { loadMessages(); });
+  }
+
+  $("#skill-add").addEventListener("click", function () {
+    data.skills.push({ name: "", level: 50 });
+    renderSkills(); setStatus("تغییر ذخیره‌نشده…", "");
+  });
+  $("#proj-add").addEventListener("click", function () {
+    data.projects.push({ id: Date.now(), title: "", title_en: "", description: "", description_en: "", tags: [], url: "" });
+    renderProjects(); setStatus("تغییر ذخیره‌نشده…", "");
+  });
+
+  document.querySelectorAll(".tab").forEach(function (t) {
+    t.addEventListener("click", function () {
+      document.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("active"); });
+      t.classList.add("active");
+      var target = t.getAttribute("data-tab");
+      ["site", "skills", "projects", "messages"].forEach(function (n) {
+        $("#tab-" + n).classList.toggle("hide", n !== target);
+      });
+      if (target === "messages") loadMessages();
+    });
+  });
+
+  begin();
+})();
+</script>
 </body>
 </html>
