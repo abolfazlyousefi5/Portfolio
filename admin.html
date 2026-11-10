@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>پنل مدیریت — ابوالفضل یوسفی</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<style>
+  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#181C23;--card:#23262F;--card2:#2A2E38;--accent:#FF6A3D;--text:#E5E7EB;--muted:#7B7F86;--ok:#34D399;--err:#F87171}
+  body{background:var(--bg);color:var(--text);font-family:'Vazirmatn',system-ui,sans-serif;line-height:1.8;padding-bottom:96px}
+  a{color:var(--accent)}
+  .wrap{max-width:900px;margin:0 auto;padding:24px 16px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-badge{width:42px;height:42px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:18px}
+  h1{font-size:19px;font-weight:700}
+  .sub{font-size:12px;color:var(--muted)}
+  .btn{border:0;border-radius:9px;padding:10px 18px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{opacity:.88}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn-ghost{background:var(--card2);color:var(--text)}
+  .btn-ghost:hover{background:#333844}
+  .btn-sm{padding:6px 12px;font-size:12px}
+  .card{background:var(--card);border-radius:14px;padding:20px;margin-bottom:16px}
+  .card h2{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--accent);display:flex;align-items:center;gap:8px}
+  .field{margin-bottom:14px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px}
+  .field input,.field textarea{width:100%;background:var(--bg);border:1px solid #343845;border-radius:8px;padding:9px 12px;color:var(--text);font-family:inherit;font-size:14px;transition:.15s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+  .field textarea{resize:vertical;line-height:1.9}
+  .field input[dir=ltr],.field textarea[dir=ltr]{text-align:left}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.row2{grid-template-columns:1fr}}
+  .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .tab{background:var(--card);border:1px solid #343845;color:var(--muted);border-radius:9px;padding:9px 18px;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .skill-row{display:grid;grid-template-columns:1fr 90px 110px 36px;gap:10px;align-items:center;margin-bottom:10px}
+  .skill-row input[type=text]{background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px 10px;color:var(--text);font-family:inherit;font-size:14px;width:100%}
+  .skill-row input[type=range]{width:100%;accent-color:var(--accent)}
+  .skill-row .lv{background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px;color:var(--accent);font-family:inherit;font-size:14px;text-align:center;width:100%}
+  .del{background:transparent;border:1px solid #4a2b2b;color:var(--err);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:16px;line-height:1}
+  .del:hover{background:#3a2222}
+  .proj{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:14px}
+  .proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+  .proj-num{font-size:12px;color:var(--accent);font-weight:700}
+  .savebar{position:fixed;bottom:0;left:0;right:0;background:#1E222A;border-top:1px solid #343845;padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50}
+  .status{font-size:13px;color:var(--muted);max-width:520px}
+  .status.ok{color:var(--ok)}.status.err{color:var(--err)}
+  .banner{background:#2A2E38;border-right:3px solid var(--accent);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--muted);margin-bottom:16px;line-height:2}
+  .banner b{color:var(--text)}
+  .banner code{background:var(--bg);padding:2px 6px;border-radius:5px;font-size:12px;direction:ltr;display:inline-block}
+  .steps{font-size:13.5px;line-height:2.4;color:var(--text)}
+  .steps li{margin-right:18px;margin-bottom:4px}
+  .steps a{text-decoration:none;border-bottom:1px dashed}
+  .hide{display:none!important}
+  .pill{font-size:11.5px;padding:4px 10px;border-radius:99px;background:var(--card2);color:var(--muted)}
+  .pill.on{background:rgba(52,211,153,.15);color:var(--ok)}
+  .hint{font-size:11.5px;color:var(--muted);margin-top:5px}
+  .add-btn{margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="logo">
+      <div class="logo-badge">AY</div>
+      <div>
+        <h1>پنل مدیریت سایت</h1>
+        <div class="sub">در پنل تغییر بده ← روی سایت ذخیره می‌شود</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span id="conn-pill" class="pill">اتصال برقرار نیست</span>
+      <a href="./" class="btn btn-ghost btn-sm" style="text-decoration:none">دیدن سایت ↗</a>
+    </div>
+  </header>
+
+  <!-- ============ صفحه راه‌اندازی توکن ============ -->
+  <div id="setup" class="card hide">
+    <h2>گام ۱ از ۱ — اتصال به گیت‌هاب (فقط یک‌بار)</h2>
+    <div class="banner">
+      برای اینکه تغییرهای تو <b>روی همه دستگاه‌ها</b> دیده شود، پنل باید فایل
+      <code>data.json</code> را در مخزن گیت‌هابت به‌روز کند. یک «کلید دسترسی» لازم است که
+      فقط یک‌بار می‌سازی و اینجا می‌چسبانی. کلید در همین مرورگر ذخیره می‌شود.
+    </div>
+    <ol class="steps">
+      <li>این لینک را باز کن:<br />
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>
+      </li>
+      <li><b>Token name</b> → بنویس: <code>portfolio-admin</code></li>
+      <li><b>Expiration</b> → <code>1 year</code></li>
+      <li><b>Repository access</b> → <code>Only select repositories</code> → انتخاب کن <code>Portfolio</code></li>
+      <li><b>Repository permissions</b> → <code>Contents</code> را روی <code>Read and write</code> بگذار</li>
+      <li>پایین صفحه <b>Generate token</b> → کلید را کپی کن (شبیه <code>github_pat_...</code>)</li>
+      <li>همین‌جا بچسبان و <b>ذخیره کن</b></li>
+    </ol>
+    <div class="field" style="margin-top:16px">
+      <label>کلید دسترسی گیت‌هاب</label>
+      <input id="pat-input" type="password" dir="ltr" placeholder="github_pat_..." autocomplete="off" spellcheck="false" />
+      <div class="hint">کلید فقط در این مرورگر ذخیره می‌شود و جایی ارسال نمی‌شود.</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button class="btn btn-primary" id="pat-save">ذخیره و وصل شو</button>
+      <button class="btn btn-ghost" id="pat-clear" style="display:none">قطع اتصال</button>
+    </div>
+    <div id="setup-msg" class="status" style="margin-top:10px"></div>
+  </div>
+
+  <!-- ============ پنل اصلی ============ -->
+  <div id="panel" class="hide">
+    <div class="tabs">
+      <button class="tab active" data-tab="site">مشخصات سایت</button>
+      <button class="tab" data-tab="skills">مهارت‌ها</button>
+      <button class="tab" data-tab="projects">پروژه‌ها</button>
+    </div>
+
+    <div id="tab-site"></div>
+
+    <div id="tab-skills" class="hide">
+      <div class="card">
+        <h2>مهارت‌ها</h2>
+        <div id="skills-box"></div>
+        <button class="btn btn-ghost btn-sm add-btn" id="skill-add">+ افزودن مهارت</button>
+      </div>
+    </div>
+
+    <div id="tab-projects" class="hide">
+      <div class="card">
+        <h2>پروژه‌ها</h2>
+        <div id="proj-box"></div>
+        <button class="btn btn-ghost btn-sm add-btn" id="proj-add">+ افزودن پروژه</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="savebar" id="savebar" style="display:none">
+  <button class="btn btn-primary" id="save-btn">ذخیره و انتشار روی سایت</button>
+  <button class="btn btn-ghost" id="reload-btn">بازخوانی از گیت‌هاب</button>
+  <span class="status" id="status"></span>
+</div>
+
+<script>!function(){"use strict";var t="main",e="https://api.github.com/repos/abolfazlyousefi5/Portfolio/contents/data.json",n="gh_pat_portfolio",a=null,l="",i=function(t){return document.querySelector(t)};function r(t){for(var e=(new TextEncoder).encode(t),n="",a=0;a<e.length;a++)n+=String.fromCharCode(e[a]);return btoa(n)}function s(t){return String(null==t?"":t).replace(/[0-9]/g,function(t){return"۰۱۲۳۴۵۶۷۸۹"[+t]})}function o(t){return String(null==t?"":t).replace(/[۰-۹]/g,function(t){return String("۰۱۲۳۴۵۶۷۸۹".indexOf(t))})}function c(t){return String(null==t?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}function u(t,e,n){var a=i("#status");n?a.innerHTML=t||"":a.textContent=t||"",a.className="status"+(e?" "+e:"")}function d(){return{Authorization:"Bearer "+l,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}}function p(){return fetch(e+"?ref="+t+"&t="+Date.now(),{headers:d(),cache:"no-store"}).then(function(t){if(401===t.status)throw new Error("کلید معتبر نیست (401)");if(404===t.status)throw new Error("مخزن یا فایل پیدا نشد (404)");if(!t.ok)throw new Error("خطای گیت‌هاب: "+t.status);return t.json()})}var f=[{title:"هویت سایت",items:[{k:"full_name",label:"نام کامل (هدر سایت)",type:"text"},{k:"site_title",label:"عنوان تب مرورگر",type:"text"},{k:"meta_description",label:"توضیح متا برای گوگل",type:"textarea",rows:2},{k:"headline",label:"عنوان اصلی — فارسی",type:"text"},{k:"headline_en",label:"عنوان اصلی — انگلیسی",type:"text",ltr:!0}]},{title:"درباره من",items:[{k:"about_text",label:"متن درباره من — فارسی",type:"textarea",rows:4},{k:"about_text_en",label:"متن درباره من — انگلیسی",type:"textarea",rows:4,ltr:!0}]},{title:"جمله‌های افکت تایپ",items:[{k:"typing_texts",label:"فارسی — هر خط یک جمله",type:"textarea",rows:4},{k:"typing_texts_en",label:"انگلیسی — هر خط یک جمله",type:"textarea",rows:4,ltr:!0}]},{title:"نوار تکنولوژی و آمار",items:[{k:"tech_line",label:"تکنولوژی‌ها — هر خط یکی",type:"textarea",rows:3,ltr:!0},{k:"stat_projects",label:"تعداد پروژه",type:"text",small:!0},{k:"stat_months",label:"ماه تجربه",type:"text",small:!0}]},{title:"راه‌های تماس",items:[{k:"email",label:"ایمیل",type:"text",ltr:!0},{k:"whatsapp",label:"واتساپ (بدون +)",type:"text",ltr:!0},{k:"address",label:"آدرس",type:"text"}]},{title:"شبکه‌های اجتماعی",items:[{k:"github",label:"GitHub",type:"text",ltr:!0},{k:"linkedin",label:"LinkedIn",type:"text",ltr:!0},{k:"telegram",label:"Telegram",type:"text",ltr:!0},{k:"instagram",label:"Instagram",type:"text",ltr:!0}]}];function v(t,e){var n=t.ltr?' dir="ltr"':"",a='<div class="field"><label>'+c(t.label)+"</label>";return"textarea"===t.type?a+='<textarea rows="'+(t.rows||3)+'" data-k="'+t.k+'"'+n+">"+c(e)+"</textarea>":a+='<input type="text" data-k="'+t.k+'" value="'+c(e)+'"'+n+" />",a+"</div>"}function m(){var t=i("#skills-box");t.innerHTML="",a.skills.forEach(function(e,n){var l=document.createElement("div");l.className="skill-row",l.innerHTML='<input type="text" value="'+c(e.name)+'" placeholder="نام مهارت" data-f="name" /><input type="range" min="0" max="100" step="5" value="'+(+e.level||0)+'" data-f="level" /><input type="text" class="lv" value="'+(+e.level||0)+'" data-f="num" dir="ltr" /><button class="del" title="حذف">×</button>',l.querySelector("[data-f=name]").addEventListener("input",function(t){a.skills[n].name=t.target.value,u("تغییر ذخیره‌نشده…","")});var i=l.querySelector("[data-f=level]"),r=l.querySelector("[data-f=num]");i.addEventListener("input",function(){a.skills[n].level=+i.value,r.value=i.value,u("تغییر ذخیره‌نشده…","")}),r.addEventListener("input",function(){var t=Math.max(0,Math.min(100,parseInt(o(r.value),10)||0));a.skills[n].level=t,i.value=t,u("تغییر ذخیره‌نشده…","")}),l.querySelector(".del").addEventListener("click",function(){a.skills.splice(n,1),m(),u("تغییر ذخیره‌نشده…","")}),t.appendChild(l)})}function b(){var t=i("#proj-box");t.innerHTML="",a.projects.forEach(function(e,n){var l=document.createElement("div");l.className="proj",l.innerHTML='<div class="proj-head"><span class="proj-num">پروژه '+(n+1)+'</span><div style="display:flex;gap:6px"><button class="btn btn-ghost btn-sm" data-up>↑</button><button class="btn btn-ghost btn-sm" data-down>↓</button><button class="del" data-del title="حذف">×</button></div></div><div class="row2"><div class="field"><label>عنوان — فارسی</label><input type="text" data-f="title" value="'+c(e.title)+'" /></div><div class="field"><label>عنوان — انگلیسی</label><input type="text" dir="ltr" data-f="title_en" value="'+c(e.title_en)+'" /></div></div><div class="field"><label>توضیح — فارسی</label><textarea rows="2" data-f="description">'+c(e.description)+'</textarea></div><div class="field"><label>توضیح — انگلیسی</label><textarea rows="2" dir="ltr" data-f="description_en">'+c(e.description_en)+'</textarea></div><div class="row2"><div class="field"><label>تگ‌ها (با کاما جدا کن)</label><input type="text" dir="ltr" data-f="tags" value="'+c((e.tags||[]).join(", "))+'" /></div><div class="field"><label>لینک پروژه</label><input type="text" dir="ltr" data-f="url" value="'+c(e.url)+'" /></div></div>',l.querySelectorAll("[data-f]").forEach(function(t){t.addEventListener("input",function(){var e=t.getAttribute("data-f");"tags"===e?a.projects[n].tags=t.value.split(",").map(function(t){return t.trim()}).filter(Boolean):a.projects[n][e]=t.value,u("تغییر ذخیره‌نشده…","")})}),l.querySelector("[data-del]").addEventListener("click",function(){confirm("این پروژه حذف شود؟")&&(a.projects.splice(n,1),b(),u("تغییر ذخیره‌نشده…",""))}),l.querySelector("[data-up]").addEventListener("click",function(){if(0!==n){var t=a.projects[n-1];a.projects[n-1]=a.projects[n],a.projects[n]=t,b(),u("تغییر ذخیره‌نشده…","")}}),l.querySelector("[data-down]").addEventListener("click",function(){if(n!==a.projects.length-1){var t=a.projects[n+1];a.projects[n+1]=a.projects[n],a.projects[n]=t,b(),u("تغییر ذخیره‌نشده…","")}}),t.appendChild(l)})}function g(){var t;t="",f.forEach(function(e){t+='<div class="card"><h2>'+c(e.title)+"</h2>";var n=e.items.filter(function(t){return t.small});e.items.filter(function(t){return!t.small}).forEach(function(e){t+=v(e,a.settings[e.k])}),n.length&&(t+='<div class="row2">',n.forEach(function(e){t+=v(e,a.settings[e.k])}),t+="</div>"),t+="</div>"}),i("#tab-site").innerHTML=t,i("#tab-site").querySelectorAll("[data-k]").forEach(function(t){t.addEventListener("input",function(){a.settings[t.getAttribute("data-k")]=t.value,u("تغییر ذخیره‌نشده…","")})}),m(),b()}function h(){return u("در حال خواندن از گیت‌هاب…",""),p().then(function(t){var e,n=function(t){for(var e=atob(String(t).replace(/\s/g,"")),n=new Uint8Array(e.length),a=0;a<e.length;a++)n[a]=e.charCodeAt(a);return(new TextDecoder).decode(n)}(t.content),l=JSON.parse(n);(e=(e=l)||{}).version=e.version||1,e.settings=e.settings||{},e.skills=Array.isArray(e.skills)?e.skills:[],e.projects=Array.isArray(e.projects)?e.projects:[],e.skills.forEach(function(t){t.level=+t.level||0}),e.projects.forEach(function(t){t.title=t.title||"",t.title_en=t.title_en||"",t.description=t.description||"",t.description_en=t.description_en||"",t.url=t.url||"",t.tags=Array.isArray(t.tags)?t.tags:[]}),a=e,g(),i("#conn-pill").textContent="متصل ✓",i("#conn-pill").className="pill on",u('بارگذاری شد — آخرین به‌روزرسانی: <bdi dir="ltr">'+c(a.updated||"—")+"</bdi>","ok",!0)}).catch(function(t){u(t.message,"err"),i("#conn-pill").textContent="خطا در اتصال",i("#conn-pill").className="pill"})}function y(){i("#setup").classList.remove("hide"),i("#panel").classList.add("hide"),i("#savebar").style.display="none",i("#pat-input").value="",i("#pat-clear").style.display=l?"inline-block":"none"}function k(){i("#setup").classList.add("hide"),i("#panel").classList.remove("hide"),i("#savebar").style.display="flex"}i("#pat-save").addEventListener("click",function(){var t=i("#pat-input").value.trim();if(!t)return i("#setup-msg").textContent="کلید را وارد کن.",void(i("#setup-msg").className="status err");l=t,localStorage.setItem(n,t),i("#setup-msg").textContent="در حال تست اتصال…",i("#setup-msg").className="status",p().then(function(){i("#setup-msg").textContent="اتصال برقرار شد ✓",i("#setup-msg").className="status ok",k(),h()}).catch(function(t){localStorage.removeItem(n),l="",i("#setup-msg").textContent=t.message,i("#setup-msg").className="status err"})}),i("#pat-clear").addEventListener("click",function(){confirm("کلید از این مرورگر حذف شود؟")&&(localStorage.removeItem(n),l="",a=null,y())}),i("#save-btn").addEventListener("click",function(){if(a){var n=i("#save-btn");n.disabled=!0,u("در حال ذخیره…","");var l,c=JSON.parse(JSON.stringify(a));c.updated=(new Date).toISOString().replace(/\.\d+Z$/,"Z"),c.settings.stat_projects=s(o(c.settings.stat_projects).trim())||"۰",c.settings.stat_months=s(o(c.settings.stat_months).trim())||"۰",(l=c,p().then(function(n){var a={message:"به‌روزرسانی محتوا از پنل ادمین",content:r(JSON.stringify(l,null,2)+"\n"),branch:t,sha:n.sha};return fetch(e,{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},d()),body:JSON.stringify(a)}).then(function(t){if(401===t.status||403===t.status)throw new Error("اجازه نوشتن نداری — دسترسی Contents را روی Read and write بگذار");if(409===t.status)throw new Error("همزمانی — دوباره تلاش کن");return t.ok?t.json():t.json().catch(function(){return{}}).then(function(e){throw new Error(e.message||"خطای ذخیره: "+t.status)})})})).then(function(){a=c,u("ذخیره شد ✓ گیت‌هاب در حال انتشار است — حدود ۴۰ ثانیه بعد سایت به‌روز می‌شود.","ok"),setTimeout(function(){i("#reload-btn").click()},2500)}).catch(function(t){u(t.message,"err")}).then(function(){n.disabled=!1})}}),i("#reload-btn").addEventListener("click",function(){confirm("تغییرهای ذخیره‌نشده پاک شود و از گیت‌هاب خوانده شود؟")&&h()}),i("#skill-add").addEventListener("click",function(){a.skills.push({name:"",level:50}),m(),u("تغییر ذخیره‌نشده…","")}),i("#proj-add").addEventListener("click",function(){a.projects.push({id:Date.now(),title:"",title_en:"",description:"",description_en:"",tags:[],url:""}),b(),u("تغییر ذخیره‌نشده…","")}),document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active")}),t.classList.add("active"),["site","skills","projects"].forEach(function(e){i("#tab-"+e).classList.toggle("hide",e!==t.getAttribute("data-tab"))})})}),(l=localStorage.getItem(n)||"")?(k(),h()):y()}();</script>
+</body>
+</html>
