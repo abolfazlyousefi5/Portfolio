@@ -129,6 +129,22 @@
     });
   }
 
+  /* ---------- متن‌های فرم تماس (از data.json) ---------- */
+  function applyContactTexts(s) {
+    if (!s) return;
+    var okFa = s.contact_ok_fa, okEn = s.contact_ok_en;
+    var fbFa = s.contact_fallback_fa, fbEn = s.contact_fallback_en;
+
+    if (okFa || okEn) {
+      document.documentElement.setAttribute("data-contact-ok", IS_EN ? (okEn || okFa) : (okFa || okEn));
+    }
+    if (fbFa || fbEn) {
+      document.documentElement.setAttribute("data-contact-fallback", IS_EN ? (fbEn || fbFa) : (fbFa || fbEn));
+    }
+    // اگر پنجره‌ی فرم باز است، فوری هم به آن اطلاع بده
+    if (window.__contactTextsChanged) window.__contactTextsChanged();
+  }
+
   /* ---------- پروژه‌ها ---------- */
   var ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>';
 
@@ -246,12 +262,14 @@
     var cached = readCache();
     if (cached && Date.now() - cached.t < CACHE_TTL) {
       applySite(cached.data.settings);
+      applyContactTexts(cached.data.settings);
       applyProjects(cached.data.projects);
       applySkills(cached.data.skills);
     }
     loadData().then(function (d) {
       if (!d) return;
       applySite(d.settings);
+      applyContactTexts(d.settings);
       applyProjects(d.projects);
       applySkills(d.skills);
       writeCache(d);
