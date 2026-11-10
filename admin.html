@@ -121,7 +121,7 @@
     </div>
   </header>
 
-  <!-- ============ صفحه ورود ============ -->
+  <!-- ============ صفحه راه‌اندازی توکن ============ -->
   <div id="setup" class="card hide">
     <h2>🔐 ورود به پنل</h2>
     <p class="lead">این پنل با «کلید شخصی گیت‌هاب» وارد می‌شود — مثل رمز عبور، ولی امن‌تر.</p>
@@ -139,6 +139,7 @@
     </div>
     <div id="setup-msg" class="status" style="margin-top:10px"></div>
 
+    <!-- این پنل فقط برای صاحب سایت است -->
     <div class="owner-note">
       🔒 <b>این پنل مخصوص صاحب سایت است.</b><br />
       اگر صاحب سایت نیستی، این صفحه برایت کار نمی‌کند — هر کلیدی بسازی،
@@ -223,31 +224,21 @@
       <div class="card">
         <h2>📨 پیام‌های رسیده</h2>
         <div class="inbox">
-          📬 پیام‌های واقعی به <b>ایمیلت</b> می‌رسند
+          ✅ پیام‌ها از <b>Google Sheet</b> خوانده می‌شوند — همان‌هایی که به ایمیلت هم می‌آیند
           <a class="btn btn-primary btn-sm" style="text-decoration:none;margin-right:auto"
-             href="https://mail.google.com/mail/u/0/#search/from%3Aformsubmit" target="_blank" rel="noopener">
+             href="https://mail.google.com/mail/u/0/" target="_blank" rel="noopener">
              باز کردن ایمیل ↗
           </a>
         </div>
 
         <div class="msg-toolbar">
           <input type="search" id="msg-search" placeholder="جستجو در نام، ایمیل یا متن…" />
-          <button class="btn btn-ghost btn-sm" id="msg-add">＋ افزودن</button>
+          <a class="btn btn-ghost btn-sm" style="text-decoration:none"
+             href="https://docs.google.com/spreadsheets/d/1GKq5HEeu7_KZOnvMtJX92HcWyondkJfTIrro_-QZQhY/edit"
+             target="_blank" rel="noopener">Google Sheet ↗</a>
           <button class="btn btn-ghost btn-sm" id="msg-refresh">به‌روزرسانی</button>
         </div>
 
-        <div class="msg-form hide" id="msg-form">
-          <div class="row2">
-            <div class="field"><label>نام</label><input id="mf-name" type="text" /></div>
-            <div class="field"><label>ایمیل</label><input id="mf-email" type="text" dir="ltr" /></div>
-          </div>
-          <div class="field"><label>موضوع (اختیاری)</label><input id="mf-subject" type="text" /></div>
-          <div class="field"><label>متن پیام</label><textarea id="mf-message" rows="3"></textarea></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-primary btn-sm" id="mf-save">ذخیره</button>
-            <button class="btn btn-ghost btn-sm" id="mf-cancel">انصراف</button>
-          </div>
-        </div>
 
         <div id="msg-box"></div>
       </div>
@@ -263,291 +254,6 @@
 </div>
 
 <script>
-  حق داری. شرمنده. این هم کد کامل:
-Ran commands1
-
-Thought for 1 second
-
-The output is truncated. Let me get the file in two parts to paste it. Let me split it.
-
-ببخشید، حق داری. کد کامل — دو تکه، چون طولانی است:
-📄 admin.html — ۳۴٬۰۴۰ بایت
-👉 https://github.com/abolfazlyousefi5/Portfolio/edit/main/admin.html
-
-Ctrl+A → پاک کن → این را بچسبان:
-
-HTML
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="noindex, nofollow" />
-<title>پنل مدیریت — ابوالفضل یوسفی</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<style>
-  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
-  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
-  @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#181C23;--card:#23262F;--card2:#2A2E38;--accent:#FF6A3D;--text:#E5E7EB;--muted:#7B7F86;--ok:#34D399;--err:#F87171}
-  body{background:var(--bg);color:var(--text);font-family:'Vazirmatn',system-ui,sans-serif;line-height:1.8;padding-bottom:96px}
-  a{color:var(--accent)}
-  .wrap{max-width:900px;margin:0 auto;padding:24px 16px}
-  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
-  .logo{display:flex;align-items:center;gap:10px}
-  .logo-badge{width:42px;height:42px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:18px}
-  h1{font-size:19px;font-weight:700}
-  .sub{font-size:12px;color:var(--muted)}
-  .btn{border:0;border-radius:9px;padding:10px 18px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:hover{opacity:.88}
-  .btn-primary:disabled{opacity:.5;cursor:not-allowed}
-  .btn-ghost{background:var(--card2);color:var(--text)}
-  .btn-ghost:hover{background:#333844}
-  .btn-sm{padding:6px 12px;font-size:12px}
-  .card{background:var(--card);border-radius:14px;padding:20px;margin-bottom:16px}
-  .card h2{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--accent);display:flex;align-items:center;gap:8px}
-  .field{margin-bottom:14px}
-  .field:last-child{margin-bottom:0}
-  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px}
-  .field input,.field textarea{width:100%;background:var(--bg);border:1px solid #343845;border-radius:8px;padding:9px 12px;color:var(--text);font-family:inherit;font-size:14px;transition:.15s}
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-  .field textarea{resize:vertical;line-height:1.9}
-  .field input[dir=ltr],.field textarea[dir=ltr]{text-align:left}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:640px){.row2{grid-template-columns:1fr}}
-  .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-  .tab{background:var(--card);border:1px solid #343845;color:var(--muted);border-radius:9px;padding:9px 18px;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer}
-  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
-  .skill-row{display:grid;grid-template-columns:1fr 90px 110px 36px;gap:10px;align-items:center;margin-bottom:10px}
-  .skill-row input[type=text]{background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px 10px;color:var(--text);font-family:inherit;font-size:14px;width:100%}
-  .skill-row input[type=range]{width:100%;accent-color:var(--accent)}
-  .skill-row .lv{background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px;color:var(--accent);font-family:inherit;font-size:14px;text-align:center;width:100%}
-  .del{background:transparent;border:1px solid #4a2b2b;color:var(--err);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:16px;line-height:1}
-  .del:hover{background:#3a2222}
-  .proj{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:14px}
-  .proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
-  .proj-num{font-size:12px;color:var(--accent);font-weight:700}
-  .savebar{position:fixed;bottom:0;left:0;right:0;background:#1E222A;border-top:1px solid #343845;padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50}
-  .status{font-size:13px;color:var(--muted);max-width:520px}
-  .status.ok{color:var(--ok)}.status.err{color:var(--err)}
-  .banner{background:#2A2E38;border-right:3px solid var(--accent);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--muted);margin-bottom:16px;line-height:2}
-  .banner b{color:var(--text)}
-  .banner code{background:var(--bg);padding:2px 6px;border-radius:5px;font-size:12px;direction:ltr;display:inline-block}
-  .steps{font-size:13.5px;line-height:2.4;color:var(--text)}
-  .steps li{margin-right:18px;margin-bottom:4px}
-  .steps a{text-decoration:none;border-bottom:1px dashed}
-  .hide{display:none!important}
-  .pill{font-size:11.5px;padding:4px 10px;border-radius:99px;background:var(--card2);color:var(--muted)}
-  .pill.on{background:rgba(52,211,153,.15);color:var(--ok)}
-  .hint{font-size:11.5px;color:var(--muted);margin-top:5px}
-  .add-btn{margin-top:6px}
-  .lead{font-size:13.5px;color:var(--muted);line-height:2}
-  .adv{margin-top:22px;border-top:1px solid #343845;padding-top:14px}
-  .adv summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600;list-style:none;padding:6px 0}
-  .adv summary::-webkit-details-marker{display:none}
-  .adv summary::before{content:"▸ ";display:inline-block;transition:.2s}
-  .adv[open] summary::before{transform:rotate(90deg)}
-  .adv-body{padding-top:10px}
-  .owner-note{background:rgba(123,127,134,.09);border-right:3px solid var(--muted);border-radius:8px;
-    padding:12px 14px;font-size:12.5px;color:var(--muted);line-height:2.1;margin-top:20px}
-  .owner-note b{color:var(--text)}
-  .safe{background:rgba(52,211,153,.07);border-right:3px solid var(--ok);border-radius:8px;padding:11px 13px;font-size:12.5px;color:var(--muted);line-height:2;margin-top:12px}
-  .safe b{color:var(--ok)}
-  .safe code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:11.5px;direction:ltr;display:inline-block}
-
-  /* ---------- پیام‌ها ---------- */
-  .msg-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-  .msg-toolbar input[type=search]{flex:1;min-width:150px;background:var(--bg);border:1px solid #343845;border-radius:8px;padding:8px 12px;color:var(--text);font-family:inherit;font-size:13px}
-  .msg-toolbar input[type=search]:focus{outline:none;border-color:var(--accent)}
-  .msg{background:var(--card2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border-right:3px solid #343845}
-  .msg.unread{border-right-color:var(--accent)}
-  .msg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-  .msg-who{display:flex;align-items:center;gap:9px;min-width:0}
-  .avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:0 0 34px}
-  .msg-name{font-weight:600;font-size:14px}
-  .msg-mail{font-size:11.5px;color:var(--muted);direction:ltr;text-align:right;word-break:break-all}
-  .msg-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-  .msg-date{font-size:11px;color:var(--muted);direction:ltr;white-space:nowrap}
-  .msg-subject{font-size:13px;color:var(--accent);margin:9px 0 4px;font-weight:600}
-  .msg-body{font-size:13.5px;line-height:2;color:var(--text);white-space:pre-wrap;word-break:break-word;margin-top:6px}
-  .msg-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-  .tag-new{font-size:10.5px;background:var(--accent);color:#fff;padding:2px 7px;border-radius:99px;font-weight:700}
-  .empty{text-align:center;padding:44px 16px;color:var(--muted);font-size:13.5px;line-height:2.1}
-  .empty .big{font-size:34px;display:block;margin-bottom:10px;opacity:.55}
-  .count-badge{background:var(--accent);color:#fff;font-size:11px;padding:1px 7px;border-radius:99px;margin-right:5px;font-weight:700}
-  .inbox{background:#2A2E38;border-right:3px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;line-height:1.9}
-  .inbox b{color:var(--text)}
-  .msg-form{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:14px}
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <header class="top">
-    <div class="logo">
-      <div class="logo-badge">AY</div>
-      <div>
-        <h1>پنل مدیریت سایت</h1>
-        <div class="sub">در پنل تغییر بده ← روی سایت ذخیره می‌شود</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <span id="conn-pill" class="pill">اتصال برقرار نیست</span>
-      <a href="./" class="btn btn-ghost btn-sm" style="text-decoration:none">دیدن سایت ↗</a>
-      <button class="btn btn-ghost btn-sm hide" id="logout-btn" title="خروج از حساب">خروج</button>
-    </div>
-  </header>
-
-  <!-- ============ صفحه ورود ============ -->
-  <div id="setup" class="card hide">
-    <h2>🔐 ورود به پنل</h2>
-    <p class="lead">این پنل با «کلید شخصی گیت‌هاب» وارد می‌شود — مثل رمز عبور، ولی امن‌تر.</p>
-
-    <div class="field" style="margin-top:18px">
-      <label>کلید شخصی</label>
-      <input id="pat-input" name="github-token" type="password" dir="ltr"
-             placeholder="github_pat_••••••••••••••••" autocomplete="on" spellcheck="false" />
-      <div class="hint">✓ فقط در همین مرورگر ذخیره می‌شود &nbsp;·&nbsp; ✓ هیچ‌جا ارسال نمی‌شود &nbsp;·&nbsp; ✓ تا ۱ سال معتبر</div>
-    </div>
-
-    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-      <button class="btn btn-primary" id="pat-save">ورود</button>
-      <button class="btn btn-ghost" id="pat-clear" style="display:none">قطع اتصال</button>
-    </div>
-    <div id="setup-msg" class="status" style="margin-top:10px"></div>
-
-    <div class="owner-note">
-      🔒 <b>این پنل مخصوص صاحب سایت است.</b><br />
-      اگر صاحب سایت نیستی، این صفحه برایت کار نمی‌کند — هر کلیدی بسازی،
-      به این سایت دسترسی پیدا نمی‌کند.
-    </div>
-  </div>
-
-  <!-- ============ پنل اصلی ============ -->
-  <div id="panel" class="hide">
-    <div class="tabs">
-      <button class="tab active" data-tab="site">مشخصات سایت</button>
-      <button class="tab" data-tab="skills">مهارت‌ها</button>
-      <button class="tab" data-tab="projects">پروژه‌ها</button>
-      <button class="tab" data-tab="messages">پیام‌ها<span class="count-badge hide" id="msg-badge">۰</span></button>
-      <button class="tab" data-tab="access">دسترسی</button>
-    </div>
-
-    <div id="tab-site"></div>
-
-    <div id="tab-skills" class="hide">
-      <div class="card">
-        <h2>مهارت‌ها</h2>
-        <div id="skills-box"></div>
-        <button class="btn btn-ghost btn-sm add-btn" id="skill-add">+ افزودن مهارت</button>
-      </div>
-    </div>
-
-    <div id="tab-projects" class="hide">
-      <div class="card">
-        <h2>پروژه‌ها</h2>
-        <div id="proj-box"></div>
-        <button class="btn btn-ghost btn-sm add-btn" id="proj-add">+ افزودن پروژه</button>
-      </div>
-    </div>
-
-    <div id="tab-access" class="hide">
-      <div class="card">
-        <h2>🔑 کلید دسترسی — فقط برای خودت</h2>
-        <p class="lead">این کلید «رمز عبور» پنل توست. هر کس آن را داشته باشد می‌تواند سایتت را عوض کند.
-        پس جایی نگذار که کسی ببیند.</p>
-
-        <div class="owner-note" style="border-right-color:var(--err);background:rgba(248,113,113,.07);margin-top:16px">
-          ⚠️ <b>مهم:</b> کلید در همین مرورگر ذخیره شده. اگر روزی خواستی از این دستگاه خارج شوی،
-          دکمه‌ی <b>«خروج»</b> در بالای صفحه را بزن.
-        </div>
-
-        <h3 style="font-size:13.5px;margin:22px 0 10px">اگر کلید را گم کردی یا لو رفت</h3>
-        <ol class="steps">
-          <li>برو به <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens ↗</a></li>
-          <li>روی کلید <code>portfolio-admin</code> → <b>Delete</b></li>
-          <li>یک کلید جدید بساز (راهنما پایین)</li>
-          <li>در پنل «خروج» بزن و کلید جدید را بچسبان</li>
-        </ol>
-
-        <h3 style="font-size:13.5px;margin:22px 0 10px">ساخت کلید جدید</h3>
-        <ol class="steps">
-          <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new ↗</a></li>
-          <li><b>Token name:</b> <code>portfolio-admin</code></li>
-          <li><b>Expiration:</b> <code>1 year</code></li>
-          <li><b>Repository access:</b> <code>Only select repositories</code> → <code>Portfolio</code></li>
-          <li><b>Permissions → Contents:</b> <code>Read and write</code> — بقیه را دست نزن</li>
-          <li><b>Generate token</b> → کپی کن</li>
-          <li>در این پنل: «خروج» → کلید جدید را بچسبان → «ورود»</li>
-        </ol>
-
-        <div class="safe">
-          <b>چرا این روش امن است؟</b><br />
-          کلید فقط به یک مخزن (<code>Portfolio</code>) و فقط به محتوا (<code>Contents</code>) دسترسی دارد.
-          به اکانت گیت‌هاب تو، به ایمیلت، به رمزت و به بقیه مخزن‌ها دسترسی ندارد.
-          اگر کسی پیدایش کند، حداکثر می‌تواند سایتت را عوض کند — و تو با یک کلیک Delete، بی‌اثرش می‌کنی.
-        </div>
-
-        <div class="owner-note">
-          <b>غریبه‌ها چه می‌توانند بکنند؟</b> هیچ. اگر کسی دیگر <code>admin.html</code> را باز کند،
-          فقط یک کادر خالی می‌بیند. اگر کلیدی هم بسازد، آن کلید به مخزن‌های خودش تعلق دارد، نه مال تو —
-          و وقتی در پنل تو بچسباند، خطای <code>401</code> می‌گیرد.
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-messages" class="hide">
-      <div class="card">
-        <h2>📨 پیام‌های رسیده</h2>
-        <div class="inbox">
-          📬 پیام‌های واقعی به <b>ایمیلت</b> می‌رسند
-          <a class="btn btn-primary btn-sm" style="text-decoration:none;margin-right:auto"
-             href="https://mail.google.com/mail/u/0/#search/from%3Aformsubmit" target="_blank" rel="noopener">
-             باز کردن ایمیل ↗
-          </a>
-        </div>
-
-        <div class="msg-toolbar">
-          <input type="search" id="msg-search" placeholder="جستجو در نام، ایمیل یا متن…" />
-          <button class="btn btn-ghost btn-sm" id="msg-add">＋ افزودن</button>
-          <button class="btn btn-ghost btn-sm" id="msg-refresh">به‌روزرسانی</button>
-        </div>
-
-        <div class="msg-form hide" id="msg-form">
-          <div class="row2">
-            <div class="field"><label>نام</label><input id="mf-name" type="text" /></div>
-            <div class="field"><label>ایمیل</label><input id="mf-email" type="text" dir="ltr" /></div>
-          </div>
-          <div class="field"><label>موضوع (اختیاری)</label><input id="mf-subject" type="text" /></div>
-          <div class="field"><label>متن پیام</label><textarea id="mf-message" rows="3"></textarea></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-primary btn-sm" id="mf-save">ذخیره</button>
-            <button class="btn btn-ghost btn-sm" id="mf-cancel">انصراف</button>
-          </div>
-        </div>
-
-        <div id="msg-box"></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="savebar" id="savebar" style="display:none">
-  <button class="btn btn-primary" id="save-btn">ذخیره و انتشار روی سایت</button>
-  <button class="btn btn-ghost" id="reload-btn">بازخوانی از گیت‌هاب</button>
-  <span class="status" id="status"></span>
-</div>
-
-<script>
-
-⬇️ تکه ۲ — از (function(){ تا آخر
-
-HTML
-
 (function () {
   "use strict";
 
@@ -558,10 +264,14 @@ HTML
   var MSG_PATH = "messages.json";
   var API   = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + PATH;
   var MSG_API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + MSG_PATH;
+
+  /* ---------- Google Apps Script (پیام‌های فرم) ---------- */
+  var GAS = "https://script.google.com/macros/s/AKfycbyz7C8V7zp74RDJmi4X-lWhSEb06QmgxxF0-UKoAa4wcZyZLC8OdfaCsqlB25K9wqMk/exec";
+  var GAS_KEY = "ay-2026-panel";
   var TOKEN_KEY = "gh_pat_portfolio";
 
-  var data = null;
-  var msgs = [];
+  var data = null;      // {version, updated, settings, skills, projects}
+  var msgs = [];        // [{id,name,email,subject,message,date,read}]
   var msgSha = "";
   var token = "";
 
@@ -579,14 +289,19 @@ HTML
     return new TextDecoder().decode(bytes);
   }
   function faNum(v) {
-    return String(v == null ? "" : v).replace(/[0-9]/g, function (d) { return "۰۱۲۳۴۵۶۷۸۹"[+d]; });
+    return String(v == null ? "" : v).replace(/[0-9]/g, function (d) {
+      return "۰۱۲۳۴۵۶۷۸۹"[+d];
+    });
   }
   function enNum(v) {
-    return String(v == null ? "" : v).replace(/[۰-۹]/g, function (d) { return String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)); });
+    return String(v == null ? "" : v).replace(/[۰-۹]/g, function (d) {
+      return String("۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+    });
   }
   function esc(s) {
     return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
   function setStatus(txt, kind, html) {
     var el = $("#status");
@@ -607,14 +322,35 @@ HTML
     return fetch(url + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: ghHeaders(), cache: "no-store" })
       .then(function (r) {
         if (r.status === 401) throw new Error("کلید معتبر نیست (401)");
-        if (r.status === 404) return null;
+        if (r.status === 404) return null;          // فایل هنوز ساخته نشده
         if (!r.ok) throw new Error("خطای گیت‌هاب: " + r.status);
         return r.json();
       });
   }
 
   function ghGet() { return ghFetchJSON(API); }
-  function ghGetMsgs() { return ghFetchJSON(MSG_API); }
+
+  /* ---------- Apps Script: خواندن پیام‌ها ---------- */
+  function gasGet() {
+    return fetch(GAS + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        var j = JSON.parse(t);
+        return { ok: true, messages: j.messages || [] };
+      });
+  }
+
+  function gasPost(payload) {
+    return fetch(GAS, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.text(); }).then(function (t) {
+      try { return JSON.parse(t); } catch (e) { return { ok: false }; }
+    });
+  }
+
+  function ghGetMsgs() { return Promise.resolve(null); }
 
   function ghPutFile(url, obj, message, sha) {
     var body = {
@@ -686,17 +422,6 @@ HTML
     ]}
   ];
 
-  function fld(f, val) {
-    var d = f.ltr ? ' dir="ltr"' : "";
-    var out = '<div class="field"><label>' + esc(f.label) + "</label>";
-    if (f.type === "textarea") {
-      out += '<textarea rows="' + (f.rows || 3) + '" data-k="' + f.k + '"' + d + ">" + esc(val) + "</textarea>";
-    } else {
-      out += '<input type="text" data-k="' + f.k + '" value="' + esc(val) + '"' + d + " />";
-    }
-    return out + "</div>";
-  }
-
   function renderSite() {
     var html = "";
     GROUPS.forEach(function (g) {
@@ -704,7 +429,9 @@ HTML
       if (g.desc) html += '<p class="lead" style="margin:-8px 0 14px;font-size:12.5px">' + esc(g.desc) + "</p>";
       var items = g.items.filter(function (i) { return i.small; });
       var normal = g.items.filter(function (i) { return !i.small; });
-      normal.forEach(function (f) { html += fld(f, data.settings[f.k]); });
+      normal.forEach(function (f) {
+        html += fld(f, data.settings[f.k]);
+      });
       if (items.length) {
         html += '<div class="row2">';
         items.forEach(function (f) { html += fld(f, data.settings[f.k]); });
@@ -719,6 +446,17 @@ HTML
         setStatus("تغییر ذخیره‌نشده…", "");
       });
     });
+  }
+
+  function fld(f, val) {
+    var d = f.ltr ? ' dir="ltr"' : "";
+    var out = '<div class="field"><label>' + esc(f.label) + "</label>";
+    if (f.type === "textarea") {
+      out += '<textarea rows="' + (f.rows || 3) + '" data-k="' + f.k + '"' + d + ">" + esc(val) + "</textarea>";
+    } else {
+      out += '<input type="text" data-k="' + f.k + '" value="' + esc(val) + '"' + d + " />";
+    }
+    return out + "</div>";
   }
 
   function renderSkills() {
@@ -804,21 +542,28 @@ HTML
     });
   }
 
-  function renderAll() { renderSite(); renderSkills(); renderProjects(); }
+  function renderAll() {
+    renderSite(); renderSkills(); renderProjects();
+  }
 
   /* ---------------- پیام‌ها ---------------- */
   function faDate(iso) {
     try {
       var d = new Date(iso);
-      return faNum(d.getFullYear() + "/" + String(d.getMonth() + 1).padStart(2, "0") + "/" +
-        String(d.getDate()).padStart(2, "0") + " — " +
-        String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"));
+      var y = d.getFullYear();
+      var mo = String(d.getMonth() + 1).padStart(2, "0");
+      var da = String(d.getDate()).padStart(2, "0");
+      var hh = String(d.getHours()).padStart(2, "0");
+      var mm = String(d.getMinutes()).padStart(2, "0");
+      return faNum(y + "/" + mo + "/" + da + " — " + hh + ":" + mm);
     } catch (e) { return "—"; }
   }
+
   function initial(name) {
     var s = String(name || "?").trim();
     return s ? s.charAt(0).toUpperCase() : "?";
   }
+
   var msgQuery = "";
 
   function renderMessages() {
@@ -827,32 +572,48 @@ HTML
     var list = msgs.slice().sort(function (a, b) {
       return String(b.date || "").localeCompare(String(a.date || ""));
     });
+
     if (msgQuery) {
       var q = msgQuery.toLowerCase();
       list = list.filter(function (m) {
-        return (m.name + " " + m.email + " " + (m.subject || "") + " " + m.message).toLowerCase().indexOf(q) !== -1;
+        return (m.name + " " + m.email + " " + (m.subject || "") + " " + m.message)
+          .toLowerCase().indexOf(q) !== -1;
       });
     }
+
+    // نشان تعداد خوانده‌نشده
     var unread = msgs.filter(function (m) { return !m.read; }).length;
     var badge = $("#msg-badge");
-    if (badge) { badge.textContent = faNum(unread); badge.classList.toggle("hide", unread === 0); }
+    if (badge) {
+      badge.textContent = faNum(unread);
+      badge.classList.toggle("hide", unread === 0);
+    }
 
     if (!list.length) {
       box.innerHTML = msgQuery
         ? '<div class="empty"><span class="big">🔍</span>پیامی با این جستجو پیدا نشد.</div>'
-        : '<div class="empty"><span class="big">📭</span>هیچ پیامی در بایگانی نیست.<br/>' +
-          '<span style="font-size:12px;opacity:.75">پیام‌های واقعی به ایمیلت می‌روند — اینجا فقط بایگانی دستی است.</span></div>';
+        : '<div class="empty"><span class="big">📭</span>' +
+          'هیچ پیامی در بایگانی نیست.<br/>' +
+          '<span style="font-size:12px;opacity:.75">پیام‌های واقعی به ایمیلت می‌روند — اینجا فقط بایگانی دستی است.</span>' +
+          '</div>';
       return;
     }
+
     box.innerHTML = "";
     list.forEach(function (m) {
       var d = document.createElement("div");
       d.className = "msg" + (m.read ? "" : " unread");
       d.innerHTML =
-        '<div class="msg-head"><div class="msg-who"><div class="avatar">' + esc(initial(m.name)) + "</div>" +
-        "<div><div class=\"msg-name\">" + esc(m.name) + (m.read ? "" : ' <span class="tag-new">جدید</span>') + "</div>" +
-        '<div class="msg-mail">' + esc(m.email) + "</div></div></div>" +
-        '<div class="msg-meta"><span class="msg-date">' + faDate(m.date) + "</span></div></div>" +
+        '<div class="msg-head">' +
+          '<div class="msg-who">' +
+            '<div class="avatar">' + esc(initial(m.name)) + "</div>" +
+            "<div>" +
+              '<div class="msg-name">' + esc(m.name) + (m.read ? "" : ' <span class="tag-new">جدید</span>') + "</div>" +
+              '<div class="msg-mail">' + esc(m.email) + "</div>" +
+            "</div>" +
+          "</div>" +
+          '<div class="msg-meta"><span class="msg-date">' + faDate(m.date) + "</span></div>" +
+        "</div>" +
         (m.subject ? '<div class="msg-subject">' + esc(m.subject) + "</div>" : "") +
         '<div class="msg-body">' + esc(m.message) + "</div>" +
         '<div class="msg-actions">' +
@@ -863,12 +624,27 @@ HTML
         "</div>";
 
       d.querySelector("[data-toggle]").addEventListener("click", function () {
-        m.read = !m.read; renderMessages(); saveMessages("تغییر وضعیت خوانده‌شدن");
+        var next = !m.read;
+        setStatus("در حال ذخیره…", "");
+        gasPost({ action: "update", key: GAS_KEY, id: m.id, read: next })
+          .then(function (r) {
+            if (!r || !r.ok) throw new Error("no");
+            m.read = next;
+            renderMessages();
+            setStatus("ذخیره شد ✓", "ok");
+          })
+          .catch(function () { setStatus("ذخیره نشد — دوباره تلاش کن", "err"); });
       });
       d.querySelector("[data-del]").addEventListener("click", function () {
-        if (!confirm("این پیام از فایل messages.json حذف شود؟")) return;
-        msgs = msgs.filter(function (x) { return x.id !== m.id; });
-        renderMessages(); saveMessages("حذف پیام");
+        if (!confirm("این پیام از Google Sheet حذف شود؟")) return;
+        setStatus("در حال حذف…", "");
+        gasPost({ action: "delete", key: GAS_KEY, id: m.id })
+          .then(function (r) {
+            if (!r || !r.ok) throw new Error("no");
+            setStatus("حذف شد ✓", "ok");
+            loadMessages();
+          })
+          .catch(function () { setStatus("حذف نشد — دوباره تلاش کن", "err"); });
       });
       box.appendChild(d);
     });
@@ -876,31 +652,59 @@ HTML
 
   function saveMessages(why) {
     setStatus("در حال ذخیره…", "");
-    return ghPutFile(MSG_API, msgs.slice(), (why || "به‌روزرسانی پیام‌ها") + " از پنل ادمین", msgSha)
-      .then(function (res) {
-        msgSha = res && res.content ? res.content.sha : msgSha;
-        setStatus("ذخیره شد ✓", "ok");
-      })
-      .catch(function (e) { setStatus(e.message, "err"); });
+    // تغییر وضعیت/حذف از طریق Apps Script
+    return Promise.resolve().then(function () { setStatus("", ""); });
   }
 
   function loadMessages() {
     var box = $("#msg-box");
     if (box) box.innerHTML = '<div class="empty">در حال خواندن پیام‌ها…</div>';
-    return ghGetMsgs().then(function (meta) {
-      if (!meta) { msgs = []; msgSha = ""; renderMessages(); return; }
-      msgSha = meta.sha;
-      try {
-        var arr = JSON.parse(b64decode(meta.content));
-        msgs = Array.isArray(arr) ? arr : [];
-      } catch (e) { msgs = []; }
+    return gasGet().then(function (res) {
+      msgs = (res.messages || []).map(function (m) {
+        // id از Apps Script = شماره‌ی سطر در شیت
+        return {
+          id: m.id,
+          name: m.name, email: m.email,
+          subject: m.subject, message: m.message,
+          date: m.date, read: !!m.read
+        };
+      });
       renderMessages();
     }).catch(function (e) {
-      if (box) box.innerHTML = '<div class="empty">خطا در خواندن پیام‌ها:<br/>' + esc(e.message) + "</div>";
+      if (box) box.innerHTML = '<div class="empty">خطا در خواندن پیام‌ها:<br/>' + esc(String(e)) + "</div>";
     });
   }
 
-  /* ---------------- بارگذاری / ذخیره ---------------- */
+  /* ---------------- بارگذاری / ذخیره ---------------- */  /* ---------------- بارگذاری / ذخیره ---------------- */
+  function loadFromGitHub() {
+    setStatus("در حال خواندن از گیت‌هاب…", "");
+    return ghGet().then(function (meta) {
+      var txt = b64decode(meta.content);
+      var obj = JSON.parse(txt);
+      data = normalize(obj);
+      renderAll();
+      $("#conn-pill").textContent = "متصل ✓";
+      $("#conn-pill").className = "pill on";
+      ghGetMsgs().then(function (meta) {
+        if (!meta) return;
+        try {
+          var arr = JSON.parse(b64decode(meta.content));
+          msgs = Array.isArray(arr) ? arr : [];
+          msgSha = meta.sha;
+          var unread = msgs.filter(function (m) { return !m.read; }).length;
+          var b = $("#msg-badge");
+          if (b) { b.textContent = faNum(unread); b.classList.toggle("hide", unread === 0); }
+        } catch (e) {}
+      }).catch(function () {});
+      setStatus('بارگذاری شد — آخرین به‌روزرسانی: <bdi dir="ltr">' +
+                esc(data.updated || "—") + "</bdi>", "ok", true);
+    }).catch(function (e) {
+      setStatus(e.message, "err");
+      $("#conn-pill").textContent = "خطا در اتصال";
+      $("#conn-pill").className = "pill";
+    });
+  }
+
   function normalize(o) {
     o = o || {};
     o.version = o.version || 1;
@@ -914,33 +718,6 @@ HTML
       p.url = p.url || ""; p.tags = Array.isArray(p.tags) ? p.tags : [];
     });
     return o;
-  }
-
-  function loadFromGitHub() {
-    setStatus("در حال خواندن از گیت‌هاب…", "");
-    return ghGet().then(function (meta) {
-      if (!meta) throw new Error("فایل data.json پیدا نشد — اول آن را بساز");
-      data = normalize(JSON.parse(b64decode(meta.content)));
-      renderAll();
-      $("#conn-pill").textContent = "متصل ✓";
-      $("#conn-pill").className = "pill on";
-      ghGetMsgs().then(function (m2) {
-        if (!m2) return;
-        try {
-          var arr = JSON.parse(b64decode(m2.content));
-          msgs = Array.isArray(arr) ? arr : [];
-          msgSha = m2.sha;
-          var unread = msgs.filter(function (m) { return !m.read; }).length;
-          var b = $("#msg-badge");
-          if (b) { b.textContent = faNum(unread); b.classList.toggle("hide", unread === 0); }
-        } catch (e) {}
-      }).catch(function () {});
-      setStatus('بارگذاری شد — آخرین به‌روزرسانی: <bdi dir="ltr">' + esc(data.updated || "—") + "</bdi>", "ok", true);
-    }).catch(function (e) {
-      setStatus(e.message, "err");
-      $("#conn-pill").textContent = "خطا در اتصال";
-      $("#conn-pill").className = "pill";
-    });
   }
 
   function save() {
@@ -962,7 +739,7 @@ HTML
     }).then(function () { btn.disabled = false; });
   }
 
-  /* ---------------- ورود / خروج ---------------- */
+  /* ---------------- راه‌اندازی ---------------- */
   function showSetup() {
     $("#setup").classList.remove("hide");
     $("#panel").classList.add("hide");
@@ -980,23 +757,16 @@ HTML
     $("#logout-btn").classList.remove("hide");
   }
 
-  function logout() {
-    if (!confirm("از حساب خارج می‌شوی؟ برای ورود بعدی باید کلید دسترسی را دوباره بچسبانی.")) return;
-    localStorage.removeItem(TOKEN_KEY);
-    token = ""; data = null;
-    showSetup();
+  function begin() {
+    token = localStorage.getItem(TOKEN_KEY) || "";
+    if (!token) { showSetup(); return; }
+    showPanel();
+    loadFromGitHub();
   }
-
-  $("#logout-btn").addEventListener("click", logout);
-  $("#pat-clear").addEventListener("click", logout);
 
   $("#pat-save").addEventListener("click", function () {
     var v = $("#pat-input").value.trim();
-    if (!v) {
-      $("#setup-msg").textContent = "کلید را وارد کن.";
-      $("#setup-msg").className = "status err";
-      return;
-    }
+    if (!v) { $("#setup-msg").textContent = "کلید را وارد کن."; $("#setup-msg").className = "status err"; return; }
     token = v;
     localStorage.setItem(TOKEN_KEY, v);
     $("#setup-msg").textContent = "در حال تست اتصال…";
@@ -1014,45 +784,40 @@ HTML
     });
   });
 
+  function logout() {
+    if (!confirm("از حساب خارج می‌شوی؟ برای ورود بعدی باید کلید دسترسی را دوباره بچسبانی.")) return;
+    localStorage.removeItem(TOKEN_KEY);
+    token = ""; data = null;
+    showSetup();
+  }
+
+  $("#logout-btn").addEventListener("click", logout);
+
+  $("#pat-clear").addEventListener("click", function () {
+    if (!confirm("کلید از این مرورگر حذف شود؟")) return;
+    localStorage.removeItem(TOKEN_KEY);
+    token = ""; data = null;
+    showSetup();
+  });
+
   $("#save-btn").addEventListener("click", save);
   $("#reload-btn").addEventListener("click", function () {
     if (!confirm("تغییرهای ذخیره‌نشده پاک شود و از گیت‌هاب خوانده شود؟")) return;
     loadFromGitHub();
   });
 
-  /* ---------------- افزودن دستی پیام ---------------- */
-  function closeMsgForm() { $("#msg-form").classList.add("hide"); }
-  var addBtn = $("#msg-add");
-  if (addBtn) addBtn.addEventListener("click", function () {
-    $("#msg-form").classList.remove("hide");
-    ["#mf-name", "#mf-email", "#mf-subject", "#mf-message"].forEach(function (s) { $(s).value = ""; });
-    $("#mf-name").focus();
-  });
-  var cancelBtn = $("#mf-cancel");
-  if (cancelBtn) cancelBtn.addEventListener("click", closeMsgForm);
-
-  var saveMsgBtn = $("#mf-save");
-  if (saveMsgBtn) saveMsgBtn.addEventListener("click", function () {
-    var name = $("#mf-name").value.trim();
-    var email = $("#mf-email").value.trim();
-    var subject = $("#mf-subject").value.trim();
-    var message = $("#mf-message").value.trim();
-    if (!name || !message) { alert("نام و متن پیام لازم است."); return; }
-    msgs.push({ id: Date.now(), name: name, email: email, subject: subject, message: message,
-                date: new Date().toISOString(), read: true });
-    closeMsgForm();
-    renderMessages();
-    saveMessages("افزودن دستی پیام");
-  });
-
   var searchEl = $("#msg-search");
-  if (searchEl) searchEl.addEventListener("input", function () {
-    msgQuery = searchEl.value.trim(); renderMessages();
-  });
+  if (searchEl) {
+    searchEl.addEventListener("input", function () {
+      msgQuery = searchEl.value.trim();
+      renderMessages();
+    });
+  }
   var refreshEl = $("#msg-refresh");
-  if (refreshEl) refreshEl.addEventListener("click", function () { loadMessages(); });
+  if (refreshEl) {
+    refreshEl.addEventListener("click", function () { loadMessages(); });
+  }
 
-  /* ---------------- مهارت / پروژه جدید ---------------- */
   $("#skill-add").addEventListener("click", function () {
     data.skills.push({ name: "", level: 50 });
     renderSkills(); setStatus("تغییر ذخیره‌نشده…", "");
@@ -1062,7 +827,6 @@ HTML
     renderProjects(); setStatus("تغییر ذخیره‌نشده…", "");
   });
 
-  /* ---------------- تب‌ها ---------------- */
   document.querySelectorAll(".tab").forEach(function (t) {
     t.addEventListener("click", function () {
       document.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("active"); });
@@ -1075,10 +839,8 @@ HTML
     });
   });
 
-  /* ---------------- شروع ---------------- */
-  token = localStorage.getItem(TOKEN_KEY) || "";
-  if (token) { showPanel(); loadFromGitHub(); } else { showSetup(); }
+  begin();
 })();
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a584cee358ae5e2f',t:'MTc5NDMxMTA5Ng=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a584cee358ae5e2f',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
