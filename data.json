@@ -20,7 +20,11 @@
     "telegram": "https://t.me/abolfazl_yousefi02",
     "typing_texts": "من ابوالفضل هستم\nکارآموز بک‌اند با پایتون\nعلاقه‌مند به جنگو و FastAPI\nدر مسیر یادگیری دیتابیس و تست‌نویسی",
     "typing_texts_en": "I am Abolfazl\nPython backend developer\nDjango & FastAPI enthusiast\nLearning databases and testing",
-    "whatsapp": "989033647670"
+    "whatsapp": "989033647670",
+    "contact_ok_fa": "پیامت رسید ✓ — جوابت رو تا چند روز آینده با ایمیل می‌دم.",
+    "contact_ok_en": "Message sent ✓ — I'll reply to you by email soon.",
+    "contact_fallback_fa": "ایمیلت باز شد — فقط دکمه‌ی «ارسال» رو بزن تا پیام برسه.",
+    "contact_fallback_en": "Your email app is opening — just press Send to finish."
   },
   "skills": [
     { "name": "HTML", "level": 70 },
