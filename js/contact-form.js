@@ -1,9 +1,14 @@
+/* ============================================================
+   contact-form.js — نسخه ۴ (Google Apps Script)
+   پیام → Google Sheet (پنل ادمین می‌بیند)
+        → ایمیل به صاحب سایت
+   روی گوگل اجرا می‌شود ← در ایران بدون فیلترشکن باز است
+   ============================================================ */
 (function () {
   "use strict";
 
-  /* ---------- تنظیمات ---------- */
-  var FORMSUBMIT = "https://formsubmit.co/ajax/a.yousefi2912@gmail.com";
-  var MAILTO = "a.yousefi2912@gmail.com";
+  /* ---------- آدرس Apps Script ---------- */
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbyz7C8V7zp74RDJmi4X-lWhSEb06QmgxxF0-UKoAa4wcZyZLC8OdfaCsqlB25K9wqMk/exec";
 
   var form = document.getElementById("contact-form");
   if (!form) return;
@@ -15,13 +20,12 @@
 
   var IS_EN = (document.documentElement.lang || "fa").slice(0, 2) === "en";
 
-  /* متن‌های پیش‌فرض — site-sync.js آن‌ها را از data.json به‌روز می‌کند */
   var T = IS_EN
     ? {
         sending: "Sending…",
         ok: "Message sent ✓ — I'll reply to you by email soon.",
         bad: "Please fill the form correctly.",
-        net: "Connection failed.",
+        net: "Connection failed — please try again.",
         fallback: "Your email app is opening — just press Send to finish.",
         err: "Something went wrong."
       }
@@ -29,12 +33,12 @@
         sending: "در حال ارسال…",
         ok: "پیامت رسید ✓ — جوابت رو تا چند روز آینده با ایمیل می‌دم.",
         bad: "لطفاً فرم را درست پر کن.",
-        net: "اتصال برقرار نشد.",
+        net: "ارسال نشد — یک‌بار دیگه تلاش کن.",
         fallback: "ایمیلت باز شد — فقط دکمه‌ی «ارسال» رو بزن تا پیام برسه.",
         err: "مشکلی پیش آمد."
       };
 
-  /* ---------- متن‌ها را از data.json بگیر (اگر تنظیم شده باشد) ---------- */
+  /* متن‌ها از data.json (اختیاری) */
   function syncTexts() {
     var root = document.documentElement;
     var ok = root.getAttribute("data-contact-ok");
@@ -43,9 +47,9 @@
     if (fb && fb.trim()) T.fallback = fb.trim();
   }
   syncTexts();
-  window.__contactTextsChanged = syncTexts;   // site-sync صدا می‌زند
+  window.__contactTextsChanged = syncTexts;
 
-  /* ---------- نمایش پیام ---------- */
+  /* ---------- نمایش ---------- */
   function flash(text, kind) {
     if (!statusEl) return;
     statusEl.textContent = text;
@@ -60,7 +64,6 @@
     statusEl.textContent = "";
   }
 
-  /* ---------- خطاهای فیلد ---------- */
   function setFieldError(name, msg) {
     var el = form.querySelector('[data-error-for="' + name + '"]');
     if (el) el.textContent = msg || "";
@@ -69,30 +72,26 @@
     form.querySelectorAll(".field-error").forEach(function (e) { e.textContent = ""; });
   }
 
-  function validate(data) {
+  function validate(d) {
     var errors = {};
-    if (!data.name || data.name.trim().length < 2)
+    if (!d.name || d.name.trim().length < 2)
       errors.name = IS_EN ? "Please enter your full name." : "نام را کامل بنویس.";
-    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email))
+    if (!d.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email))
       errors.email = IS_EN ? "Please enter a valid email." : "ایمیل معتبر وارد کن.";
-    if (!data.message || data.message.trim().length < 10)
+    if (!d.message || d.message.trim().length < 10)
       errors.message = IS_EN ? "Message must be at least 10 characters." : "پیام باید حداقل ۱۰ کاراکتر باشد.";
     return errors;
   }
 
-  /* ---------- شمارنده کاراکتر ---------- */
+  /* ---------- شمارنده ---------- */
   var counter = document.getElementById("message-count");
   var textarea = form.querySelector('textarea[name="message"]');
   function updateCounter() {
     if (!counter || !textarea) return;
-    var n = textarea.value.length;
-    var fa = "۰۱۲۳۴۵۶۷۸۹";
+    var n = textarea.value.length, fa = "۰۱۲۳۴۵۶۷۸۹";
     counter.textContent = String(n).replace(/\d/g, function (d) { return fa[+d]; });
   }
-  if (textarea) {
-    textarea.addEventListener("input", updateCounter);
-    updateCounter();
-  }
+  if (textarea) { textarea.addEventListener("input", updateCounter); updateCounter(); }
 
   /* ---------- ارسال ---------- */
   form.addEventListener("submit", function (ev) {
@@ -109,8 +108,7 @@
       website: (fd.get("website") || "").toString().trim()
     };
 
-    // هانی‌پات — ربات
-    if (data.website) return;
+    if (data.website) return;   // هانی‌پات
 
     var errors = validate(data);
     if (Object.keys(errors).length) {
@@ -122,55 +120,53 @@
     if (btnLabel) btnLabel.textContent = T.sending;
     if (submitBtn) submitBtn.disabled = true;
 
-    var payload = {
-      name: data.name,
-      email: data.email,
-      message: data.message,
-      _subject: (IS_EN ? "New message from your site" : "پیام جدید از سایت") +
-                (data.subject ? " — " + data.subject : ""),
-      _template: "table",
-      _captcha: "false"
-    };
-
     function done() {
       if (btnLabel) btnLabel.textContent = originalLabel;
       if (submitBtn) submitBtn.disabled = false;
     }
 
     function mailtoFallback() {
+      var MAIL = "abolfazl.yousefi.dev@gmail.com";
       var body = data.message + "\n\n— " + data.name + " (" + data.email + ")";
-      var url = "mailto:" + MAILTO +
-                "?subject=" + encodeURIComponent(data.subject || "پیام از سایت") +
-                "&body=" + encodeURIComponent(body);
-      window.location.href = url;
+      window.location.href = "mailto:" + MAIL +
+        "?subject=" + encodeURIComponent(data.subject || "پیام از سایت") +
+        "&body=" + encodeURIComponent(body);
       flash(T.fallback, "ok");
       done();
     }
 
-    fetch(FORMSUBMIT, {
+    var payload = {
+      action: "send",
+      name: data.name,
+      email: data.email,
+      subject: data.subject,
+      message: data.message
+    };
+
+    fetch(ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+      redirect: "follow"
     })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
-      .then(function (res) {
-        if (res.ok && (res.j.success === "true" || res.j.success === true)) {
+      .then(function (r) { return r.text(); })
+      .then(function (txt) {
+        var j = {};
+        try { j = JSON.parse(txt); } catch (e) {}
+        if (j && j.ok) {
           flash(T.ok, "ok");
           form.reset();
           updateCounter();
-          done();
         } else {
-          // FormSubmit قبول نکرد → ایمیل مستقیم
           mailtoFallback();
         }
+        done();
       })
       .catch(function () {
-        // شبکه قطع / فیلتر → ایمیل مستقیم
         mailtoFallback();
       });
   });
 
-  // وقتی کاربر شروع به تایپ می‌کند، پیام قبلی محو شود
   form.addEventListener("input", function (e) {
     if (e.target.name) setFieldError(e.target.name, "");
   });
