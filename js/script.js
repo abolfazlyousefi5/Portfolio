@@ -1,3 +1,68 @@
+  // دکمه‌ی برگشت به بالا — نسخه‌ی درست برای موبایل و دسکتاپ
+  const scrollBtn = document.getElementById("scrollToTop");
+  if (scrollBtn) {
+    const SHOW_AFTER = 320;
+    let visible = false, ticking = false, animId = null;
+
+    function syncBtn() {
+      const show = window.scrollY > SHOW_AFTER;
+      if (show !== visible) {
+        visible = show;
+        scrollBtn.classList.toggle("is-visible", show);
+        scrollBtn.setAttribute("aria-hidden", show ? "false" : "true");
+        scrollBtn.tabIndex = show ? 0 : -1;
+      }
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(syncBtn); }
+    }, { passive: true });
+    syncBtn();
+
+    function goTop() {
+      if (animId) cancelAnimationFrame(animId);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const start = window.scrollY || 0;
+      if (start <= 0) return;
+      document.documentElement.classList.add("st-scrolling");
+      if (reduce) {
+        window.scrollTo(0, 0);
+        document.documentElement.classList.remove("st-scrolling");
+        return;
+      }
+      const duration = Math.min(700, Math.max(260, start * 0.32));
+      const t0 = performance.now();
+      function step(now) {
+        const t = (now - t0) / duration;
+        const p = t >= 1 ? 1 : t;
+        const e = 1 - Math.pow(1 - p, 3);
+        window.scrollTo(0, Math.round(start * (1 - e)));
+        if (p < 1) { animId = requestAnimationFrame(step); }
+        else { animId = null; document.documentElement.classList.remove("st-scrolling"); }
+      }
+      animId = requestAnimationFrame(step);
+    }
+
+    let lastTouch = 0;
+    scrollBtn.addEventListener("touchend", function (e) {
+      lastTouch = Date.now(); e.preventDefault(); goTop();
+    }, { passive: false });
+    scrollBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (Date.now() - lastTouch < 700) return;
+      goTop();
+    });
+    ["wheel", "touchstart"].forEach(function (ev) {
+      window.addEventListener(ev, function () {
+        if (animId) { cancelAnimationFrame(animId); animId = null;
+          document.documentElement.classList.remove("st-scrolling"); }
+      }, { passive: true });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && visible) goTop();
+    });
+  }
+
 // افکت تایپ متحرک: متن را تایپ می‌کند، پاک می‌کند و به جمله‌ی بعدی می‌رود
 var __typingTimer = null;      // تایمر حلقه‌ی فعلی — تا بتوانیم لغو کنیم
 var __typingSignature = null;  // امضای متن‌ها — برای اینکه بی‌دلیل ری‌استارت نشود
