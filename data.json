@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "updated": "2026-11-10T09:39:45Z",
+  "updated": "2026-11-11T09:34:38Z",
   "settings": {
     "about_text": "من یک کارآموز بک‌اند با تمرکز روی پایتون هستم. این روزها در حال یادگیری ساخت API، کار با دیتابیس و اصول نوشتن کد تمیزم و سعی می‌کنم با پروژه‌های کوچک مهارت‌هام رو تقویت کنم. هدفم اینه که کم‌کم وارد تیم‌های حرفه‌ای بشم و روی پروژه‌های واقعی کار کنم.",
     "about_text_en": "I am a backend intern focused on Python. I keep sharpening my skills with small projects and my goal is to join a professional team.",
     "address": "مشهد ، ایران",
-    "email": "a.yousefi2912@gmail.com",
+    "email": "abolfazl.yousefi.dev@gmail.com",
     "full_name": "ابوالفضل یوسفی",
     "github": "https://github.com/abolfazlyousefi5",
     "headline": "برنامه نویس پایتون",
@@ -27,12 +27,30 @@
     "contact_fallback_en": "Your email app is opening — just press Send to finish."
   },
   "skills": [
-    { "name": "HTML", "level": 70 },
-    { "name": "CSS", "level": 25 },
-    { "name": "Python", "level": 35 },
-    { "name": "SQL", "level": 20 },
-    { "name": "Git", "level": 25 },
-    { "name": "GitHub", "level": 70 }
+    {
+      "name": "HTML",
+      "level": 70
+    },
+    {
+      "name": "CSS",
+      "level": 25
+    },
+    {
+      "name": "Python",
+      "level": 35
+    },
+    {
+      "name": "SQL",
+      "level": 20
+    },
+    {
+      "name": "Git",
+      "level": 25
+    },
+    {
+      "name": "GitHub",
+      "level": 70
+    }
   ],
   "projects": [
     {
@@ -41,7 +59,13 @@
       "description": "طراحی و پیاده‌سازی صفحه رزومه شخصی ریسپانسیو  شده با  HTML، CSS ,  JS , Python , Flask",
       "title_en": "Personal Resume Website",
       "description_en": "Designed and built a fully responsive personal resume page with HTML, CSS and JavaScript, plus a Flask version with an admin panel, SQLite database and a working contact form.",
-      "tags": ["HTML", "CSS", "JavaScript", "Python", "Flask"],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python",
+        "Flask"
+      ],
       "url": "https://github.com/abolfazlyousefi5/Portfolio"
     },
     {
@@ -50,7 +74,10 @@
       "description": "پیاده‌سازی بک‌اند شبیه‌ساز سیستم مدیریت بانک با پایتون و SQL",
       "title_en": "Bank Management Simulator",
       "description_en": "Backend for a bank management simulator built with Python and SQL — customer, account and transaction management.",
-      "tags": ["Python", "SQL"],
+      "tags": [
+        "Python",
+        "SQL"
+      ],
       "url": "https://github.com/abolfazlyousefi5/Bank-App"
     },
     {
@@ -59,7 +86,9 @@
       "description": "ابزار تولید پسوردهای تصادفی و امن با تنظیم طول، حروف، اعداد و کاراکترهای ویژه",
       "title_en": "Secure Password Generator",
       "description_en": "A tool that generates secure random passwords with configurable length, letters, digits and special characters.",
-      "tags": ["Python"],
+      "tags": [
+        "Python"
+      ],
       "url": "https://github.com/abolfazlyousefi5/password-generator"
     },
     {
@@ -68,7 +97,9 @@
       "description": "ابزار تایمر ساده با پایتون برای شمارش معکوس",
       "title_en": "Countdown Timer",
       "description_en": "A simple Python countdown timer.",
-      "tags": ["Python"],
+      "tags": [
+        "Python"
+      ],
       "url": "https://github.com/abolfazlyousefi5/python-timer"
     },
     {
@@ -77,7 +108,9 @@
       "description": "ابزار خط فرمان برای رمزنگاری و رمزگشایی متن‌ها و فایل‌ها با استفاده از الگوریتم‌های ساده",
       "title_en": "Encrypt / Decrypt Tool",
       "description_en": "A command-line tool for encrypting and decrypting text and files using simple algorithms.",
-      "tags": ["Python"],
+      "tags": [
+        "Python"
+      ],
       "url": "https://github.com/abolfazlyousefi5/mini-encrypt-decrypt"
     },
     {
@@ -86,7 +119,9 @@
       "description": "پیاده‌سازی بازی کلاسیک سنگ، کاغذ، قیچی با زبان Python. این پروژه شامل انتخاب تصادفی کامپیوتر، اعتبارسنجی ورودی کاربر، تعیین برنده و امکان خروج از بازی با دستور exit است.",
       "title_en": "Rock, Paper, Scissors",
       "description_en": "Classic Rock, Paper, Scissors game in Python — random computer choice, input validation, winner detection and an exit command.",
-      "tags": ["Python"],
+      "tags": [
+        "Python"
+      ],
       "url": "https://github.com/abolfazlyousefi5/rock-paper-scissors-game"
     }
   ]
