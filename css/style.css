@@ -359,6 +359,7 @@ footer a { text-decoration: none; }
   color: #fff;
   transform: translateY(-1px);
 }
+/* دکمه‌ی بازگشت به بالا — رفع باگ موبایل */
 #scrollToTop{position:fixed;inset-inline-end:16px;bottom:22px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:9999px;border:2px solid #FF6A3D;color:#FF6A3D;background:#181C23;box-shadow:0 8px 24px rgba(0,0,0,.45);z-index:60;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(14px) scale(.85);scale:none;transition:opacity .28s ease,transform .28s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 #scrollToTop.is-visible{scale:none;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
 #scrollToTop:active{background:#FF6A3D;color:#fff;transform:translateY(0) scale(.9)}
