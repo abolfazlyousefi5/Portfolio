@@ -359,3 +359,10 @@ footer a { text-decoration: none; }
   color: #fff;
   transform: translateY(-1px);
 }
+#scrollToTop{position:fixed;inset-inline-end:16px;bottom:22px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:9999px;border:2px solid #FF6A3D;color:#FF6A3D;background:#181C23;box-shadow:0 8px 24px rgba(0,0,0,.45);z-index:60;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(14px) scale(.85);scale:none;transition:opacity .28s ease,transform .28s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#scrollToTop.is-visible{scale:none;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
+#scrollToTop:active{background:#FF6A3D;color:#fff;transform:translateY(0) scale(.9)}
+@media(hover:hover) and (pointer:fine){#scrollToTop:hover{background:#FF6A3D;color:#fff;transform:translateY(-2px) scale(1.06)}}
+html.st-scrolling{scroll-behavior:auto !important}
+@media(max-width:420px){#scrollToTop{inset-inline-end:12px;bottom:18px;width:50px;height:50px}}
+@media(prefers-reduced-motion:reduce){#scrollToTop{transition:opacity .01ms,visibility .01ms;transform:none}#scrollToTop.is-visible{transform:none}}
