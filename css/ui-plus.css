@@ -659,3 +659,88 @@ body.has-resume-toolbar #float-stack {
   #stage .page .foot { margin-top: auto !important; }
   #stage .page > .main > *:last-child { margin-bottom: 0 !important; }
 }
+/* ══════════════════════════════════════════════════════════════
+   بهبود جستجو — سه تغییر
+   ──────────────────────────────────────────────────────────────
+   ۱) ابزار بستن: به‌جای «ESC» یک دکمه‌ی ✕ که با کلیک صفحه را می‌بندد
+   ۲) نوار پایین (↑↓ حرکت · Enter رفتن · Esc بستن) حذف می‌شود
+   ۳) بعد از کلیک روی نتیجه، همان محتوا در صفحه‌ی مقصد برجسته می‌شود
+
+   فایل: css/ui-plus.css — این بلوک به انتهایش اضافه می‌شود
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────── ۱) دکمه‌ی بستن به‌جای ESC ─────────── */
+#search-esc {
+  display: none !important;
+}
+
+#search-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border: 1px solid var(--border, #2A2E38);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted, #9AA3B0);
+  cursor: pointer;
+  padding: 0;
+  transition: background .15s, color .15s, border-color .15s;
+}
+#search-close:hover {
+  background: rgba(255, 106, 61, .14);
+  border-color: rgba(255, 106, 61, .55);
+  color: #FF6A3D;
+}
+#search-close:active { transform: scale(.94); }
+#search-close svg { width: 16px; height: 16px; display: block; }
+#search-close:focus-visible {
+  outline: 2px solid rgba(255, 106, 61, .6);
+  outline-offset: 2px;
+}
+
+/* دکمه‌ی پاک‌کردن خودکار مرورگر روی input[type=search] حذف شود،
+   وگرنه کنار دکمه‌ی ✕ ما یک × دیگر دیده می‌شود */
+#search-input::-webkit-search-cancel-button,
+#search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+#search-input::-ms-clear,
+#search-input::-ms-reveal { display: none; }
+
+/* ─────────── ۲) نوار پایین حذف می‌شود ─────────── */
+#search-foot { display: none !important; }
+
+/* ─────────── ۳) برجسته‌سازی محتوای مقصد ─────────── */
+
+/* حلقه‌ی نارنجی دور همان کارت / همان بخش، برای چند ثانیه */
+@keyframes srTargetPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 106, 61, .70); }
+  55%  { box-shadow: 0 0 0 10px rgba(255, 106, 61, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 106, 61, 0); }
+}
+.sr-target {
+  animation: srTargetPulse 1.5s ease-out 2;
+  border-color: rgba(255, 106, 61, .85) !important;
+  background-color: rgba(255, 106, 61, .075) !important;
+  transition: background-color .4s, border-color .4s;
+}
+
+/* خودِ کلمه‌ای که جستجو شد، در متن مقصد زرد-نارنجی می‌شود */
+mark.sr-hit {
+  background: rgba(255, 106, 61, .30);
+  color: #FFD9CB;
+  border-radius: 4px;
+  padding: 0 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* احترام به کسانی که انیمیشن را در سیستم عامل خاموش کرده‌اند */
+@media (prefers-reduced-motion: reduce) {
+  .sr-target { animation: none; border-color: rgba(255, 106, 61, .85) !important; }
+}
