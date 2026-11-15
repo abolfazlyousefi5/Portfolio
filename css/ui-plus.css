@@ -743,3 +743,133 @@ mark.sr-hit {
 @media (prefers-reduced-motion: reduce) {
   .sr-target { animation: none; border-color: rgba(255, 106, 61, .85) !important; }
 }
+/* ============================================================
+   LIGHT THEME ROOT FIX — inner pages only (homepages untouched)
+   Purpose: improve text contrast where legacy hard-coded colors
+   do not follow the shared light-theme variables.
+   ============================================================ */
+@media screen {
+  html[data-theme="light"] body:not(:has(section#home)) {
+    --text: #1B1F27;
+    --muted: #4B5563;
+    --accent: #B54422;
+    color: var(--text) !important;
+  }
+
+  /* Remap legacy Tailwind grays and white text on light surfaces. */
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#7B7F86\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#9AA3AF\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#9AA2AE\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#8E96A3\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#5C6470\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#B9C0CC\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#DCE1E8\] {
+    color: #4B5563 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#FF6A3D\],
+  html[data-theme="light"] body:not(:has(section#home)) .text-\[\#FF9A6B\] {
+    color: #B54422 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) .text-white,
+  html[data-theme="light"] body:not(:has(section#home)) a.hover\:text-white:hover {
+    color: #1B1F27 !important;
+  }
+
+  /* Keep white lettering only on orange badges/buttons; darken their orange
+     so small white labels remain readable in light mode. */
+  html[data-theme="light"] body:not(:has(section#home)) .bg-\[\#FF6A3D\] {
+    background-color: #B54422 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) .bg-\[\#FF6A3D\].text-white,
+  html[data-theme="light"] body:not(:has(section#home)) .bg-\[\#FF6A3D\] .text-white {
+    color: #FFFFFF !important;
+  }
+
+  /* Resume pages use their own fixed dark palette; make their screen version
+     genuinely light while leaving print/PDF styling untouched. */
+  html[data-theme="light"] body.has-resume-toolbar {
+    background: #F7F8FA !important;
+    color: #1B1F27 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .page {
+    background: #FFFFFF !important;
+    color: #1B1F27 !important;
+    box-shadow: 0 12px 36px rgba(15, 23, 42, .12) !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .page > .paper-bg {
+    display: none !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .side {
+    background: #F0F2F5 !important;
+    border-color: #DFE3E9 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .main,
+  html[data-theme="light"] body.has-resume-toolbar #stage .head {
+    background: #FFFFFF !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .head h1,
+  html[data-theme="light"] body.has-resume-toolbar #stage .sec-title,
+  html[data-theme="light"] body.has-resume-toolbar #stage .proj-top b,
+  html[data-theme="light"] body.has-resume-toolbar #stage .proj-top b a,
+  html[data-theme="light"] body.has-resume-toolbar #stage .skill-top .nm {
+    color: #1B1F27 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .contact-item,
+  html[data-theme="light"] body.has-resume-toolbar #stage .contact-item a,
+  html[data-theme="light"] body.has-resume-toolbar #stage .lang-row,
+  html[data-theme="light"] body.has-resume-toolbar #stage .lead,
+  html[data-theme="light"] body.has-resume-toolbar #stage .proj p {
+    color: #4B5563 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .head .sub,
+  html[data-theme="light"] body.has-resume-toolbar #stage .sec-title .en,
+  html[data-theme="light"] body.has-resume-toolbar #stage .stat span,
+  html[data-theme="light"] body.has-resume-toolbar #stage .foot {
+    color: #5B6472 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .head h1 span,
+  html[data-theme="light"] body.has-resume-toolbar #stage .head .role,
+  html[data-theme="light"] body.has-resume-toolbar #stage .side h2,
+  html[data-theme="light"] body.has-resume-toolbar #stage .skill-top .pc,
+  html[data-theme="light"] body.has-resume-toolbar #stage .stat b {
+    color: #B54422 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .stat {
+    background: #F7F8FA !important;
+    border-color: #DFE3E9 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .track {
+    background: #DFE3E9 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .tag {
+    background: #FFF4EF !important;
+    color: #8A351B !important;
+    border-color: #EFC2B1 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .chip {
+    background: #E8EBF0 !important;
+    color: #4B5563 !important;
+    border-color: #DFE3E9 !important;
+  }
+  html[data-theme="light"] body.has-resume-toolbar #stage .proj::before {
+    background: #FFFFFF !important;
+  }
+}
+
+@media screen {
+  /* Contact values are injected without color classes by the site data script. */
+  html[data-theme="light"] body:not(:has(section#home)) #about-contact,
+  html[data-theme="light"] body:not(:has(section#home)) #about-contact li,
+  html[data-theme="light"] body:not(:has(section#home)) #about-contact li span,
+  html[data-theme="light"] body:not(:has(section#home)) #about-contact li a {
+    color: #4B5563 !important;
+  }
+
+  /* Social glyphs were white on pale buttons after the card background changed. */
+  html[data-theme="light"] body:not(:has(section#home)) footer a.bg-\[\#23262F\] svg {
+    color: #4B5563 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) footer a.bg-\[\#23262F\]:hover svg {
+    color: #FFFFFF !important;
+  }
+}
