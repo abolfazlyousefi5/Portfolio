@@ -890,3 +890,14 @@ mark.sr-hit {
     color: #6F2A16 !important;
   }
 }
+/* Light-mode mobile navigation links: readable on every page, homepage included. */
+@media screen {
+  html[data-theme="light"] #mobile-menu a,
+  html[data-theme="light"] #mobile-menu a:hover {
+    color: #1B1F27 !important;
+  }
+  html[data-theme="light"] #mobile-menu a:last-child,
+  html[data-theme="light"] #mobile-menu a:last-child:hover {
+    color: #8A351B !important;
+  }
+}
