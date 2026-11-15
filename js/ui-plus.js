@@ -457,3 +457,222 @@
     addPrintBackground();
   }
 })();
+  /* ══════════════════════════════════════════════════════════
+     بهبود جستجو — ۳ تغییر
+     ──────────────────────────────────────────────────────────
+     ۱) به‌جای «ESC» دکمه‌ی ✕ که با کلیک می‌بندد
+     ۲) نوار پایین (↑↓ Enter Esc) حذف می‌شود
+     ۳) بعد از کلیک روی نتیجه، همان محتوا در صفحه‌ی مقصد
+        برجسته می‌شود: اسکرول + حلقه‌ی نارنجی + هایلایت کلمه
+     ══════════════════════════════════════════════════════════ */
+  (function () {
+    "use strict";
+
+    var KEY = "sr_target_v1";
+
+    /* ---------- ۱) دکمه‌ی ✕ جای ESC ---------- */
+    function swapCloseButton() {
+      var wrap = document.getElementById("search-input-wrap");
+      if (!wrap || document.getElementById("search-close")) return;
+
+      var old = document.getElementById("search-esc");
+      if (old) old.parentNode.removeChild(old);
+
+      var btn = document.createElement("button");
+      btn.id = "search-close";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "بستن جستجو");
+      btn.setAttribute("title", "بستن جستجو");
+      btn.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
+        'stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.__closeSearch) window.__closeSearch();
+      });
+      wrap.appendChild(btn);
+    }
+
+    /* ---------- ۲) حذف نوار پایین ---------- */
+    function dropFootBar() {
+      var f = document.getElementById("search-foot");
+      if (f && f.parentNode) f.parentNode.removeChild(f);
+    }
+
+    /* ---------- ۳) بعد از کلیک: انتقال + برجسته‌سازی ---------- */
+
+    // کلمه‌ی جستجو + آدرس مقصد را ذخیره می‌کنیم
+    function rememberTarget(href) {
+      var input = document.getElementById("search-input");
+      var q = input ? String(input.value || "").trim() : "";
+      try {
+        sessionStorage.setItem(KEY, JSON.stringify({ q: q, href: href, t: Date.now() }));
+      } catch (e) { /* حالت خصوصی — مهم نیست */ }
+    }
+
+    // روی هر کلیک نتیجه، قبل از رفتن، کلمه را ذخیره کن
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest(".sr-item");
+      if (!a) return;
+      rememberTarget(a.getAttribute("href") || "");
+    }, true);
+
+    // Enter هم همان کار را بکند (که با حذف نوار پایین، کیبورد هم از کار نیفتد)
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      if (!document.getElementById("search-modal") ||
+          !document.getElementById("search-modal").classList.contains("open")) return;
+      var act = document.querySelector(".sr-item.active") || document.querySelector(".sr-item");
+      if (act) rememberTarget(act.getAttribute("href") || "");
+    }, true);
+
+    /* ---------- اجرای برجسته‌سازی در صفحه‌ی مقصد ---------- */
+
+    function faNorm(s) {
+      return String(s == null ? "" : s).toLowerCase()
+        .replace(/[\u064A\u0649]/g, "\u06CC").replace(/\u0643/g, "\u06A9")
+        .replace(/[\u064B-\u065F\u0670]/g, "").trim();
+    }
+
+    function escapeRe(s) {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    // هایلایت کلمه داخل متن، بدون دست زدن به HTML
+    function markIn(root, q) {
+      if (!q || q.length < 2 || !root) return 0;
+      var re;
+      try { re = new RegExp("(" + escapeRe(q) + ")", "gi"); } catch (e) { return 0; }
+
+      var n = 0;
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (node) {
+          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          var p = node.parentNode;
+          if (!p) return NodeFilter.FILTER_REJECT;
+          var tag = (p.tagName || "").toUpperCase();
+          if (tag === "SCRIPT" || tag === "STYLE" || tag === "MARK" || tag === "CODE" ||
+              tag === "PRE" || tag === "TEXTAREA" || tag === "INPUT") return NodeFilter.FILTER_REJECT;
+          if (p.closest && p.closest("#search-modal")) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      var targets = [];
+      while (walker.nextNode()) {
+        // فقط جاهایی که واقعاً این کلمه را دارند
+        if (faNorm(walker.currentNode.nodeValue).indexOf(faNorm(q)) !== -1) {
+          targets.push(walker.currentNode);
+        }
+      }
+
+      targets.forEach(function (node) {
+        var text = node.nodeValue;
+        var frag = document.createDocumentFragment();
+        var last = 0, m;
+        re.lastIndex = 0;
+        var guard = 0;
+        while ((m = re.exec(text)) !== null && guard++ < 60) {
+          if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+          var mk = document.createElement("mark");
+          mk.className = "sr-hit";
+          mk.textContent = m[0];
+          frag.appendChild(mk);
+          last = m.index + m[0].length;
+          n++;
+          if (m[0].length === 0) re.lastIndex++;
+        }
+        if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+        if (node.parentNode) node.parentNode.replaceChild(frag, node);
+      });
+
+      return n;
+    }
+
+    function findCardFor(sel) {
+      // sel می‌تواند "#p3" یا "#skills" یا خالی باشد
+      if (!sel || sel === "#") return null;
+      var id = sel.replace(/^#/, "");
+      if (!id) return null;
+      var el = document.getElementById(id);
+      if (!el) return null;
+      // اگر خودش کارت نیست، نزدیک‌ترین کارت یا بخش را برگردان
+      return el;
+    }
+
+    function runHighlight() {
+      var raw;
+      try { raw = sessionStorage.getItem(KEY); } catch (e) { return; }
+      if (!raw) return;
+
+      var data;
+      try { data = JSON.parse(raw); } catch (e) { return; }
+      if (!data || !data.q) return;
+
+      // فقط اگر خیلی قدیمی نیست (۲ دقیقه)
+      if (Date.now() - (data.t || 0) > 120000) {
+        try { sessionStorage.removeItem(KEY); } catch (e) {}
+        return;
+      }
+      try { sessionStorage.removeItem(KEY); } catch (e) {}
+
+      var q = data.q;
+
+      function go() {
+        var href = String(data.href || "");
+        var hash = href.indexOf("#") !== -1 ? href.slice(href.indexOf("#")) : "";
+        var el = hash ? findCardFor(hash) : null;
+
+        // صفحه‌ی پست/رزومه: خودِ مقاله‌ی اصلی را برجسته کن
+        if (!el) {
+          el = document.querySelector("#post") ||
+               document.querySelector("article#post") ||
+               document.querySelector("main article") ||
+               document.querySelector("#p-title");
+          // عنوان را جدا می‌خواهیم نه خودش را — به والد کارت برو
+          if (el && el.id === "p-title") el = el.closest("article") || el.parentElement;
+        }
+
+        // اگر کارت پیدا شد، بیا سرش
+        if (el) {
+          var top = el.getBoundingClientRect().top + window.pageYOffset - 110;
+          try { window.scrollTo({ top: Math.max(0, top), behavior: "smooth" }); }
+          catch (e) { window.scrollTo(0, Math.max(0, top)); }
+          el.classList.add("sr-target");
+          window.setTimeout(function () { el.classList.remove("sr-target"); }, 4200);
+        }
+
+        // هایلایت کلمه در ناحیه‌ی مقصد (یا کل صفحه اگر بخش مشخصی نبود)
+        var scope = el || document.querySelector("main") || document.body;
+        var n = markIn(scope, q);
+
+        // اگر در آن بخش چیزی پیدا نشد، کل صفحه را بگرد
+        if (!n && el) markIn(document.body, q);
+      }
+
+      // کارت‌ها با JS ساخته می‌شوند → کمی صبر می‌کنیم
+      if (document.readyState === "complete") window.setTimeout(go, 550);
+      else window.addEventListener("load", function () { window.setTimeout(go, 550); });
+    }
+
+    /* ---------- راه‌اندازی ---------- */
+    var tries = 0;
+    (function boot() {
+      // مودال جستجو lazily ساخته می‌شود؛ تا ساخته نشده صبر می‌کنیم
+      swapCloseButton();
+      dropFootBar();
+      if ((!document.getElementById("search-close") || !document.getElementById("search-foot")) && tries++ < 40) {
+        window.setTimeout(boot, 150);
+      }
+    })();
+
+    // هر بار مودال دوباره ساخته شد (مثلاً بعد از باز شدن)، دوباره اعمال کن
+    document.addEventListener("click", function (e) {
+      if (e.target.closest && (e.target.closest("#search-launch") || e.target.closest("#search-modal"))) {
+        window.setTimeout(function () { swapCloseButton(); dropFootBar(); }, 0);
+      }
+    }, true);
+
+    runHighlight();
+  })();
