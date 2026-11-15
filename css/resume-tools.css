@@ -161,3 +161,31 @@ body.has-resume-toolbar #float-stack {
 @media (prefers-reduced-motion: reduce) {
   .rt-btn { transition: none !important; }
 }
+
+
+/* موبایل رزومه: ابزارها روی متن شناور نباشند */
+@media screen and (max-width: 860px) {
+  body.has-resume-toolbar {
+    padding-bottom: 16px !important;
+  }
+
+  body.has-resume-toolbar #stage {
+    padding-bottom: 0 !important;
+  }
+
+  /* نوار PDF بعد از رزومه و در جریان عادی صفحه قرار می‌گیرد */
+  body.has-resume-toolbar .resume-toolbar {
+    position: static !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: max-content;
+    max-width: calc(100vw - 28px);
+    margin: 18px auto 22px;
+  }
+
+  /* رزومه خودش اطلاعات تماس دارد؛ دکمه‌ی شناور روی متن نمی‌افتد */
+  body.has-resume-toolbar #float-stack {
+    display: none !important;
+  }
+}
