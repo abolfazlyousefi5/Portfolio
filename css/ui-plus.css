@@ -873,3 +873,20 @@ mark.sr-hit {
     color: #FFFFFF !important;
   }
 }
+/* Mobile menu: force readable link colors in light mode on inner pages.
+   style.css has #mobile-menu a { color: ... !important }, which is more
+   specific than the general text utility mapping. Keep homepage unchanged. */
+@media screen {
+  html[data-theme="light"] body:not(:has(section#home)) #mobile-menu a {
+    color: #1B1F27 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) #mobile-menu a:last-child {
+    color: #8A351B !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) #mobile-menu a:hover {
+    color: #1B1F27 !important;
+  }
+  html[data-theme="light"] body:not(:has(section#home)) #mobile-menu a:last-child:hover {
+    color: #6F2A16 !important;
+  }
+}
