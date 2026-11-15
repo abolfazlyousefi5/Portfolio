@@ -373,3 +373,87 @@
     boot();
   }
 })();
+
+/* ============================================================
+   فیکس چاپ رزومه (افزوده‌ی آخر)
+   ------------------------------------------------------------
+   مشکل: در «Microsoft Print to PDF» با گزینه‌ی Background graphics
+   خاموش، مرورگر همه‌ی background-color ها را حذف می‌کند و صفحه
+   سفید چاپ می‌شود.
+   راه‌حل: پس‌زمینه را با عنصر <svg> می‌سازیم (عنصر چاپ می‌شود،
+   نه background). فقط در resume.html فعال است.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  function addPrintBackground() {
+    var page = document.querySelector("#stage .page") || document.querySelector(".page");
+    if (!page) return;
+    if (page.querySelector(".paper-bg")) return;
+
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "paper-bg");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("viewBox", "0 0 210 297");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.style.cssText =
+      "position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;";
+
+    var r1 = document.createElementNS(NS, "rect");
+    r1.setAttribute("x", "0");
+    r1.setAttribute("y", "0");
+    r1.setAttribute("width", "210");
+    r1.setAttribute("height", "297");
+    r1.setAttribute("fill", "#181C23");
+
+    var r2 = document.createElementNS(NS, "rect");
+    r2.setAttribute("x", "148");
+    r2.setAttribute("y", "0");
+    r2.setAttribute("width", "62");
+    r2.setAttribute("height", "297");
+    r2.setAttribute("fill", "#12161C");
+
+    svg.appendChild(r1);
+    svg.appendChild(r2);
+    page.insertBefore(svg, page.firstChild);
+
+    /* .page باید مرجع موقعیت SVG باشد — بدون دست‌زدن به display */
+    if (getComputedStyle(page).position === "static") {
+      page.style.position = "relative";
+    }
+
+    /* ستون‌ها فقط z-index بگیرند؛ اگر position:relative بدهیم،
+       آیتم‌های grid می‌شوند و چیدمان رزومه به هم می‌ریزد */
+    Array.prototype.forEach.call(page.children, function (el) {
+      if (el.classList.contains("side") || el.classList.contains("main")) {
+        if (getComputedStyle(el).zIndex === "auto") el.style.zIndex = "1";
+      }
+    });
+
+    /* نام را وسط‌چین نگه می‌داریم (از قانون ستون‌بندی چاپ ارث می‌برد) */
+    var head = page.querySelector(".head");
+    if (head) {
+      head.style.textAlign = "center";
+      var h1 = head.querySelector("h1");
+      if (h1) h1.style.textAlign = "center";
+    }
+  }
+
+  /* قبل از چاپ: ارتفاع اینلاینی #stage را پاک کن.
+     اسکریپت خود رزومه برای حالت اسکرین height=~1200px می‌گذارد و
+     در چاپ پاکش نمی‌کند ⇒ مرورگر یک صفحه‌ی دوم خالی می‌سازد. */
+  window.addEventListener("beforeprint", function () {
+    var stage = document.getElementById("stage");
+    var page = document.querySelector("#stage .page");
+    if (stage) stage.style.height = "";
+    if (page) page.style.transform = "";
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", addPrintBackground);
+  } else {
+    addPrintBackground();
+  }
+})();
