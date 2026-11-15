@@ -958,3 +958,24 @@ mark.sr-hit {
     }
   }
 }
+/* English resume: keep the A4 two-column placement, but make its content LTR. */
+@media screen, print {
+  html[lang="en"] body.has-resume-toolbar #stage .side,
+  html[lang="en"] body.has-resume-toolbar #stage .main {
+    direction: ltr !important;
+  }
+  html[lang="en"] body.has-resume-toolbar #stage .lead,
+  html[lang="en"] body.has-resume-toolbar #stage .proj p {
+    text-align: left !important;
+  }
+  html[lang="en"] body.has-resume-toolbar #stage .proj {
+    border-right: 0 !important;
+    padding-right: 0 !important;
+    border-left: 1.6px solid #262C37 !important;
+    padding-left: 3.2mm !important;
+  }
+  html[lang="en"] body.has-resume-toolbar #stage .proj::before {
+    right: auto !important;
+    left: -1.35mm !important;
+  }
+}
