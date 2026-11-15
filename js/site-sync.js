@@ -124,6 +124,7 @@
     Object.keys(map).forEach(function (k) {
       if (!s[k]) return;
       document.querySelectorAll('a[href*="' + map[k] + '"]').forEach(function (a) {
+        if (a.closest("#projects")) return;
         if (a.getAttribute("href") !== s[k]) a.setAttribute("href", s[k]);
       });
     });
