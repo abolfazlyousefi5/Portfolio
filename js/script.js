@@ -201,3 +201,67 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+/* Repair the inner pages that render the hamburger button without its menu. */
+(function () {
+  "use strict";
+
+  function installMissingMenu() {
+    var button = document.getElementById("mobile-menu-button");
+    if (!button || document.getElementById("mobile-menu")) return;
+
+    var isEnglish = (document.documentElement.lang || "fa").toLowerCase().indexOf("en") === 0;
+    var labels = isEnglish
+      ? ["Home", "About", "Projects", "Blog", "Resume", "Contact", "نسخه فارسی →"]
+      : ["خانه", "درباره من", "پروژه‌ها", "بلاگ", "رزومه", "تماس", "English version →"];
+    var hrefs = isEnglish
+      ? ["en-index.html#home", "about.html", "projects.html", "blog.html", "en-resume.html", "en-index.html#contact", "index.html"]
+      : ["index.html#home", "about.html", "projects.html", "blog.html", "resume.html", "index.html#contact", "en-index.html"];
+
+    var menu = document.createElement("nav");
+    menu.id = "mobile-menu";
+    menu.className = "md:hidden bg-[#181C23] border-b border-[#23262F] px-8 py-4 space-y-3";
+    menu.setAttribute("aria-label", isEnglish ? "Mobile navigation" : "منوی موبایل");
+
+    labels.forEach(function (label, index) {
+      var link = document.createElement("a");
+      link.href = hrefs[index];
+      link.textContent = label;
+      link.className = index === labels.length - 1
+        ? "block text-[#FF6A3D] hover:text-[#ff8a5c] transition-colors duration-200"
+        : "block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200";
+      if (index === labels.length - 1) {
+        link.lang = isEnglish ? "fa" : "en";
+        link.setAttribute("hreflang", isEnglish ? "fa" : "en");
+      }
+      menu.appendChild(link);
+    });
+
+    var header = button.closest("header");
+    if (header) header.insertAdjacentElement("afterend", menu);
+    else button.insertAdjacentElement("afterend", menu);
+
+    button.setAttribute("aria-controls", "mobile-menu");
+    button.setAttribute("aria-expanded", "false");
+    button.addEventListener("click", function () {
+      var isOpen = menu.classList.toggle("open");
+      button.classList.toggle("active", isOpen);
+      button.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    menu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        menu.classList.remove("open");
+        button.classList.remove("active");
+        button.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /* Run after script.js's existing DOMContentLoaded handler, so the
+     existing homepage menu keeps its original single click listener. */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", installMissingMenu, { once: true });
+  } else {
+    installMissingMenu();
+  }
+})();
