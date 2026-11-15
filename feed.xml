@@ -12,5 +12,46 @@
       <title>وبسایت شخصی ابوالفضل یوسفی</title>
       <link>https://abolfazl-yousefi.is-a.dev/</link>
     </image>
+    <item>
+      <title>پنج پروژه‌ی پایتون که باید بسازی</title>
+      <link>https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html</link>
+      <guid isPermaLink="true">https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html</guid>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <description>اگر تازه پایتون را شروع کرده‌ای، این پنج پروژه‌ی کوچک بهترین تمرین برای تو هستند.</description>
+      <content:encoded><![CDATA[اگر تازه پایتون را شروع کرده‌ای و نمی‌دانی از کجا باید تمرین کنی، این نوشته برای توست.
+
+## چرا پروژه‌ی کوچک بهتر از دوره‌ی بلند است؟
+دوره‌ی ۴۰ ساعته حس پیشرفت می‌دهد ولی چیزی در دستت نیست. یک پروژه‌ی ۱۰۰ خطی که **کار می‌کند**، بیشتر یادت می‌ماند.
+
+> چیزی که ساختی، حتی ساده، از چیزی که فقط دیدی ارزشمندتر است.
+
+## پنج پروژه‌ای که خودم ساختم
+1. **مولد پسورد** — تمرین `random` و `string`
+2. **تایمر شمارش معکوس** — تمرین حلقه و `time`
+3. **سنگ کاغذ قیچی** — تمرین شرط و ورودی کاربر
+4. **رمزنگاری متنی** — تمرین کار با فایل و الگوریتم ساده
+5. **سیستم مدیریت بانک** — تمرین `MySQL` و طراحی جدول
+
+## یک نمونه کد
+```python
+import random
+import string
+
+def make_password(length=16):
+    chars = string.ascii_letters + string.digits + "!@#$%^&*"
+    return "".join(random.choice(chars) for _ in range(length))
+
+print(make_password())
+```
+
+## قدم بعدی تو
+یکی از این‌ها را انتخاب کن و **امشب** شروع کن. فردا هم ادامه بده. همین.
+
+---
+
+اگر سؤالی داشتی، از صفحه‌ی [تماس](../index.html#contact) پیام بده.]]></content:encoded>
+      <category>پایتون</category>
+      <category>شروع</category>
+    </item>
   </channel>
 </rss>
