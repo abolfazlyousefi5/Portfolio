@@ -676,3 +676,21 @@
 
     runHighlight();
   })();
+/* Point English-page PDF buttons to the English PDF, not the Persian file. */
+(function () {
+  "use strict";
+
+  function useEnglishResumePdf() {
+    if ((document.documentElement.lang || "").toLowerCase().indexOf("en") !== 0) return;
+
+    document.querySelectorAll('a[href="resume.pdf"]').forEach(function (link) {
+      link.setAttribute("href", "en-resume.pdf");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", useEnglishResumePdf, { once: true });
+  } else {
+    useEnglishResumePdf();
+  }
+})();
