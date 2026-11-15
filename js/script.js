@@ -265,3 +265,23 @@ document.addEventListener("DOMContentLoaded", function () {
     installMissingMenu();
   }
 })();
+/* On inner pages, send the desktop Contact link to the homepage contact section. */
+(function () {
+  "use strict";
+
+  function fixInnerContactLinks() {
+    if (document.getElementById("contact")) return;
+
+    var isEnglish = (document.documentElement.lang || "fa").toLowerCase().indexOf("en") === 0;
+    var destination = isEnglish ? "en-index.html#contact" : "index.html#contact";
+    document.querySelectorAll('header nav a[href="#contact"]').forEach(function (link) {
+      link.setAttribute("href", destination);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fixInnerContactLinks, { once: true });
+  } else {
+    fixInnerContactLinks();
+  }
+})();
