@@ -739,7 +739,6 @@ mark.sr-hit {
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-
 /* احترام به کسانی که انیمیشن را در سیستم عامل خاموش کرده‌اند */
 @media (prefers-reduced-motion: reduce) {
   .sr-target { animation: none; border-color: rgba(255, 106, 61, .85) !important; }
