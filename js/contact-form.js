@@ -171,3 +171,17 @@
     if (e.target.name) setFieldError(e.target.name, "");
   });
 })();
+
+/* جلوگیری از ثبت هندلر تکراری ارسال فرم توسط js/script.js */
+(function () {
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+
+  /* هندلر اصلی فرم در contact-form.js قبلاً ثبت شده؛
+     ثبت submitهای بعدی روی همین فرم را نادیده بگیر. */
+  var originalAddEventListener = form.addEventListener;
+  form.addEventListener = function (type, listener, options) {
+    if (type === "submit") return;
+    return originalAddEventListener.call(this, type, listener, options);
+  };
+})();
