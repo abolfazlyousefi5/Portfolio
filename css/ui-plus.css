@@ -901,3 +901,60 @@ mark.sr-hit {
     color: #8A351B !important;
   }
 }
+/* Consistent card outlines, spacing and tag gaps across the whole site.
+   Screen only: preserves resume print/PDF. */
+@media screen {
+  /* Same thin orange outline used by the Projects cards. */
+  .bg-\[\#23262F\].p-6.rounded-lg {
+    border: 1px solid rgba(255, 106, 61, .30);
+    transition: border-color .2s ease, background-color .2s ease;
+  }
+  .bg-\[\#23262F\].p-6.rounded-lg:hover {
+    border-color: rgba(255, 106, 61, .65);
+  }
+  html[data-theme="light"] .bg-\[\#23262F\].p-6.rounded-lg {
+    border-color: rgba(181, 68, 34, .28);
+  }
+  html[data-theme="light"] .bg-\[\#23262F\].p-6.rounded-lg:hover {
+    border-color: rgba(181, 68, 34, .62);
+  }
+
+  /* Card grids, including the homepage teaser cards: same 40px spacing. */
+  .grid:has(> .bg-\[\#23262F\].p-6.rounded-lg),
+  #projects-list,
+  #blog-list {
+    column-gap: 40px !important;
+    row-gap: 40px !important;
+  }
+
+  /* Some page templates render the tag wrapper with gap-2 but the built
+     Tailwind sheet does not provide that utility; set the actual gap here. */
+  .bg-\[\#23262F\].p-6.rounded-lg .flex.flex-wrap,
+  #projects-list .flex.flex-wrap,
+  #blog-list .flex.flex-wrap {
+    gap: 8px !important;
+  }
+
+  /* Resume skill/purpose tags also use 8px spacing on screen. */
+  body.has-resume-toolbar .tag-cloud,
+  body.has-resume-toolbar .chips {
+    gap: 8px !important;
+  }
+
+  /* About-page stacked cards use margins instead of a grid gap. */
+  main .bg-\[\#23262F\].p-6.rounded-lg.mb-6 {
+    margin-bottom: 40px !important;
+  }
+
+  @media (max-width: 640px) {
+    .grid:has(> .bg-\[\#23262F\].p-6.rounded-lg),
+    #projects-list,
+    #blog-list {
+      column-gap: 28px !important;
+      row-gap: 28px !important;
+    }
+    main .bg-\[\#23262F\].p-6.rounded-lg.mb-6 {
+      margin-bottom: 28px !important;
+    }
+  }
+}
