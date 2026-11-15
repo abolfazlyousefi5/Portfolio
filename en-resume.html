@@ -539,3 +539,17 @@
   <script src="js/ui-plus.js"></script>
 </body>
 </html>
+
+
+<!-- فعال‌کردن چیدمان موبایل رزومه؛ دسکتاپ و چاپ PDF دست‌نخورده می‌مانند. -->
+<script>
+(function () {
+  var viewport = document.querySelector('meta[name="viewport"]');
+  if (!viewport) {
+    viewport = document.createElement("meta");
+    viewport.name = "viewport";
+    document.head.appendChild(viewport);
+  }
+  viewport.content = "width=device-width, initial-scale=1";
+})();
+</script>
