@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>وبسایت شخصی ابوالفضل یوسفی</title>
+    <link>https://abolfazl-yousefi.is-a.dev/</link>
+    <description>وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس و کارآموز بک‌اند با پایتون</description>
+    <language>fa-IR</language>
+    <lastBuildDate>Tue, 10 Nov 2026 09:39:45 +0000</lastBuildDate>
+    <atom:link href="https://abolfazl-yousefi.is-a.dev/feed.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://abolfazl-yousefi.is-a.dev/og-image.png</url>
+      <title>وبسایت شخصی ابوالفضل یوسفی</title>
+      <link>https://abolfazl-yousefi.is-a.dev/</link>
+    </image>
+  </channel>
+</rss>
