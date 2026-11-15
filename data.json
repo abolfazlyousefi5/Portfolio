@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-11T10:46:39Z",
+  "updated": "2026-11-10T09:39:45Z",
   "settings": {
     "about_text": "من یک کارآموز بک‌اند با تمرکز روی پایتون هستم. این روزها در حال یادگیری ساخت API، کار با دیتابیس و اصول نوشتن کد تمیزم و سعی می‌کنم با پروژه‌های کوچک مهارت‌هام رو تقویت کنم. هدفم اینه که کم‌کم وارد تیم‌های حرفه‌ای بشم و روی پروژه‌های واقعی کار کنم.",
     "about_text_en": "I am a backend intern focused on Python. I keep sharpening my skills with small projects and my goal is to join a professional team.",
@@ -16,10 +16,10 @@
     "site_title": "وبسایت شخصی ابوالفضل یوسفی",
     "stat_months": "۶",
     "stat_projects": "۵",
-    "tech_line": "HTML5\nCSS\nPython\nSQL\nGit\nGithub",
+    "tech_line": "HTML5\nCSS\nPython\nMySQL\nGit\nGitHub",
     "telegram": "https://t.me/abolfazl_yousefi02",
-    "typing_texts": "من ابوالفضل هستم\nکارآموز بک‌اند با پایتون\nعلاقه‌مند به جنگو و FastAPI\nدر مسیر یادگیری دیتابیس و تست‌نویسی",
-    "typing_texts_en": "I am Abolfazl\nPython backend developer\nDjango & FastAPI enthusiast\nLearning databases and testing",
+    "typing_texts": "من ابوالفضل هستم\nکارآموز بک‌اند با پایتون\nعلاقه‌مند به بک‌اند و دیتابیس\nدر مسیر یادگیری و ساختن پروژه‌های واقعی",
+    "typing_texts_en": "I am Abolfazl\nPython backend developer\nBackend & database enthusiast\nLearning by building real projects",
     "whatsapp": "989033647670",
     "contact_ok_fa": "پیامت رسید ✓ — جوابت رو تا چند روز آینده با ایمیل می‌دم.",
     "contact_ok_en": "Message sent ✓ — I'll reply to you by email soon.",
@@ -40,7 +40,7 @@
       "level": 35
     },
     {
-      "name": "SQL",
+      "name": "MySQL",
       "level": 20
     },
     {
@@ -56,27 +56,26 @@
     {
       "id": 1,
       "title": "پروژه رزومه شخصی",
-      "description": "طراحی و پیاده‌سازی صفحه رزومه شخصی ریسپانسیو  شده با  HTML، CSS ,  JS , Python , Flask",
+      "description": "طراحی و پیاده‌سازی صفحه‌ی رزومه‌ی شخصیِ ریسپانسیو با HTML، CSS و JavaScript، همراه با فرم تماس متصل به Google Apps Script",
       "title_en": "Personal Resume Website",
-      "description_en": "Designed and built a fully responsive personal resume page with HTML, CSS and JavaScript, plus a Flask version with an admin panel, SQLite database and a working contact form.",
+      "description_en": "Designed and built a fully responsive personal resume page with HTML, CSS and JavaScript, plus a working contact form connected to Google Apps Script.",
       "tags": [
         "HTML",
         "CSS",
         "JavaScript",
-        "Python",
-        "Flask"
+        "Python"
       ],
       "url": "https://github.com/abolfazlyousefi5/Portfolio"
     },
     {
       "id": 2,
       "title": "پروژه شبیه‌ساز سیستم مدیریت بانک",
-      "description": "پیاده‌سازی بک‌اند شبیه‌ساز سیستم مدیریت بانک با پایتون و SQL",
+      "description": "پیاده‌سازی بک‌اند شبیه‌ساز سیستم مدیریت بانک با پایتون و MySQL",
       "title_en": "Bank Management Simulator",
-      "description_en": "Backend for a bank management simulator built with Python and SQL — customer, account and transaction management.",
+      "description_en": "Backend for a bank management simulator built with Python and MySQL — customer, account and transaction management.",
       "tags": [
         "Python",
-        "SQL"
+        "MySQL"
       ],
       "url": "https://github.com/abolfazlyousefi5/Bank-App"
     },
