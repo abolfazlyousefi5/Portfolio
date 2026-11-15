@@ -38,3 +38,9 @@
     row-gap: 28px;
   }
 }
+
+
+/* فاصله‌ی ۸ پیکسلی بین برچسب‌های نارنجی پروژه‌ها */
+#projects-list article .flex.flex-wrap.gap-2 {
+  gap: 8px;
+}
