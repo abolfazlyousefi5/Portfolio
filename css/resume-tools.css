@@ -189,3 +189,16 @@ body.has-resume-toolbar #float-stack {
     display: none !important;
   }
 }
+
+
+/* رزومه موبایل: پس‌زمینه‌ی دو ستونه‌ی A4 نباید روی صفحه‌ی تک‌ستونه بیفتد */
+@media screen and (max-width: 860px), screen and (max-device-width: 860px) {
+  body.has-resume-toolbar .page {
+    background: #181C23 !important;
+  }
+
+  /* ui-plus.js این SVG را پس از بارگذاری اضافه می‌کند؛ فقط روی موبایل پنهانش کن */
+  body.has-resume-toolbar .page > .paper-bg {
+    display: none !important;
+  }
+}
