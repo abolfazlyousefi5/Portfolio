@@ -516,3 +516,146 @@ html[data-theme="light"] body.admin-panel #search-launch:hover {
     animation: none !important;
   }
 }
+
+/* ============================================================
+   فیکس چیدمان و چاپ — افزوده‌ی آخر فایل
+   ------------------------------------------------------------
+   این بلوک را عیناً به «انتهای» فایل css/ui-plus.css اضافه کن.
+   هیچ خطی از کد قبلی حذف یا تغییر نمی‌کند.
+
+   چه کاری می‌کند؟
+   الف) جستجو و دکمه‌ی تم را از وسط هدر به کنار نام می‌برد
+   ب) دکمه‌های شناور (واتساپ + بالا) را به سمت راست می‌برد
+   ج) دکمه‌های شناور روی نوار رزومه نیفتند
+   د) رزومه در چاپ فقط یک صفحه شود
+   ============================================================ */
+
+/* ---------- الف) چیدمان هدر ----------
+   نکته: سلکتور «body > header» است، نه «header» خالی.
+   وگرنه <header class="head"> داخل صفحه‌ی رزومه هم قربانی می‌شد. */
+@media (min-width: 769px) {
+  body > header {
+    display: grid !important;
+    /* سه ستون: نام | ابزارها | منو
+       ستون وسط 1fr است تا نام و ابزارها همیشه چسبیده بمانند. */
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    column-gap: 16px;
+  }
+
+  /* نام سایت + دکمه‌ی زبان → ستون ۱ */
+  body > header > div.flex:first-child {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ابزارها (جستجو + تم) → ستون ۲، چسبیده به نام */
+  body > header > .header-tools {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: start;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px;
+    margin: 0 !important;
+  }
+
+  /* منوی دسکتاپ → ستون ۳ (لبه‌ی مقابل) */
+  body > header > nav {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end;
+    display: flex !important;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 !important;
+  }
+
+  /* دکمه‌ی همبرگری روی دسکتاپ پنهان */
+  body > header > #mobile-menu-button { display: none !important; }
+}
+
+/* ---------- صفحه‌ی انگلیسی ----------
+   css/style.css روی همه‌ی body ها direction:rtl می‌گذارد (بی‌توجه به
+   dir="ltr" صفحه)، پس ستون‌های EN آینه می‌شدند و منو به چپ می‌رفت.
+   اینجا جهت را برمی‌گردانیم: نام چپ، منو راست. */
+html[lang="en"] body > header {
+  direction: ltr !important;
+}
+
+/* ---------- موبایل و تبلت (≤768px) ---------- */
+@media (max-width: 768px) {
+  body > header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  body > header > div.flex:first-child {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+  }
+  body > header > .header-tools {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px;
+    order: 0 !important;
+    margin: 0 !important;
+  }
+  body > header > nav { display: none !important; }
+  body > header > #mobile-menu-button { display: flex !important; }
+}
+
+/* ---------- ب) دکمه‌های شناور در سمت راست ---------- */
+#float-stack {
+  left: auto !important;
+  right: 16px !important;
+  inset-inline-end: auto !important;
+  inset-inline-start: auto !important;
+}
+@media (max-width: 420px) {
+  #float-stack { left: auto !important; right: 12px !important; }
+}
+
+/* تولتیپ واتساپ سمت چپ دکمه باشد */
+#whatsapp-btn .wa-tip {
+  right: 68px !important;
+  left: auto !important;
+  inset-inline-end: auto !important;
+}
+
+/* ---------- ج) رزومه: دکمه‌ها بالاتر نروند روی نوار پایین ---------- */
+body.has-resume-toolbar #float-stack {
+  bottom: 92px;
+  left: auto !important;
+  right: 16px !important;
+}
+@media (max-width: 640px) {
+  body.has-resume-toolbar #float-stack { bottom: 84px; right: 12px !important; }
+}
+
+/* ---------- د) چاپ رزومه: فقط یک صفحه ----------
+   محتوا چند پیکسل بلندتر از A4 بود و مرورگر یک صفحه‌ی دوم
+   خالی/ناقص می‌ساخت. فاصله‌ها را کمی جمع می‌کنیم. */
+@media print {
+  #stage .page { height: 296mm !important; }
+
+  #stage .page > .main {
+    padding: 10mm 9mm 8mm 10mm !important;
+    gap: 2.2mm !important;
+    font-size: 10.9px !important;
+  }
+  #stage .page > .side {
+    padding: 11mm 7mm 9mm 7mm !important;
+    gap: 6mm !important;
+    font-size: 10.9px !important;
+  }
+
+  #stage .page .lead { font-size: 10.9px !important; line-height: 1.75 !important; }
+  #stage .page .foot { margin-top: auto !important; }
+  #stage .page > .main > *:last-child { margin-bottom: 0 !important; }
+}
