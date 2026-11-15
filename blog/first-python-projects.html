@@ -7,7 +7,7 @@
   <meta name="description" content="اگر تازه پایتون را شروع کرده‌ای، این پنج پروژه‌ی کوچک بهترین تمرین برای تو هستند." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html" />
-  <meta property="og:title" content="پنج پروژه‌ی پایتون که باید بسازی | ابوالفضل یوسفی" />
+  <meta property="og:title" content="پنج پروژه‌ی پایتون که باید بسازی" />
   <meta property="og:description" content="اگر تازه پایتون را شروع کرده‌ای، این پنج پروژه‌ی کوچک بهترین تمرین برای تو هستند." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://i.imgur.com/bbqYmWH.png" />
@@ -45,6 +45,18 @@
   </style>
   <script>
     (function(){try{var t=localStorage.getItem("site_theme");document.documentElement.setAttribute("data-theme",(t==="light"||t==="dark")?t:"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+  </script>
+
+  <script>
+(function () {
+  var want = "پنج پروژه‌ی پایتون که باید بسازی | ابوالفضل یوسفی";
+  function fix() { if (document.title !== want) document.title = want; }
+  if (window.MutationObserver) {
+    var mo = new MutationObserver(fix);
+    mo.observe(document.head, { childList: true, subtree: true, characterData: true });
+  }
+  setTimeout(fix, 400); setTimeout(fix, 1200); setTimeout(fix, 3000);
+})();
   </script>
 </head>
 
