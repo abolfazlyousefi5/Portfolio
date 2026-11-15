@@ -76,6 +76,11 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tailwind.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/ui-plus.css" />
+  <script>
+    /* جلوگیری از پرش رنگ: تم را قبل از رسم صفحه اعمال می‌کنیم */
+    (function(){try{var t=localStorage.getItem("site_theme");document.documentElement.setAttribute("data-theme",(t==="light"||t==="dark")?t:"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+  </script>
 </head>
 
 <body class="bg-[#181C23] text-white min-h-screen" dir="rtl">
@@ -84,11 +89,21 @@
       <div class="text-lg font-bold site-name">ابوالفضل یوسفی</div>
       <a href="en-index.html" class="lang-switch" hreflang="en" lang="en" title="Read this page in English">EN</a>
     </div>
+    <!-- ابزارهای هدر: جستجو · تم · منوی موبایل -->
+    <div class="header-tools">
+      <button id="search-launch" type="button" aria-label="جستجو در سایت" title="جستجو (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+      <button id="theme-toggle" type="button" aria-label="تغییر تم" title="حالت روشن" aria-pressed="false">
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+    </div>
     <!-- منوی دسکتاپ -->
     <nav class="hidden md:flex gap-8">
       <a href="#home" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">خانه</a>
-      <a href="#about" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
-      <a href="#projects" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
+      <a href="about.html" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
+      <a href="projects.html" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
       <a href="#contact" class="text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">تماس</a>
     </nav>
     <!-- دکمه منوی موبایل -->
@@ -103,8 +118,8 @@
   <!-- منوی موبایل -->
   <nav id="mobile-menu" class="md:hidden bg-[#181C23] border-b border-[#23262F] px-8 py-4 space-y-3">
     <a href="#home" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">خانه</a>
-    <a href="#about" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
-    <a href="#projects" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
+    <a href="about.html" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">درباره من</a>
+    <a href="projects.html" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">پروژه‌ها</a>
     <a href="#contact" class="block text-[#E5E7EB] hover:text-[#FF6A3D] transition-colors duration-200">تماس</a>
     <a href="en-index.html" class="block text-[#FF6A3D] hover:text-[#ff8a5c] transition-colors duration-200" hreflang="en" lang="en">English version →</a>
   </nav>
@@ -133,6 +148,10 @@
         <a href="resume.html" target="_blank" rel="noopener" class="resume-btn" aria-label="مشاهده و دانلود رزومه">
           <svg class="resume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           <span>رزومه من</span>
+        </a>
+        <a href="resume.pdf" download class="resume-btn" aria-label="دانلود رزومه به‌صورت PDF">
+          <svg class="resume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span>دانلود PDF</span>
         </a>
       </div>
       <div class="flex space-x-6 text-[#7B7F86] text-sm">
@@ -260,7 +279,7 @@
         </div>
         <h3 class="text-lg font-bold mb-2">پروژه شبیه‌ساز سیستم مدیریت بانک</h3>
         <p class="text-[#7B7F86] text-sm mb-4">پیاده‌سازی بک‌اند شبیه‌ساز سیستم مدیریت بانک با پایتون و MySQL</p>
-        <div class="flex flex-wrap" style="gap:8px"><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">SQL</span></div>
+        <div class="flex flex-wrap" style="gap:8px"><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">Python</span><span class="bg-[#FF6A3D] text-white px-2 py-1 rounded text-xs">MySQL</span></div>
         
         <div style="margin-top: 10px;">
           <a href="https://github.com/abolfazlyousefi5/Bank-App" target="_blank" rel="noopener noreferrer" style="color: chocolate;">لینک پروژه</a>
@@ -496,6 +515,14 @@
           <span class="text-[#FF6A3D]">·</span>
           تمامی حقوق محفوظ است.
         </p>
+        <nav class="text-xs text-[#7B7F86] flex items-center gap-x-4 gap-y-2 flex-wrap justify-center foot-nav" aria-label="صفحه‌های سایت">
+          <a href="about.html" class="hover:text-[#FF6A3D] transition-colors">درباره من</a>
+          <a href="projects.html" class="hover:text-[#FF6A3D] transition-colors">پروژه‌ها</a>
+          <a href="blog.html" class="hover:text-[#FF6A3D] transition-colors">بلاگ</a>
+          <a href="resume.html" class="hover:text-[#FF6A3D] transition-colors">رزومه</a>
+          <a href="index.html#contact" class="hover:text-[#FF6A3D] transition-colors">تماس</a>
+          <a href="feed.xml" class="hover:text-[#FF6A3D] transition-colors">RSS</a>
+        </nav>
         <p class="text-xs text-[#5C6470] flex items-center gap-2 flex-wrap justify-center">
           <span>طراحی و توسعه توسط خودم</span>
           <span class="text-[#FF6A3D]">•</span>
@@ -508,14 +535,18 @@
   <script src="js/script.js"></script>
   <script src="js/site-sync.js"></script>
   <script src="js/contact-form.js"></script>
+  <script src="js/ui-plus.js"></script>
 
-  <a href="#" id="scrollToTop"
-    class="fixed bottom-12 right-4 md:bottom-20 md:right-6 w-12 h-12 md:w-14 md:h-14 border-2 border-[#FF6A3D] text-[#FF6A3D] rounded-full flex items-center justify-center transform scale-0 transition-all duration-300 hover:bg-[#FF6A3D] hover:text-white hover:scale-110 shadow-lg z-50"
-    aria-label="Scroll to top">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 24 24" stroke="none">
-      <path d="M5 15l7-7 7 7" />
-    </svg>
-  </a>
+  <!-- استک دکمه‌های شناور: واتساپ + بازگشت به بالا -->
+  <div id="float-stack">
+    <a id="whatsapp-btn" href="https://wa.me/989033647670" target="_blank" rel="noopener noreferrer" aria-label="گفت‌وگو در واتساپ">
+      <span class="wa-tip">پیام در واتساپ</span>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.13c-.24.68-1.42 1.31-1.96 1.36-.54.05-1.05.24-3.56-.75-3.02-1.19-4.9-4.31-5.05-4.51-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4.01.57.01.18 0 .43-.07.67.51.25.6.85 2.06.93 2.21.08.15.13.32.02.52-.1.2-.35.5-.55.72-.2.22-.3.32-.13.62.17.3.75 1.24 1.61 2.01 1.11.99 1.6 1.16 1.9 1.31.3.15.48.13.66-.08.18-.2.76-.89.96-1.19.2-.3.4-.25.67-.15.27.1 1.71.81 2 .96.29.15.49.22.56.35.07.13.07.75-.17 1.43z"/></svg>
+    </a>
+    <a href="#" id="scrollToTop" aria-label="بازگشت به بالا">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l7-7 7 7" /></svg>
+    </a>
+  </div>
 </body>
 
 </html>
