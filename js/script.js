@@ -160,7 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const messageField = document.querySelector('#contact-form textarea[name="message"]');
   const messageCount = document.getElementById("message-count");
   if (messageField && messageCount) {
-    const updateMessageCount = () => { messageCount.textContent = messageField.value.length.toLocaleString("fa-IR"); };
+    // رقم‌ها با زبان صفحه هم‌خوان باشند: صفحه‌ی انگلیسی → 0 1 2 ، صفحه‌ی فارسی → ۰ ۱ ۲
+    const countLocale = (document.documentElement.lang || "fa").slice(0, 2).toLowerCase() === "en" ? "en-US" : "fa-IR";
+    const updateMessageCount = () => { messageCount.textContent = messageField.value.length.toLocaleString(countLocale); };
     messageField.addEventListener("input", updateMessageCount);
     updateMessageCount();
   }
