@@ -201,21 +201,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-/* Repair the inner pages that render the hamburger button without its menu. */
+/* منوی همبرگری صفحه‌های داخلی را می‌سازد (صفحه‌ی اصلی منوی خودش را دارد).
+   نسخه‌ی دوزبانه: روی صفحه‌ی انگلیسی، آدرس‌ها انگلیسی‌اند و لینک زبان
+   به «جفتِ همین صفحه» می‌رود، نه به صفحه‌ی اصلی. */
 (function () {
   "use strict";
+
+  function isEnglishPage() {
+    return (document.documentElement.lang || "fa").toLowerCase().indexOf("en") === 0;
+  }
+
+  /* پیشوند ../ برای صفحه‌هایی که داخل پوشه‌ی blog/ یا en-blog/ هستند */
+  function upPrefix() {
+    var path = location.pathname;
+    return (path.indexOf("/blog/") > -1 || path.indexOf("/en-blog/") > -1) ? "../" : "";
+  }
+
+  /* جفتِ همین صفحه در زبان دیگر */
+  function counterpartHref() {
+    var path = location.pathname;
+    var file = path.split("/").pop() || "index.html";
+
+    if (path.indexOf("/en-blog/") > -1) return "../blog/" + file;
+    if (path.indexOf("/blog/") > -1) return "../en-blog/" + file;
+
+    var pairs = {
+      "index.html": "en-index.html",
+      "about.html": "en-about.html",
+      "projects.html": "en-projects.html",
+      "blog.html": "en-blog.html",
+      "resume.html": "en-resume.html",
+      "en-index.html": "index.html",
+      "en-about.html": "about.html",
+      "en-projects.html": "projects.html",
+      "en-blog.html": "blog.html",
+      "en-resume.html": "resume.html"
+    };
+    if (pairs[file]) return pairs[file];
+    return isEnglishPage() ? "index.html" : "en-index.html";
+  }
 
   function installMissingMenu() {
     var button = document.getElementById("mobile-menu-button");
     if (!button || document.getElementById("mobile-menu")) return;
 
-    var isEnglish = (document.documentElement.lang || "fa").toLowerCase().indexOf("en") === 0;
+    var isEnglish = isEnglishPage();
+    var up = upPrefix();
     var labels = isEnglish
       ? ["Home", "About", "Projects", "Blog", "Resume", "Contact", "نسخه فارسی →"]
       : ["خانه", "درباره من", "پروژه‌ها", "بلاگ", "رزومه", "تماس", "English version →"];
     var hrefs = isEnglish
-      ? ["en-index.html#home", "about.html", "projects.html", "blog.html", "en-resume.html", "en-index.html#contact", "index.html"]
-      : ["index.html#home", "about.html", "projects.html", "blog.html", "resume.html", "index.html#contact", "en-index.html"];
+      ? [up + "en-index.html#home", up + "en-about.html", up + "en-projects.html", up + "en-blog.html", up + "en-resume.html", up + "en-index.html#contact", counterpartHref()]
+      : [up + "index.html#home", up + "about.html", up + "projects.html", up + "blog.html", up + "resume.html", up + "index.html#contact", counterpartHref()];
 
     var menu = document.createElement("nav");
     menu.id = "mobile-menu";
@@ -257,8 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* Run after script.js's existing DOMContentLoaded handler, so the
-     existing homepage menu keeps its original single click listener. */
+  /* بعد از هندلر DOMContentLoaded در بالای همین فایل اجرا می‌شود،
+     تا منوی صفحه‌ی اصلی همان یک لیسنر اصلی خودش را نگه دارد. */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", installMissingMenu, { once: true });
   } else {
