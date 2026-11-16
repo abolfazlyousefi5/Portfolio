@@ -9,6 +9,17 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ui-plus.css">
+<style>
+  /* چیدمان دو زبان در صفحه‌ی ۴۰۴ */
+  .err-block { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .err-sep {
+    width: 100%; max-width: 430px; border: 0;
+    border-top: 1px solid #23262F; margin: 34px auto;
+  }
+  #err-en .err-sub { direction: ltr; }
+  #err-en .err-links { border-top: 0; padding-top: 0; margin-top: 26px; }
+  #err-en .err-btn { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+</style>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -28,31 +39,88 @@
 </header>
 
 <main class="err-wrap flex-1">
-  <div class="err-code">۴۰۴</div>
-  <h1 class="err-ttl">این صفحه پیدا نشد</h1>
-  <p class="err-sub">
-    آدرسی که زدی وجود ندارد — یا جابه‌جا شده یا هیچ‌وقت نبوده.
-    <br>می‌توانی برگردی به خانه یا یکی از صفحه‌های زیر را ببینی.
-  </p>
-  <div class="err-btns">
-    <a href="index.html" class="err-btn err-primary">→ بازگشت به خانه</a>
-    <a href="projects.html" class="err-btn err-ghost">مشاهده پروژه‌ها</a>
-  </div>
-  <nav class="err-links">
-    <a href="index.html">خانه</a>
-    <a href="about.html">درباره من</a>
-    <a href="projects.html">پروژه‌ها</a>
-    <a href="blog.html">بلاگ</a>
-    <a href="resume.html">رزومه</a>
-    <a href="index.html#contact">تماس</a>
-  </nav>
+
+  <!-- ============ فارسی ============ -->
+  <section id="err-fa" class="err-block" lang="fa" dir="rtl">
+    <div class="err-code">۴۰۴</div>
+    <h1 class="err-ttl">این صفحه پیدا نشد</h1>
+    <p class="err-sub">
+      آدرسی که زدی وجود ندارد — یا جابه‌جا شده یا هیچ‌وقت نبوده.
+      <br>می‌توانی برگردی به خانه یا یکی از صفحه‌های زیر را ببینی.
+    </p>
+    <div class="err-btns">
+      <a href="index.html" class="err-btn err-primary">→ بازگشت به خانه</a>
+      <a href="projects.html" class="err-btn err-ghost">مشاهده پروژه‌ها</a>
+    </div>
+    <nav class="err-links" aria-label="صفحه‌های سایت">
+      <a href="index.html">خانه</a>
+      <a href="about.html">درباره من</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="blog.html">بلاگ</a>
+      <a href="resume.html">رزومه</a>
+      <a href="index.html#contact">تماس</a>
+    </nav>
+  </section>
+
+  <hr class="err-sep">
+
+  <!-- ============ English ============ -->
+  <section id="err-en" class="err-block" lang="en" dir="ltr">
+    <div class="err-code">404</div>
+    <h1 class="err-ttl">This page wasn't found</h1>
+    <p class="err-sub">
+      The address you typed doesn't exist — it moved, or it never did.
+      <br>You can go back home, or take a look at one of the pages below.
+    </p>
+    <div class="err-btns">
+      <a href="en-index.html" class="err-btn err-primary">→ Back to home</a>
+      <a href="en-projects.html" class="err-btn err-ghost">View projects</a>
+    </div>
+    <nav class="err-links" aria-label="Site pages">
+      <a href="en-index.html">Home</a>
+      <a href="en-about.html">About</a>
+      <a href="en-projects.html">Projects</a>
+      <a href="en-blog.html">Blog</a>
+      <a href="en-resume.html">Resume</a>
+      <a href="en-index.html#contact">Contact</a>
+    </nav>
+  </section>
+
 </main>
 
 <footer class="border-t border-[#23262F] px-6 py-5 text-center text-xs text-[#7B7F86]">
-  © <span id="yr"></span> ابوالفضل یوسفی
+  © <span id="yr"></span> — ابوالفضل یوسفی · Abolfazl Yousefi
 </footer>
 
 <script src="js/ui-plus.js"></script>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5adf980efa2d25e',t:'MTc5NDc0Mjc1OA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5adf980efa2d25e',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<script>
+/* سال جاری */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* اگر مرورگر کاربر انگلیسی است، بخش انگلیسی را بالا می‌آورد
+   (صفحه‌ی ۴۰۴ در گیت‌هاب/ورسل فقط یک فایل است و از آدرس نمی‌شود زبان را فهمید) */
+(function () {
+  try {
+    var lang = (navigator.language || navigator.userLanguage || "fa").toLowerCase();
+    if (lang.indexOf("fa") === 0) return;
+
+    var main = document.querySelector(".err-wrap");
+    var fa = document.getElementById("err-fa");
+    var en = document.getElementById("err-en");
+    var sep = document.querySelector(".err-sep");
+    if (!main || !fa || !en || !sep) return;
+
+    main.appendChild(en);   /* English first */
+    main.appendChild(sep);
+    main.appendChild(fa);   /* Persian below */
+
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+    document.title = "Page not found (404) — Abolfazl Yousefi";
+  } catch (e) {}
+})();
+</script>
+
+</body>
 </html>
