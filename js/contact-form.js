@@ -89,7 +89,10 @@
   function updateCounter() {
     if (!counter || !textarea) return;
     var n = textarea.value.length, fa = "۰۱۲۳۴۵۶۷۸۹";
-    counter.textContent = String(n).replace(/\d/g, function (d) { return fa[+d]; });
+    /* صفحه‌ی انگلیسی با رقم لاتین، صفحه‌ی فارسی با رقم فارسی */
+    counter.textContent = IS_EN
+      ? String(n)
+      : String(n).replace(/\d/g, function (d) { return fa[+d]; });
   }
   if (textarea) { textarea.addEventListener("input", updateCounter); updateCounter(); }
 
