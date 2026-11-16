@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>وبسایت شخصی ابوالفضل یوسفی</title>
     <link>https://abolfazl-yousefi.is-a.dev/</link>
     <description>وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس و کارآموز بک‌اند با پایتون</description>
     <language>fa-IR</language>
-    <lastBuildDate>Sun, 15 Nov 2026 16:29:35 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 13:10:37 GMT</lastBuildDate>
     <atom:link href="https://abolfazl-yousefi.is-a.dev/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://abolfazl-yousefi.is-a.dev/og-image.png</url>
@@ -17,6 +17,7 @@
       <link>https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html</link>
       <guid isPermaLink="true">https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html</guid>
       <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <dc:language>fa</dc:language>
       <description>اگر تازه پایتون را شروع کرده‌ای، این پنج پروژه‌ی کوچک بهترین تمرین برای تو هستند.</description>
       <content:encoded><![CDATA[اگر تازه پایتون را شروع کرده‌ای و نمی‌دانی از کجا باید تمرین کنی، این نوشته برای توست.
 
@@ -54,10 +55,53 @@ print(make_password())
       <category>شروع</category>
     </item>
     <item>
+      <title>Five Python Projects You Should Build</title>
+      <link>https://abolfazl-yousefi.is-a.dev/en-blog/first-python-projects.html</link>
+      <guid isPermaLink="true">https://abolfazl-yousefi.is-a.dev/en-blog/first-python-projects.html</guid>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <dc:language>en</dc:language>
+      <description>If you have just started with Python, these five small projects are the best practice you can get.</description>
+      <content:encoded><![CDATA[If you have just started with Python and you don't know where to practise, this post is for you.
+
+## Why a small project beats a long course
+A 40-hour course gives you the feeling of progress, but you end up with nothing in your hands. A 100-line project that **works** stays with you much longer.
+
+> What you built — even something simple — is worth more than what you only watched.
+
+## Five projects I built myself
+1. **Password generator** — practising `random` and `string`
+2. **Countdown timer** — practising loops and `time`
+3. **Rock, paper, scissors** — practising conditions and user input
+4. **Text encryption** — practising file handling and a simple algorithm
+5. **Bank management system** — practising `MySQL` and table design
+
+## A small code sample
+```python
+import random
+import string
+
+def make_password(length=16):
+    chars = string.ascii_letters + string.digits + "!@#$%^&*"
+    return "".join(random.choice(chars) for _ in range(length))
+
+print(make_password())
+```
+
+## Your next step
+Pick one of them and start **tonight**. Keep going tomorrow. That's it.
+
+---
+
+If you have a question, send me a message from the [contact page](https://abolfazl-yousefi.is-a.dev/en-index.html#contact).]]></content:encoded>
+      <category>Python</category>
+      <category>Getting started</category>
+    </item>
+    <item>
       <title>چطور سایتم را مجانی بالا آوردم</title>
       <link>https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html</link>
       <guid isPermaLink="true">https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html</guid>
       <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:language>fa</dc:language>
       <description>بدون سرور، بدون هاست پولی، بدون دامنه‌ی خریدنی. مسیری که رفتم — با اشتباه‌هایش.</description>
       <content:encoded><![CDATA[## اولش فکر می‌کردم باید پول بدهم
 
@@ -164,6 +208,118 @@ Vercel سرویسی است که مخزن گیت‌هاب تو را می‌خوا
       <category>شروع</category>
       <category>گیت‌هاب</category>
       <category>ورکسل</category>
+    </item>
+    <item>
+      <title>How I Put My Site Online for Free</title>
+      <link>https://abolfazl-yousefi.is-a.dev/en-blog/free-personal-website.html</link>
+      <guid isPermaLink="true">https://abolfazl-yousefi.is-a.dev/en-blog/free-personal-website.html</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:language>en</dc:language>
+      <description>No server, no paid hosting, no bought domain. The road I took — mistakes included.</description>
+      <content:encoded><![CDATA[## At first I thought I had to pay
+
+The first thought after "I should have a personal website" was: "so I need to rent a server."
+
+I didn't.
+
+The site you are looking at right now has no server, no paid hosting and no bought domain. It is a repository on GitHub, plus a free service that turns that repository into a website.
+
+This post is that road — mistakes included.
+
+## Step zero: one HTML file
+
+A website doesn't have to be complete from day one. Mine started as an `index.html` with nothing in it but my name.
+
+If you have just started:
+
+- make a folder
+- put an `index.html` inside it
+- one `<h1>` heading and one paragraph about yourself
+
+That's it. The rest gets added later.
+
+**What matters is that it goes online, not that it is complete.**
+
+## Step one: GitHub
+
+GitHub isn't only a place to keep code; for me it became the place the site is published from. Because the service I mention in the next step connects straight to GitHub.
+
+What I did:
+
+1. Created an account
+2. Created a public repository called `Portfolio`
+3. Uploaded the files
+
+Here I made my first mistake: I dragged and dropped the files and **the paths broke**. The images loaded but the site's styles didn't, because the CSS file was inside the `css` folder and I had flattened everything into one place.
+
+**Lesson:** the folder structure has to stay exactly as it was on your computer.
+
+## Step two: Vercel
+
+Vercel is a service that reads your GitHub repository and turns it into a web address. The free plan is enough for a personal site.
+
+What I did:
+
+1. Signed up with my GitHub account
+2. Imported the `Portfolio` repository
+3. Hit Deploy, with no extra settings
+
+A few seconds later I had an address like `portfolio-xxxx.vercel.app` and the site was up.
+
+The best part: from then on, **every time you commit a change on GitHub, it rebuilds the site by itself.** I have never put a file on a server by hand.
+
+## Step three: the domain
+
+You can't put `portfolio-xxxx.vercel.app` on a business card. A domain cost money, but there was a free way too.
+
+My domain is `abolfazl-yousefi.is-a.dev`. `is-a.dev` is a service for developers: they give you `yourname.is-a.dev` for free, on the condition that you open a request on their repository.
+
+The short version of what to do:
+
+1. A small JSON file with your details and a DNS record
+2. A pull request to the `is-a-dev/register` repository
+3. Wait until it is accepted
+
+Then you add the domain in Vercel and point it at that record.
+
+**Note:** Vercel gives you a specific address that you must put in the JSON file — not a guessed one. This part needs a bit of patience; I got it wrong twice.
+
+## Four mistakes I made
+
+If you want to save yourself some time, know these:
+
+1. **Case sensitivity.** On Windows `About.html` and `about.html` are the same. On the server they are not. Once my whole menu returned a 404.
+
+2. **Forgetting to commit.** I edited the file, saved it, went to look at the site and saw no change. Because I hadn't committed.
+
+3. **Expecting it to be instant.** After a commit the site doesn't change all at once. It takes about 30 to 60 seconds. At first I thought it was broken.
+
+4. **Building everything before publishing.** For a while I worked on details without the site being online. That was a mistake. If I had put a simple page up on the first day, I would have stayed motivated.
+
+## Something I learned later
+
+A static site — just HTML, CSS and JS — has one limitation: you can't save anything from inside the browser.
+
+Later I learned you can get around that too, with the GitHub API. Now I have an admin panel where I write posts and add projects, and it saves straight to the repository. Without any server.
+
+But you should learn that **after** your site is up. If you go for it on day one, you will never see your site online.
+
+## In the end
+
+If you have just started, remember three things:
+
+- your site doesn't have to be complete
+- a free domain is enough
+- you can be online tonight
+
+The biggest difference between someone who has a website and someone who doesn't is that one committed their file and the other didn't.
+
+---
+
+If you have a question, send me a message from the [contact page](https://abolfazl-yousefi.is-a.dev/en-index.html#contact).]]></content:encoded>
+      <category>Getting started</category>
+      <category>GitHub</category>
+      <category>Vercel</category>
     </item>
   </channel>
 </rss>
