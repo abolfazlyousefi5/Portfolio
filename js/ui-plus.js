@@ -7,6 +7,69 @@
   "use strict";
 
   /* ==========================================================
+     ۰) زبان صفحه  —  همه‌ی متن‌ها و آدرس‌های این فایل دوزبانه‌اند
+     ========================================================== */
+  var IS_EN = (document.documentElement.lang || "fa").slice(0, 2).toLowerCase() === "en";
+
+  /* صفحه‌هایی که داخل پوشه‌ی blog/ یا en-blog/ هستند، مسیرشان یک پله بالاست */
+  var UP = (location.pathname.indexOf("/blog/") > -1 ||
+            location.pathname.indexOf("/en-blog/") > -1) ? "../" : "";
+
+  var T = IS_EN ? {
+    themeToDark: "Switch to dark mode",
+    themeToLight: "Switch to light mode",
+    dark: "Dark mode",
+    light: "Light mode",
+    searchSite: "Search this site",
+    searchPlaceholder: "Search this site… (pages, projects, skills, posts)",
+    move: "move",
+    go: "open",
+    close: "close",
+    closeSearch: "Close search",
+    nothing: "Nothing found.",
+    tryAnother: "Try another word.",
+    page: "Page",
+    project: "Projects",
+    skill: "Skills",
+    post: "Blog",
+    result: "Result",
+    skillLevel: "Skill — ",
+    postFallback: "Post",
+    projectFallback: "Project"
+  } : {
+    themeToDark: "تغییر به حالت تاریک",
+    themeToLight: "تغییر به حالت روشن",
+    dark: "حالت تاریک",
+    light: "حالت روشن",
+    searchSite: "جستجو در سایت",
+    searchPlaceholder: "جستجو در سایت… (پروژه، مهارت، پست)",
+    move: "حرکت",
+    go: "رفتن",
+    close: "بستن",
+    closeSearch: "بستن جستجو",
+    nothing: "چیزی پیدا نشد.",
+    tryAnother: "کلمه‌ی دیگری امتحان کن.",
+    page: "صفحه",
+    project: "پروژه",
+    skill: "مهارت",
+    post: "بلاگ",
+    result: "نتیجه",
+    skillLevel: "مهارت — ",
+    postFallback: "پست",
+    projectFallback: "پروژه"
+  };
+
+  /* متن انگلیسی؛ اگر نبود، فارسی */
+  function pick(obj, faKey, enKey) {
+    if (!obj) return "";
+    if (IS_EN) {
+      var en = obj[enKey];
+      if (en && String(en).trim()) return en;
+    }
+    return obj[faKey] || "";
+  }
+
+  /* ==========================================================
      ۱) حالت روشن / تاریک
      ========================================================== */
   var THEME_KEY = "site_theme";
@@ -32,8 +95,8 @@
       if (meta) meta.setAttribute("content", t === "light" ? "#F7F8FA" : "#181C23");
     } catch (e) {}
     document.querySelectorAll("#theme-toggle").forEach(function (btn) {
-      btn.setAttribute("aria-label", t === "light" ? "تغییر به حالت تاریک" : "تغییر به حالت روشن");
-      btn.setAttribute("title", t === "light" ? "حالت تاریک" : "حالت روشن");
+      btn.setAttribute("aria-label", t === "light" ? T.themeToDark : T.themeToLight);
+      btn.setAttribute("title", t === "light" ? T.dark : T.light);
       btn.setAttribute("aria-pressed", t === "light" ? "true" : "false");
     });
   }
@@ -78,14 +141,21 @@
       .trim();
   }
 
-  // صفحه‌های ثابت (همیشه در جستجو هستند)
-  var STATIC_PAGES = [
-    { t: "خانه", d: "صفحه‌ی اصلی سایت", u: "./", k: "خانه اصلی صفحه اول", i: "🏠" },
-    { t: "درباره من", d: "درباره‌ی ابوالفضل یوسفی", u: "about.html", k: "درباره بیوگرافی معرفی", i: "👤" },
-    { t: "پروژه‌ها", d: "همه‌ی پروژه‌ها", u: "projects.html", k: "پروژه کار نمونه portfolio", i: "💼" },
-    { t: "بلاگ", d: "نوشته‌ها و مقاله‌ها", u: "blog.html", k: "بلاگ مقاله نوشته پست", i: "📝" },
-    { t: "رزومه", d: "رزومه‌ی کامل", u: "resume.html", k: "رزومه cv resume رزومه‌ام", i: "📄" },
-    { t: "تماس", d: "راه‌های ارتباطی", u: "./#contact", k: "تماس ارتباط ایمیل واتساپ شماره", i: "✉️" }
+  // صفحه‌های ثابت (همیشه در جستجو هستند) — دوزبانه
+  var STATIC_PAGES = IS_EN ? [
+    { t: "Home", d: "The main page of the site", u: UP + "en-index.html", k: "home main page start", i: "🏠" },
+    { t: "About", d: "About Abolfazl Yousefi", u: UP + "en-about.html", k: "about bio introduction", i: "👤" },
+    { t: "Projects", d: "All projects", u: UP + "en-projects.html", k: "projects work portfolio", i: "💼" },
+    { t: "Blog", d: "Posts and articles", u: UP + "en-blog.html", k: "blog post article writing", i: "📝" },
+    { t: "Resume", d: "Full resume", u: UP + "en-resume.html", k: "resume cv", i: "📄" },
+    { t: "Contact", d: "Ways to reach me", u: UP + "en-index.html#contact", k: "contact email whatsapp phone", i: "✉️" }
+  ] : [
+    { t: "خانه", d: "صفحه‌ی اصلی سایت", u: UP + "index.html", k: "خانه اصلی صفحه اول", i: "🏠" },
+    { t: "درباره من", d: "درباره‌ی ابوالفضل یوسفی", u: UP + "about.html", k: "درباره بیوگرافی معرفی", i: "👤" },
+    { t: "پروژه‌ها", d: "همه‌ی پروژه‌ها", u: UP + "projects.html", k: "پروژه کار نمونه portfolio", i: "💼" },
+    { t: "بلاگ", d: "نوشته‌ها و مقاله‌ها", u: UP + "blog.html", k: "بلاگ مقاله نوشته پست", i: "📝" },
+    { t: "رزومه", d: "رزومه‌ی کامل", u: UP + "resume.html", k: "رزومه cv resume رزومه‌ام", i: "📄" },
+    { t: "تماس", d: "راه‌های ارتباطی", u: UP + "index.html#contact", k: "تماس ارتباط ایمیل واتساپ شماره", i: "✉️" }
   ];
 
   function buildIndex() {
@@ -100,11 +170,11 @@
         // پروژه‌ها
         (d.projects || []).forEach(function (p) {
           DATA.items.push({
-            t: p.title || p.title_en || "پروژه",
-            d: p.description || p.description_en || "",
-            k: (p.title || "") + " " + (p.title_en || "") + " " + (p.description || "") + " " + (p.tags || []).join(" "),
-            u: "projects.html#" + (p.id != null ? "p" + p.id : ""),
-            i: "💼", g: "پروژه"
+            t: pick(p, "title", "title_en") || T.projectFallback,
+            d: pick(p, "description", "description_en"),
+            k: (p.title || "") + " " + (p.title_en || "") + " " + (p.description || "") + " " + (p.description_en || "") + " " + (p.tags || []).join(" ") + " " + (p.tags_en || []).join(" "),
+            u: UP + (IS_EN ? "en-projects.html#" : "projects.html#") + (p.id != null ? "p" + p.id : ""),
+            i: "💼", g: T.project
           });
         });
 
@@ -112,21 +182,21 @@
         (d.skills || []).forEach(function (sk) {
           DATA.items.push({
             t: sk.name,
-            d: "مهارت — " + (sk.level || 0) + "٪",
+            d: IS_EN ? (T.skillLevel + (sk.level || 0) + "%") : (T.skillLevel + (sk.level || 0) + "٪"),
             k: sk.name,
-            u: "index.html#skills",
-            i: "⚡", g: "مهارت"
+            u: UP + (IS_EN ? "en-index.html#skills" : "index.html#skills"),
+            i: "⚡", g: T.skill
           });
         });
 
         // پست‌های بلاگ (اگر بعداً اضافه شود)
         (d.posts || []).forEach(function (po) {
           DATA.items.push({
-            t: po.title || "پست",
-            d: po.excerpt || "",
-            k: (po.title || "") + " " + (po.excerpt || "") + " " + (po.tags || []).join(" "),
-            u: "blog/" + (po.slug || "") + ".html",
-            i: "📰", g: "بلاگ"
+            t: pick(po, "title", "title_en") || T.postFallback,
+            d: pick(po, "excerpt", "excerpt_en"),
+            k: (po.title || "") + " " + (po.title_en || "") + " " + (po.excerpt || "") + " " + (po.excerpt_en || "") + " " + (po.tags || []).join(" ") + " " + (po.tags_en || []).join(" "),
+            u: UP + (IS_EN ? "en-blog/" : "blog/") + (po.slug || "") + ".html",
+            i: "📰", g: T.post
           });
         });
 
@@ -141,19 +211,19 @@
     wrap.id = "search-modal";
     wrap.setAttribute("role", "dialog");
     wrap.setAttribute("aria-modal", "true");
-    wrap.setAttribute("aria-label", "جستجو در سایت");
+    wrap.setAttribute("aria-label", T.searchSite);
     wrap.innerHTML =
       '<div id="search-box">' +
         '<div id="search-input-wrap">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>' +
-          '<input id="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="جستجو در سایت… (پروژه، مهارت، پست)" />' +
+          '<input id="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="' + T.searchPlaceholder + '" />' +
           '<span id="search-esc">ESC</span>' +
         '</div>' +
         '<div id="search-results"></div>' +
         '<div id="search-foot">' +
-          '<span><kbd>↑</kbd><kbd>↓</kbd> حرکت</span>' +
-          '<span><kbd>Enter</kbd> رفتن</span>' +
-          '<span><kbd>Esc</kbd> بستن</span>' +
+          '<span><kbd>↑</kbd><kbd>↓</kbd> ' + T.move + '</span>' +
+          '<span><kbd>Enter</kbd> ' + T.go + '</span>' +
+          '<span><kbd>Esc</kbd> ' + T.close + '</span>' +
         '</div>' +
       '</div>';
     document.body.appendChild(wrap);
@@ -236,22 +306,29 @@
       return;
     }
 
-    var all = DATA.pages.map(function (p) { return { t: p.t, d: p.d, k: p.k || (p.t + " " + p.d), u: p.u, i: p.i, g: "صفحه" }; })
-      .concat(DATA.items);
+    var seen = {};
+    var all = DATA.pages.map(function (p) { return { t: p.t, d: p.d, k: p.k || (p.t + " " + p.d), u: p.u, i: p.i, g: T.page }; })
+      .concat(DATA.items)
+      .filter(function (x) {
+        var key = x.u + "|" + x.t;
+        if (seen[key]) return false;
+        seen[key] = 1;
+        return true;
+      });
 
     var res = all.filter(function (x) {
       return norm(x.t + " " + x.d + " " + (x.k || "")).indexOf(q) !== -1;
     }).slice(0, 14);
 
     if (!res.length) {
-      box.innerHTML = '<div class="sr-empty"><span class="big">🔍</span>چیزی پیدا نشد.<br/>کلمه‌ی دیگری امتحان کن.</div>';
+      box.innerHTML = '<div class="sr-empty"><span class="big">🔍</span>' + T.nothing + '<br/>' + T.tryAnother + '</div>';
       return;
     }
 
     // گروه‌بندی
     var groups = {};
     res.forEach(function (r) {
-      var g = r.g || "نتیجه";
+      var g = r.g || T.result;
       (groups[g] = groups[g] || []).push(r);
     });
 
@@ -481,8 +558,10 @@
       var btn = document.createElement("button");
       btn.id = "search-close";
       btn.type = "button";
-      btn.setAttribute("aria-label", "بستن جستجو");
-      btn.setAttribute("title", "بستن جستجو");
+      var closeLabel = (document.documentElement.lang || "fa").slice(0, 2).toLowerCase() === "en"
+        ? "Close search" : "بستن جستجو";
+      btn.setAttribute("aria-label", closeLabel);
+      btn.setAttribute("title", closeLabel);
       btn.innerHTML =
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
         'stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
