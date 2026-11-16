@@ -1,0 +1,27 @@
+{
+  "name": "ابوالفضل یوسفی — Abolfazl Yousefi",
+  "short_name": "Abolfazl",
+  "description": "وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس بک‌اند با پایتون — Portfolio of Abolfazl Yousefi, Python backend developer",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#181C23",
+  "theme_color": "#181C23",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
