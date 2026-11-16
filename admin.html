@@ -823,6 +823,9 @@
       po.slug = po.slug || ""; po.title = po.title || "";
       po.excerpt = po.excerpt || ""; po.date = po.date || "";
       po.content = po.content || ""; po.tags = Array.isArray(po.tags) ? po.tags : [];
+      /* نسخه‌ی انگلیسی پست — دست نخورد */
+      po.title_en = po.title_en || ""; po.excerpt_en = po.excerpt_en || "";
+      po.content_en = po.content_en || ""; po.tags_en = Array.isArray(po.tags_en) ? po.tags_en : [];
     });
     return o;
   }
@@ -1011,25 +1014,35 @@
     var siteDesc = s.meta_description || "وبسایت شخصی ابوالفضل یوسفی، برنامه‌نویس و کارآموز بک‌اند با پایتون";
     var now = new Date().toUTCString();
 
-    var items = list.map(function (p) {
-      var url = SITE + "/blog/" + p.slug + ".html";
-      var body = String(p.content || p.body || "").replace(/\]\((\.\.\/|\.\/|\/)?([^)]*)\)/g, function (mm, pre, rest) {
+    function oneItem(p, lang) {
+      var isEn = (lang === "en");
+      var url = SITE + (isEn ? "/en-blog/" : "/blog/") + p.slug + ".html";
+      var body = String((isEn ? p.content_en : (p.content || p.body)) || "").replace(/\]\((\.\.\/|\.\/|\/)?([^)]*)\)/g, function (mm, pre, rest) {
         return "](" + SITE + "/" + String(rest || "").replace(/^\.\.\//, "") + ")";
       });
-      var cats = (p.tags || []).map(function (t) { return "      <category>" + xesc(t) + "</category>"; }).join("\n");
+      var tags = isEn ? (p.tags_en || []) : (p.tags || []);
+      var cats = tags.map(function (t) { return "      <category>" + xesc(t) + "</category>"; }).join("\n");
       return "    <item>\n" +
-        "      <title>" + xesc(p.title) + "</title>\n" +
+        "      <title>" + xesc(isEn ? p.title_en : p.title) + "</title>\n" +
         "      <link>" + url + "</link>\n" +
         "      <guid isPermaLink=\"true\">" + url + "</guid>\n" +
         "      <pubDate>" + rfc822(p.date) + "</pubDate>\n" +
-        "      <description>" + xesc(p.excerpt || "") + "</description>\n" +
+        "      <dc:language>" + lang + "</dc:language>\n" +
+        "      <description>" + xesc((isEn ? p.excerpt_en : p.excerpt) || "") + "</description>\n" +
         "      <content:encoded><![CDATA[" + body + "]]></content:encoded>\n" +
         (cats ? cats + "\n" : "") +
         "    </item>";
-    }).join("\n");
+    }
+
+    var items = [];
+    list.forEach(function (p) {
+      items.push(oneItem(p, "fa"));
+      if (String(p.title_en || "").trim()) items.push(oneItem(p, "en"));
+    });
+    items = items.join("\n");
 
     return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">\n' +
+      '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">\n' +
       '  <channel>\n' +
       '    <title>' + xesc(siteTitle) + '</title>\n' +
       '    <link>' + SITE + '/</link>\n' +
@@ -1266,6 +1279,11 @@
         tags: $("#b-tags").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
         content: $("#b-content").value
       };
+      /* فیلدهای انگلیسی این پست دست نخورده بمانند (در این فرم ویرایش نمی‌شوند و از data.json می‌آیند) */
+      var prev = (blogEditing >= 0 && data.posts[blogEditing]) ? data.posts[blogEditing] : {};
+      ["title_en", "excerpt_en", "content_en", "tags_en"].forEach(function (k) {
+        if (prev[k] !== undefined) post[k] = prev[k];
+      });
 
       if (blogEditing >= 0) data.posts[blogEditing] = post;
       else data.posts.push(post);
