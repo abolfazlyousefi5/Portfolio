@@ -121,7 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.documentElement.classList.remove("st-scrolling");
         return;
       }
-      const duration = Math.min(700, Math.max(260, start * 0.32));
+      // سرعت برگشت به بالا — نرم و آرام (قبلاً خیلی تند بود)
+      const duration = Math.min(1500, Math.max(620, start * 0.85));
       const t0 = performance.now();
       function step(now) {
         const t = (now - t0) / duration;
