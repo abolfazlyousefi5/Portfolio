@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://abolfazl-yousefi.is-a.dev/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/"/>
@@ -12,7 +12,7 @@
   </url>
   <url>
     <loc>https://abolfazl-yousefi.is-a.dev/en-index.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/"/>
@@ -20,19 +20,111 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/"/>
   </url>
   <url>
-    <loc>https://abolfazl-yousefi.is-a.dev/resume.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <loc>https://abolfazl-yousefi.is-a.dev/about.html</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/resume.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-resume.html"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/about.html"/>
   </url>
   <url>
-    <loc>https://abolfazl-yousefi.is-a.dev/en-resume.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-about.html</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/about.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/projects.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/projects.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-projects.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/projects.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/blog.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-blog.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/resume.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/resume.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-resume.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/resume.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-resume.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/resume.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-resume.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/resume.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog/first-python-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-blog/first-python-projects.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog/first-python-projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog/first-python-projects.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog/free-personal-website.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html"/>
+  </url>
+  <url>
+    <loc>https://abolfazl-yousefi.is-a.dev/en-blog/free-personal-website.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abolfazl-yousefi.is-a.dev/en-blog/free-personal-website.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abolfazl-yousefi.is-a.dev/blog/free-personal-website.html"/>
   </url>
 </urlset>
