@@ -94,7 +94,7 @@
 
     function setStat(labelText, value) {
       if (!value) return;
-      var labels = document.querySelectorAll("#about div, #about span, #about p");
+      var labels = document.querySelectorAll("#about .flex.space-x-12 > div > div:last-child"); 
       for (var i = 0; i < labels.length; i++) {
         var el = labels[i];
         if (el.children.length > 0) continue;
