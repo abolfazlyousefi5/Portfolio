@@ -1,13 +1,1 @@
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "<https://abolfazl-yousefi.is-a.dev/>; rel=\"canonical\""
-        }
-      ]
-    }
-  ]
-}
+{} 
