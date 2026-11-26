@@ -19,6 +19,9 @@
   #err-en .err-sub { direction: ltr; }
   #err-en .err-links { border-top: 0; padding-top: 0; margin-top: 26px; }
   #err-en .err-btn { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  body { background: var(--bg); color: var(--text); }
+  #err-en, .err-sep { display: none; }
+  .err-sep { border-top-color: var(--border); } 
 </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -110,11 +113,14 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     var en = document.getElementById("err-en");
     var sep = document.querySelector(".err-sep");
     if (!main || !fa || !en || !sep) return;
-
+    fa.style.display = "none";
+    en.style.display = "flex";
+    sep.style.display = "none";
+    
     main.appendChild(en);   /* English first */
     main.appendChild(sep);
     main.appendChild(fa);   /* Persian below */
-
+    
     document.documentElement.lang = "en";
     document.documentElement.dir = "ltr";
     document.title = "Page not found (404) — Abolfazl Yousefi";
